@@ -84,10 +84,10 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "geces.users",
     "geces.core",
-    "geces.products",
+    "geces.users",
     "geces.movement",
+    "geces.people",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
