@@ -1,12 +1,11 @@
-from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from geces.core import constants
 
-class Person(models.Model):
 
+class Person(models.Model):
     name = models.CharField(
         verbose_name=_("Nome"),
         max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH,
@@ -55,7 +54,13 @@ class Responsible(models.Model):
     def __str__(self):
         return str(self.person)
 
+
 class Student(models.Model):
+    class Shift(models.IntegerChoices):
+        MORNING = 1, _("Matutino")
+        AFTERNOON = 2, _("Vespertino")
+        NIGHT = 3, _("Noturno")
+
     class Series(models.IntegerChoices):
         LEVEL1 = 1, _("Nível I")
         LEVEL2 = 2, _("Nível II")
@@ -74,6 +79,11 @@ class Student(models.Model):
     serie = models.PositiveSmallIntegerField(
         verbose_name=_("Série"),
         choices=Series.choices,
+        validators=[MinValueValidator(1), MaxValueValidator(3)],
+    )
+    serie = models.PositiveSmallIntegerField(
+        verbose_name=_("TURNO"),
+        choices=Shift.choices,
         validators=[MinValueValidator(1), MaxValueValidator(8)],
     )
     responsible = models.ForeignKey(
@@ -83,6 +93,7 @@ class Student(models.Model):
         null=True,
         related_name="students",
     )
+    balance = models.DecimalField(_("Saldo"), max_digits=5, decimal_places=2)
 
     class Meta:
         verbose_name = _("Discente")
