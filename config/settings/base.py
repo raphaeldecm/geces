@@ -88,6 +88,7 @@ LOCAL_APPS = [
     "geces.users",
     "geces.movement",
     "geces.people",
+    "adminlte3",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
