@@ -1,8 +1,14 @@
-{% extends "adminlte/base.html" %}
+{% extends "base.html" %}
 
+
+{% block title %}
+    Cadastro de Produtos
+{% endblock title %}
+    
 
 {% block content %}
-<form action="post">
+<form method="POST">
+    {% csrf_token %}
     {{ form_product.as_p }}
     <button class="btn btn-primary" type="submit">Registrar</button>
 </form>
