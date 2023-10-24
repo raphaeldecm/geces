@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load bootstrap5 %}
 
 {% block title %}
     Cadastro de Produtos
@@ -7,10 +7,17 @@
     
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form_product.as_p }}
-    <button class="btn btn-primary" type="submit">Registrar</button>
-</form>
+<div class="card card-primary">
+    <div class="card-header">
+        <div class="card-title">Cadastro de Produtos</div>
+    </div>
+</div>
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form_product %}
+        <button class="btn btn-primary" type="submit">Registrar</button>
+    </form>
+</div>
 {% endblock content %}
     
