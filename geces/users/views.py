@@ -3,9 +3,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 User = get_user_model()
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    slug_field = "id"
+    slug_url_kwarg = "id"
+    template_name = "users/user_list.html"
+    queryset = User.objects.all()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
