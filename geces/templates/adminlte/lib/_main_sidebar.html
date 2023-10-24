@@ -1,0 +1,30 @@
+{% extends 'adminlte/lib/_main_sidebar.html' %}
+
+{% block logo_text %}
+    <span class="brand-text font-weight-light">GECES</span>
+{% endblock logo_text %}
+
+{% block nav_heading %}
+    Menu Principal
+{% endblock nav_heading %}
+
+{% block nav_links %}
+    <li class="nav-item">
+        <a href="/" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i> 
+            <p>Home</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'movement:listar_produtos' %}" class="nav-link">
+            <i class="nav-icon fas fa-list-alt"></i> 
+            <p>Produtos</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user"></i> 
+            <p>Usuários</p>
+        </a>
+    </li>
+{% endblock nav_links %}
