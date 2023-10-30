@@ -22,11 +22,20 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     class Meta(admin_forms.UserCreationForm.Meta):
         model = User
-        fields = ("email",)
+        fields = ("email", "name")
         field_classes = {"email": EmailField}
         error_messages = {
             "email": {"unique": _("This email has already been taken.")},
         }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.name = self.cleaned_data['name']
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
 
 
 class UserSignupForm(SignupForm):

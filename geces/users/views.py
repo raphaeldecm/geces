@@ -1,9 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages import views
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.views import generic
 from django.views.generic import DetailView, RedirectView, UpdateView
+
+from .forms import UserAdminCreationForm
 
 User = get_user_model()
 
@@ -41,3 +45,15 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+class UsersListView(LoginRequiredMixin, generic.ListView):
+    model = User
+    paginate_by = 5
+    ordering = ["name"]
+
+class UserCreateView(views.SuccessMessageMixin, generic.CreateView):
+    model = User
+    form_class = UserAdminCreationForm
+    success_url = reverse_lazy("users:list")
+    success_message = "Usuário cadastrado com sucesso!"
+    template_name = "users/signup.html"
