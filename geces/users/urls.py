@@ -3,6 +3,7 @@ from django.urls import path
 from geces.users.views import (
     ThirdUserUpdateView,
     UserCreateView,
+    UserDeleteView,
     UsersListView,
     user_detail_view,
     user_redirect_view,
@@ -17,4 +18,5 @@ urlpatterns = [
     path("list/", view=UsersListView.as_view(), name="list"),
     path("signup/", view=UserCreateView.as_view(), name="signup"),
     path("edit/<int:pk>/", view=ThirdUserUpdateView.as_view(), name="edit"),
+    path("delete/<int:pk>/", view=UserDeleteView.as_view(), name="delete"),
 ]
