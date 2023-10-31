@@ -3,21 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages import views
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views import generic
-from django.views.generic import DeleteView, DetailView, RedirectView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, RedirectView, UpdateView
 
 from .forms import UserAdminCreationForm
 
 User = get_user_model()
-
-
-class UserDetailView(LoginRequiredMixin, DetailView):
-    model = User
-    slug_field = "id"
-    slug_url_kwarg = "id"
-
-
-user_detail_view = UserDetailView.as_view()
 
 
 class UserUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, UpdateView):
@@ -46,7 +36,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 user_redirect_view = UserRedirectView.as_view()
 
 
-class UsersListView(LoginRequiredMixin, generic.ListView):
+class UsersListView(LoginRequiredMixin, ListView):
     model = User
     paginate_by = 5
     ordering = ["name"]
@@ -59,7 +49,7 @@ class UserBaseMixin:
         return context
 
 
-class UserCreateView(UserBaseMixin, views.SuccessMessageMixin, generic.CreateView):
+class UserCreateView(UserBaseMixin, LoginRequiredMixin, views.SuccessMessageMixin, CreateView):
     model = User
     form_class = UserAdminCreationForm
     success_url = reverse_lazy("users:list")
@@ -67,7 +57,7 @@ class UserCreateView(UserBaseMixin, views.SuccessMessageMixin, generic.CreateVie
     template_name = "users/signup.html"
 
 
-class ThirdUserUpdateView(UserBaseMixin, views.SuccessMessageMixin, generic.UpdateView):
+class ThirdUserUpdateView(UserBaseMixin, LoginRequiredMixin, views.SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserAdminCreationForm
     success_url = reverse_lazy("users:list")
@@ -75,7 +65,13 @@ class ThirdUserUpdateView(UserBaseMixin, views.SuccessMessageMixin, generic.Upda
     template_name = "users/signup.html"
 
 
-class UserDeleteView(views.SuccessMessageMixin, generic.DeleteView):
+class UserDeleteView(LoginRequiredMixin, views.SuccessMessageMixin, DeleteView):
     model = User
     success_url = reverse_lazy("users:list")
     success_message = _("Usuário excluído com sucesso!")
+
+class UserDetailView(UserBaseMixin, LoginRequiredMixin, DetailView):
+    model = User
+    slug_field = "id"
+    slug_url_kwarg = "id"
+    template_name = "users/user_detail.html"
