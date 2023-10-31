@@ -2,20 +2,19 @@
 
 <!-- Header Navbar: style can be found in header.less -->
 {% block nav_bar %}
-<!-- Left navbar links -->
-<ul class="navbar-nav">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-        <a href="{% url 'movement:listar_produtos' %}" class="nav-link">Home</a>
+      <a href="{% url 'movement:listar_produtos' %}" class="nav-link">Home</a>
     </li>
-    
-</ul>
-{% block nav_bar_center %}
+  </ul>
+  {% block nav_bar_center %}
     {{ block.super }}
-{% endblock nav_bar_center %}
-{% block nav_custom_menu %}
+  {% endblock nav_bar_center %}
+  {% block nav_custom_menu %}
     {{ block.super }}
-{% endblock nav_custom_menu %}
+  {% endblock nav_custom_menu %}
 {% endblock nav_bar %}

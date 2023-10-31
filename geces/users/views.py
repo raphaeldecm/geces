@@ -46,10 +46,12 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 user_redirect_view = UserRedirectView.as_view()
 
+
 class UsersListView(LoginRequiredMixin, generic.ListView):
     model = User
     paginate_by = 5
     ordering = ["name"]
+
 
 class UserBaseMixin:
     def get_context_data(self, **kwargs):
@@ -57,12 +59,14 @@ class UserBaseMixin:
         context["user_groups"] = models.Group.objects.all()
         return context
 
+
 class UserCreateView(UserBaseMixin, views.SuccessMessageMixin, generic.CreateView):
     model = User
     form_class = UserAdminCreationForm
     success_url = reverse_lazy("users:list")
     success_message = _("Usuário cadastrado com sucesso!")
     template_name = "users/signup.html"
+
 
 class ThirdUserUpdateView(UserBaseMixin, views.SuccessMessageMixin, generic.UpdateView):
     model = User

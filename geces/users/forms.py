@@ -25,9 +25,11 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
         queryset=models.Group.objects.all(),
         required=False,
         label=_("Grupo de permissões"),
-        widget=forms.Select(attrs={
-            "class": "form-control",
-        })
+        widget=forms.Select(
+            attrs={
+                "class": "form-control",
+            }
+        ),
     )
 
     class Meta(admin_forms.UserCreationForm.Meta):
@@ -40,18 +42,19 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.name = self.cleaned_data['name']
+        user.email = self.cleaned_data["email"]
+        user.name = self.cleaned_data["name"]
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
-        user.groups.add(self.cleaned_data['group'])
+        user.groups.remove(*user.groups.all())
+        user.groups.add(self.cleaned_data["group"])
         return user
-    # TODO: remove groups before add a new group.
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.instance.id:
-            self.fields['group'].initial = self.instance.groups.first()
+            self.fields["group"].initial = self.instance.groups.first()
 
 
 class UserSignupForm(SignupForm):
