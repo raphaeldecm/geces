@@ -16,6 +16,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Permissões</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -25,8 +26,14 @@
                             <td>{{ object.name }}</td>
                             <td>{{ object.email }}</td>
                             <td>
-                                <a href="#">Editar</a>
-                                <a href="#">Excluir</a>
+                                {% for group in object.groups.all %}
+                                    {{ group.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="#"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                                <a href="{% url 'users:edit' object.pk %}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fas fa-trash" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     {% endfor %} 

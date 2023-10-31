@@ -1,8 +1,9 @@
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
+from django import forms
 from django.contrib.auth import forms as admin_forms
-from django.contrib.auth import get_user_model
-from django.forms import EmailField
+from django.contrib.auth import get_user_model, models
+from django.forms import EmailField, ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
@@ -20,9 +21,18 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
     To change user signup, see UserSignupForm and UserSocialSignupForm.
     """
 
+    group = ModelChoiceField(
+        queryset=models.Group.objects.all(),
+        required=False,
+        label=_("Grupo de permissões"),
+        widget=forms.Select(attrs={
+            "class": "form-control",
+        })
+    )
+
     class Meta(admin_forms.UserCreationForm.Meta):
         model = User
-        fields = ("email", "name")
+        fields = ("email", "name", "group")
         field_classes = {"email": EmailField}
         error_messages = {
             "email": {"unique": _("This email has already been taken.")},
@@ -35,7 +45,13 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
+        user.groups.add(self.cleaned_data['group'])
         return user
+    # TODO: remove groups before add a new group.
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.id:
+            self.fields['group'].initial = self.instance.groups.first()
 
 
 class UserSignupForm(SignupForm):

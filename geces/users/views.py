@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages import views
 from django.contrib.messages.views import SuccessMessageMixin
@@ -51,9 +51,22 @@ class UsersListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
     ordering = ["name"]
 
-class UserCreateView(views.SuccessMessageMixin, generic.CreateView):
+class UserBaseMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_groups"] = models.Group.objects.all()
+        return context
+
+class UserCreateView(UserBaseMixin, views.SuccessMessageMixin, generic.CreateView):
     model = User
     form_class = UserAdminCreationForm
     success_url = reverse_lazy("users:list")
-    success_message = "Usuário cadastrado com sucesso!"
+    success_message = _("Usuário cadastrado com sucesso!")
+    template_name = "users/signup.html"
+
+class ThirdUserUpdateView(UserBaseMixin, views.SuccessMessageMixin, generic.UpdateView):
+    model = User
+    form_class = UserAdminCreationForm
+    success_url = reverse_lazy("users:list")
+    success_message = _("Usuário atualizado com sucesso!")
     template_name = "users/signup.html"
