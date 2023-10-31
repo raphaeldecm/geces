@@ -15,7 +15,8 @@
             <th>Nome</th>
             <th>Email</th>
             <th>Permissões</th>
-            <th>Ações</th>
+            <th class="text-center">Situação</th>
+            <th class="text-center">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -29,8 +30,15 @@
                   {% if not forloop.last %},{% endif %}
                 {% endfor %}
               </td>
-              <td>
-                <a href="#"><i class="fas fa-eye" aria-hidden="true"></i></a>
+              <td class="text-center">
+                {% if object.is_active %}
+                  <span class="badge bg-success">Ativo</span>
+                {% else %}
+                  <span class="badge bg-danger">Inativo</span>
+                {% endif %}
+              </td>
+              <td class="text-center">
+                <a href="{% url 'users:detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
                 <a 
                   href="{% url 'users:edit' object.pk %}"
                   type="button"
@@ -44,7 +52,7 @@
                   aria-label="excluir"
                   title="excluir">
                   <i class="fas fa-trash" aria-hidden="true"></i></a>
-                {% include "users/user_confirm_delete.html" with object=object %}
+                {% include "users/user_confirm_delete.html" %}
               </td>
             </tr>
             {% empty %}
@@ -58,5 +66,13 @@
       </table>
     </div>
   </div>
-  <a class="btn btn-primary" href="{% url 'users:signup' %}">Cadastrar</a>
+  
+  <div class="row justify-content-between">
+    <div class="col-lg-2 col-md-3  col-12 mt-3">
+      <a type="button" class="btn btn-secondary" href="/"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
+    </div>
+    <div class="col-lg-2 col-md-3 col-12 mt-3">
+      <a class="btn btn-primary" href="{% url 'users:signup' %}">Cadastrar</a>
+    </div>
+  </div>
 {% endblock content %}
