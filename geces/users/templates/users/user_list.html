@@ -35,6 +35,12 @@
                 <a href="#"><i class="fas fa-trash" aria-hidden="true"></i></a>
               </td>
             </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">
+                    <p>Não existem usuários cadastrados.</p>
+                </td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>
