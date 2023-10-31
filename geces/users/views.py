@@ -1,11 +1,10 @@
 from django.contrib.auth import get_user_model, models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages import views
-from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.views.generic import DeleteView, DetailView, RedirectView, UpdateView
 
 from .forms import UserAdminCreationForm
 
@@ -21,7 +20,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 user_detail_view = UserDetailView.as_view()
 
 
-class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, views.SuccessMessageMixin, UpdateView):
     model = User
     fields = ["name"]
     success_message = _("Information successfully updated")
@@ -74,3 +73,9 @@ class ThirdUserUpdateView(UserBaseMixin, views.SuccessMessageMixin, generic.Upda
     success_url = reverse_lazy("users:list")
     success_message = _("Usuário atualizado com sucesso!")
     template_name = "users/signup.html"
+
+
+class UserDeleteView(views.SuccessMessageMixin, generic.DeleteView):
+    model = User
+    success_url = reverse_lazy("users:list")
+    success_message = _("Usuário excluído com sucesso!")
