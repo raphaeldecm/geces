@@ -3,6 +3,7 @@ from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django import forms
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model, models
+from django.contrib.auth.hashers import make_password
 from django.forms import EmailField, ModelChoiceField
 from django.utils.translation import gettext_lazy as _
 
@@ -42,9 +43,13 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
+
         user.email = self.cleaned_data["email"]
         user.name = self.cleaned_data["name"]
-        user.set_password(self.cleaned_data["password1"])
+
+        if not user.pk:
+            user.password = make_password("Senha123*")
+
         if commit:
             user.save()
         user.groups.remove(*user.groups.all())
@@ -53,6 +58,8 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['password1'].required = False
+        self.fields['password2'].required = False
         if self.instance.id:
             self.fields["group"].initial = self.instance.groups.first()
 
