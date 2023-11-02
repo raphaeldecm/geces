@@ -40,7 +40,7 @@ class UsersListView(LoginRequiredMixin, ListView):
     model = User
     paginate_by = 5
     ordering = ["name"]
-    queryset = User.objects.filter(is_superuser=False, email__contains="@")
+    queryset = User.objects.filter(is_superuser=False).exclude(email="deleted")
 
 
 class UserBaseMixin:
