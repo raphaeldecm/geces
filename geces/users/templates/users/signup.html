@@ -21,15 +21,15 @@
         {% bootstrap_field form.group %}
         {% bootstrap_field form.is_active %}
       </div>
-
-      <div class="row justify-content-between">
-        <div class="col-lg-3 col-md-4 col-12">
-          <a type="button" class="btn btn-secondary" href="{% url 'users:list' %}"> <i class="fas fa-times mr-1" aria-hidden="true"></i>Cancelar</a>
-        </div>
-        <div class="col-lg-2 col-md-3 col-12">
-          <button class="btn btn-primary" type="submit">{% translate "Salvar" %}</button>
-        </div>
-      </div>
-    </form>
   </div>
+  <div class="row justify-content-between m-5">
+    <div class="col-lg-3 col-md-4 col-12">
+      <a type="button" class="btn btn-secondary" href="{% url 'users:list' %}"> <i class="fas fa-times mr-1" aria-hidden="true"></i>Cancelar</a>
+    </div>
+    <div class="col-lg-2 col-md-3 col-12">
+      <button class="btn btn-primary" type="submit">{% translate "Salvar" %}</button>
+    </div>
+  </div>
+  
+</form>
 {% endblock content %}
