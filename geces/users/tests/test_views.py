@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from geces.users.forms import UserAdminChangeForm
 from geces.users.models import User
 from geces.users.tests.factories import UserFactory
-from geces.users.views import UserRedirectView, UserUpdateView, user_detail_view
+from geces.users.views import UserDetailView, UserRedirectView, UserUpdateView
 
 pytestmark = pytest.mark.django_db
 
@@ -81,14 +81,14 @@ class TestUserDetailView:
     def test_authenticated(self, user: User, rf: RequestFactory):
         request = rf.get("/fake-url/")
         request.user = UserFactory()
-        response = user_detail_view(request, pk=user.pk)
+        response = UserDetailView(request, pk=user.pk)
 
         assert response.status_code == 200
 
     def test_not_authenticated(self, user: User, rf: RequestFactory):
         request = rf.get("/fake-url/")
         request.user = AnonymousUser()
-        response = user_detail_view(request, pk=user.pk)
+        response = UserDetailView(request, pk=user.pk)
         login_url = reverse(settings.LOGIN_URL)
 
         assert isinstance(response, HttpResponseRedirect)
