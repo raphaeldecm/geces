@@ -3,6 +3,17 @@
 {% block logo_text %}
   <span class="brand-text font-weight-light">GECES</span>
 {% endblock logo_text %}
+{% block user_panel %}
+  <!-- Sidebar user panel (optional) -->
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="image">
+      {% comment %} <img src="{% avatar_url size=90 %}" class="img-circle elevation-2" alt="User Image"> {% endcomment %}
+    </div>
+    <div class="info">
+      <a href="/" class="d-block">{% firstof request.user.name request.user.username %}</a>
+    </div>
+  </div>
+{% endblock %}
 {% block nav_heading %}
   Menu Principal
 {% endblock nav_heading %}
