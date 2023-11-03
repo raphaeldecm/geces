@@ -13,7 +13,11 @@
       <div class="card-body">
         <h1 class="card-text">Página Inicial</h1>
         <p class="card-text">Sistema de Gerencimento de Cantina Escolar.</p>
-        <a href="{% url 'account_login' %}" class="btn btn-primary">Entrar</a>
+        {% if not request.user.is_authenticated %}
+          <a href="{% url 'account_login' %}" class="btn btn-primary">Entrar</a>
+        {% else %}
+        <a href="{% url 'account_logout' %}" class="btn btn-danger">Sair</a>
+        {% endif %}
       </div>
       <div class="card-footer text-muted">
         desde 2023

@@ -4,7 +4,9 @@ from django.contrib.messages import views
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, RedirectView, UpdateView
+from django_filters.views import FilterView
 
+from .filters import UserFilterSet
 from .forms import UserAdminCreationForm
 
 User = get_user_model()
@@ -36,10 +38,12 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 user_redirect_view = UserRedirectView.as_view()
 
 
-class UsersListView(LoginRequiredMixin, ListView):
+class UsersListView(LoginRequiredMixin, FilterView):
     model = User
     paginate_by = 5
     ordering = ["name"]
+    filterset_class = UserFilterSet
+    template_name = "users/user_list.html"
     queryset = User.objects.filter(is_superuser=False).exclude(email="deleted")
 
 
