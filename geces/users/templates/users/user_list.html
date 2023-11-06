@@ -10,23 +10,25 @@
   </div>
   <div class="card-body p-0">
     <form method="GET" action="{% url 'users:list' %}" autocomplete="off">
-      <div class="col-12 mx-0 mt-3">
-        {{ filter.form.name.label_tag }}
-        {{ filter.form.name }}
-        {{ filter.form.email.label_tag }}
-        {{ filter.form.email }}
+      <div class="row justify-content-between">
+        <div class="col-12 mx-0 m-3">
+          {{ filter.form.name.label_tag }}
+          {{ filter.form.name }}
+          {{ filter.form.email.label_tag }}
+          {{ filter.form.email }}
+        </div>
       </div>
-      <div class="col-12 mx-0 mt-3">
-        {{ filter.form.is_active.label_tag }}
-        {{ filter.form.is_active }}
-        {{ filter.form.group.label_tag }}
-        {{ filter.form.group }}
-      </div>
-      <div class="col-12 mx-0 mt-3">
-        <button class="btn btn-primary rounder-md flex-grow-1 mb-1" type="submit" name="filtrar">
-          <i class="fa fa-filter"></i>
-          {% translate "Filtrar" %}
-        </button>
+      <div class="row justify-content-between">
+        <div class="col-12 mx-0 m-3">
+          {{ filter.form.is_active.label_tag }}
+          {{ filter.form.is_active }}
+          {{ filter.form.group.label_tag }}
+          {{ filter.form.group }}
+          <button class="btn btn-primary rounder-md flex-grow-1 mb-1" type="submit" name="filtrar">
+            <i class="fa fa-filter"></i>
+            {% translate "Filtrar" %}
+          </button>
+        </div>
       </div>
     </form>
   </div>
