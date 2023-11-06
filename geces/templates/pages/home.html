@@ -1,28 +1,22 @@
 {% extends "base.html" %}
+
 {% load bootstrap5 %}
 
-
-{% block title %}Página Inicial{% endblock title %}
-    
+{% block title %}
+  Página Inicial
+{% endblock title %}
 {% block content %}
-
-    <div class="card text-center col-8 mx-auto p-0">
-      <div class="card-header">
-        GeCEs
-      </div>
-      <div class="card-body">
-        <h1 class="card-text">Página Inicial</h1>
-        <p class="card-text">Sistema de Gerencimento de Cantina Escolar.</p>
-        {% if not request.user.is_authenticated %}
-          <a href="{% url 'account_login' %}" class="btn btn-primary">Entrar</a>
-        {% else %}
+  <div class="card text-center col-8 mx-auto p-0">
+    <div class="card-header">GeCEs</div>
+    <div class="card-body">
+      <h1 class="card-text">Página Inicial</h1>
+      <p class="card-text">Sistema de Gerencimento de Cantina Escolar.</p>
+      {% if not request.user.is_authenticated %}
+        <a href="{% url 'account_login' %}" class="btn btn-primary">Entrar</a>
+      {% else %}
         <a href="{% url 'account_logout' %}" class="btn btn-danger">Sair</a>
-        {% endif %}
-      </div>
-      <div class="card-footer text-muted">
-        desde 2023
-      </div>
+      {% endif %}
     </div>
-
+    <div class="card-footer text-muted">desde 2023</div>
+  </div>
 {% endblock content %}
-    

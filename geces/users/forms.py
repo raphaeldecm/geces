@@ -58,8 +58,8 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password1'].required = False
-        self.fields['password2'].required = False
+        self.fields["password1"].required = False
+        self.fields["password2"].required = False
         if self.instance.id:
             self.fields["group"].initial = self.instance.groups.first()
 

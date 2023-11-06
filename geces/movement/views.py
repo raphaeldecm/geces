@@ -16,6 +16,7 @@ def cadastrar_produto(request):
         form_product = ProductForm()
     return render(request, "products/products_form.html", {"form_product": form_product})
 
+
 @login_required
 def editar_produto(request, pk):
     produto = Product.objects.get(pk=pk)
@@ -25,11 +26,13 @@ def editar_produto(request, pk):
         return redirect("movement:listar_produtos")
     return render(request, "products/products_form.html", {"form_product": form_product})
 
+
 @login_required
 def excluir_produto(request, pk):
     produto = Product.objects.get(pk=pk)
     produto.delete()
     return redirect("movement:listar_produtos")
+
 
 @login_required
 def listar_produtos(request):

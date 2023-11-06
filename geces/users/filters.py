@@ -7,8 +7,8 @@ from .models import User
 
 class UserFilterSet(django_filters.FilterSet):
     name = django_filters.CharFilter(
-        lookup_expr='icontains',
-        label='Nome',
+        lookup_expr="icontains",
+        label="Nome",
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
@@ -16,8 +16,8 @@ class UserFilterSet(django_filters.FilterSet):
         ),
     )
     email = django_filters.CharFilter(
-        lookup_expr='icontains',
-        label='Email',
+        lookup_expr="icontains",
+        label="Email",
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
@@ -25,7 +25,7 @@ class UserFilterSet(django_filters.FilterSet):
         ),
     )
     is_active = django_filters.BooleanFilter(
-        label='Ativo',
+        label="Ativo",
         widget=forms.Select(
             attrs={
                 "class": "form-select",
@@ -34,8 +34,8 @@ class UserFilterSet(django_filters.FilterSet):
     )
     group = django_filters.ModelMultipleChoiceFilter(
         queryset=Group.objects.all(),
-        label='Grupos',
-        field_name='groups',
+        label="Grupos",
+        field_name="groups",
         required=False,
         widget=forms.SelectMultiple(
             attrs={
@@ -46,4 +46,4 @@ class UserFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = User
-        fields = ('name', 'email', 'is_active', 'group')
+        fields = ("name", "email", "is_active", "group")

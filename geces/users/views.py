@@ -75,6 +75,7 @@ class UserDeleteView(LoginRequiredMixin, views.SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy("users:list")
     success_message = _("Usuário excluído com sucesso!")
 
+
 class UserDetailView(UserBaseMixin, LoginRequiredMixin, DetailView):
     model = User
     slug_field = "id"

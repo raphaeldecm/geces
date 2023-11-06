@@ -19,7 +19,7 @@ urlpatterns = [
     path("movement/", include("geces.movement.urls", namespace="movement")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     # Static file serving when using Gunicorn + Uvicorn for local web socket development
