@@ -1,18 +1,47 @@
 import django_filters
+from django import forms
 from django.contrib.auth.models import Group
 
 from .models import User
 
 
 class UserFilterSet(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains', label='Nome')
-    email = django_filters.CharFilter(lookup_expr='icontains', label='Email')
-    is_active = django_filters.BooleanFilter(label='Active')
+    name = django_filters.CharFilter(
+        lookup_expr='icontains',
+        label='Nome',
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+            }
+        ),
+    )
+    email = django_filters.CharFilter(
+        lookup_expr='icontains',
+        label='Email',
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+            }
+        ),
+    )
+    is_active = django_filters.BooleanFilter(
+        label='Ativo',
+        widget=forms.Select(
+            attrs={
+                "class": "form-select",
+            }
+        ),
+    )
     group = django_filters.ModelMultipleChoiceFilter(
         queryset=Group.objects.all(),
         label='Grupos',
         field_name='groups',
         required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                "class": "form-control",
+            }
+        ),
     )
 
     class Meta:
