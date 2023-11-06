@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages import views
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, RedirectView, UpdateView
 from django_filters.views import FilterView
 
 from .filters import UserFilterSet
