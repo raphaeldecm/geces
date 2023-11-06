@@ -9,38 +9,60 @@
 {% endblock title %}
 
 {% block content %}
-<div class="card mx-auto">
-  <div class="card-header">
-    <h3 class="card-title">Filtros</h3>
-  </div>
-  <div class="card-body p-0">
-    <form method="GET" action="{% url 'users:list' %}" autocomplete="off">
-      <div class="row mx-auto">
-        <div class="col-lg-6 col-md-6 col-12 mt-3">
-          {% bootstrap_field filter.form.name %}
-        </div>
-        <div class="col-lg-6 col-md-6 col-12 mt-3">
-          {% bootstrap_field filter.form.email %}
-        </div>
-        <div class="col-lg-6 col-md-6 col-12 mt-3">
-          {% bootstrap_field filter.form.is_active %}
-        </div>
-        <div class="col-lg-6 col-md-6 col-12 mt-3">
-          {% bootstrap_field filter.form.group %}
-        </div>
+
+<div class="accordion m-3" id="accordionFilters">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        Filtros
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <form method="GET" action="{% url 'users:list' %}" autocomplete="off">
+          <div class="row mx-auto">
+            <div class="col-lg-6 col-md-6 col-12 mt-3">
+              {% comment %} {% bootstrap_field filter.form.name %} {% endcomment %}
+              {{ filter.form.name.label_tag }}
+              {{ filter.form.name }}
+              {{ filter.form.name.help_text }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3">
+              {% comment %} {% bootstrap_field filter.form.email %} {% endcomment %}
+              {{ filter.form.email.label_tag }}
+              {{ filter.form.email }}
+              {{ filter.form.email.help_text }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3">
+              {% bootstrap_field filter.form.is_active %}
+              {{ filter.form.is_active.label_tag }}
+              {{ filter.form.is_active }}
+              {{ filter.form.is_active.help_text }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3">
+              {% comment %} {% bootstrap_field filter.form.group %} {% endcomment %}
+              {{ filter.form.group.label_tag }}
+              {{ filter.form.group }}
+              {{ filter.form.group.help_text }}
+              <div id="groupHelp" class="form-text">É possível selecionar mais de um grupo.</div>
+            </div>
+          </div>
+          <div class="row mx-auto justify-content-start">
+            <div class="col-lg-2 col-md-3 col-12 mt-3">
+              <button class="btn btn-primary rounder-md flex-grow-1 mb-1" type="submit" name="filtrar">
+                <i class="fa fa-filter"></i>
+                {% translate "Filtrar" %}
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="row mx-auto justify-content-start">
-        <div class="col-lg-2 col-md-3 col-12 mt-3">
-          <button class="btn btn-primary rounder-md flex-grow-1 mb-1" type="submit" name="filtrar">
-            <i class="fa fa-filter"></i>
-            {% translate "Filtrar" %}
-          </button>
-        </div>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
-  <div class="card card-primary">
+    
+
+  <div class="card card-primary m-3">
     <div class="card-header">
       <h3 class="card-title">Lista de Usuários Cadastrados</h3>
     </div>
@@ -103,17 +125,8 @@
     </div>
   </div>
   
-  {% comment %} <div class="row justify-content-between">
-    <div class="col-lg-2 col-md-3  col-12 mt-3">
-      <a type="button" class="btn btn-secondary" href="/"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
-    </div>
-    <div class="col-lg-2 col-md-3 col-12 mt-3">
-      <a class="btn btn-primary" href="{% url 'users:signup' %}">Cadastrar</a>
-    </div>
-  </div> {% endcomment %}
-  
   {% url "home" as home_url %}
   {% url "users:signup" as users_signup %}
-  {% comment %} {% save_cancel_buttons link_back=home_url link_forward=users_signup is_form=False %} {% endcomment %}
+  {% save_cancel_buttons link_back=home_url link_forward=users_signup %}
 
 {% endblock content %}
