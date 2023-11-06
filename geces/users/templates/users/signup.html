@@ -7,24 +7,26 @@
 {% block head_title %}
   {% trans "Signup" %}
 {% endblock head_title %}
+
 {% block content %}
-  <div class="card card-primary">
+  <div class="card card-primary mx-3">
     <div class="card-header">
-      <div class="card-title">Cadastro de Usuários</div>
+      <h3 class="card-title">Cadastro de Usuários</h3>
     </div>
-  </div>
-  <div class="card-body">
+  <div class="card-body p-0">
     <form method="POST">
       {% csrf_token %}
-      <div class="form-group">
+      <div class="row mx-auto">
         {% bootstrap_field form.email %}
         {% bootstrap_field form.name %}
         {% bootstrap_field form.group %}
         {% bootstrap_field form.is_active %}
       </div>
+    </form>
   </div>
-  {% url "users:list" as users_list_url %}
-  {% save_cancel_buttons link_back=users_list_url %}
   
-</form>
+  {% url "users:list" as users_list_url %}
+  {% save_cancel_buttons link_back=users_list_url is_form=True %}
+  
+  
 {% endblock content %}
