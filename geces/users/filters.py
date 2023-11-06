@@ -26,7 +26,7 @@ class UserFilterSet(django_filters.FilterSet):
     )
     is_active = django_filters.BooleanFilter(
         label="Ativo",
-        widget=forms.Select(
+        widget=django_filters.widgets.BooleanWidget(
             attrs={
                 "class": "form-select",
             }
@@ -37,6 +37,7 @@ class UserFilterSet(django_filters.FilterSet):
         label="Grupos",
         field_name="groups",
         required=False,
+        help_text="Selecione um ou mais grupos.",
         widget=forms.SelectMultiple(
             attrs={
                 "class": "form-control",

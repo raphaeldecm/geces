@@ -25,40 +25,32 @@
         <div class="accordion-body">
           <form method="get" action="{% url 'users:list' %}" autocomplete="off">
             <div class="row mx-auto">
-              <div class="col-lg-6 col-md-6 col-12 mt-3">
-                {% comment %} {% bootstrap_field filter.form.name %} {% endcomment %}
+              <div class="col-md-4 col-12 mt-3">
                 {{ filter.form.name.label_tag }}
                 {{ filter.form.name }}
-                {{ filter.form.name.help_text }}
               </div>
-              <div class="col-lg-6 col-md-6 col-12 mt-3">
-                {% comment %} {% bootstrap_field filter.form.email %} {% endcomment %}
+              <div class="col-md-4 col-12 mt-3">
                 {{ filter.form.email.label_tag }}
                 {{ filter.form.email }}
-                {{ filter.form.email.help_text }}
               </div>
-              <div class="col-lg-6 col-md-6 col-12 mt-3">
-                {% bootstrap_field filter.form.is_active %}
+              <div class="col-md-4 col-12 mt-3">
                 {{ filter.form.is_active.label_tag }}
                 {{ filter.form.is_active }}
-                {{ filter.form.is_active.help_text }}
               </div>
-              <div class="col-lg-6 col-md-6 col-12 mt-3">
-                {% comment %} {% bootstrap_field filter.form.group %} {% endcomment %}
+              <div class="col-md-6 col-12 mt-3">
                 {{ filter.form.group.label_tag }}
                 {{ filter.form.group }}
                 {{ filter.form.group.help_text }}
-                <div id="groupHelp" class="form-text">É possível selecionar mais de um grupo.</div>
               </div>
-            </div>
-            <div class="row mx-auto justify-content-start">
-              <div class="col-lg-2 col-md-3 col-12 mt-3">
-                <button class="btn btn-primary rounder-md flex-grow-1 mb-1"
-                        type="submit"
-                        name="filtrar">
-                  <i class="fa fa-filter"></i>
-                  {% translate "Filtrar" %}
-                </button>
+              <div class="col-md-6 col-12 mt-3 d-flex align-items-end">
+                <div class="ms-auto">
+                  <button class="btn btn-primary rounder-md flex-grow-1 mb-1"
+                          type="submit"
+                          name="filtrar">
+                    <i class="fa fa-filter"></i>
+                    {% translate "Filtrar" %}
+                  </button>
+                </div>
               </div>
             </div>
           </form>
