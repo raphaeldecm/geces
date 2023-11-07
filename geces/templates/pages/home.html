@@ -1,45 +1,97 @@
 {% extends "base.html" %}
 
 {% load bootstrap5 %}
-{% load humanize %}
+{% load breadcrumb_item %}
 
 {% block title %}
   Página Inicial
 {% endblock title %}
+
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      {% breadcrumb_item text="Página Inicial" url="home" active="active" %}
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
+
 {% block content %}
   
-  <div class="card text-center col-8 mx-auto p-0">
-    <div class="card-header">GeCEs</div>
-    <div class="card-body">
-      <h1 class="card-text">Página Inicial</h1>
-      <p class="card-text">Sistema de Gerencimento de Cantina Escolar.</p>
-      {% if not request.user.is_authenticated %}
-        <a href="{% url 'account_login' %}" class="btn btn-primary">Entrar</a>
-      {% else %}
-        <a href="{% url 'account_logout' %}" class="btn btn-danger">Sair</a>
-      {% endif %}
+  <div class="row justify-content-start m-3">
+    
+    {% comment %} {% include "custom_info_box.html" with color="success" icon="check" header="Total Users" number=123 unit="users" percent=25 how_long="last month" %} {% endcomment %}
+    
+    <div class="col-md-4 col-12">
+      <div class="small-box bg-gradient-success">
+        <div class="inner">
+          <h3>1</h3>
+          <p>User Registrations</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
     </div>
-    <div class="card-footer text-muted">desde 2023</div>
-  </div>
+    <div class="col-md-4 col-12">
+      <div class="small-box bg-gradient-success">
+        <div class="inner">
+          <h3>1</h3>
+          <p>User Registrations</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-12">
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3>150</h3>
+          <p>Vendas no mês atual</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-12">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>3</h3>
+          <p>Balanço Mensal</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-chart-pie"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-12">
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>4</h3>
+          <p>User Registrations</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
 
-  <div class="info-box bg-{{ color }}">
-    {% if not hide_icon %}
-        <span class="info-box-icon"><i class="fa fa-{{ icon }}"></i></span>
-    {% endif %}
-    <div class="info-box-content">
-        <span class="info-box-text">{{ header }}</span>
-        <span class="info-box-number">{{ number }} {{ unit }}</span>
-        {% if percent %}
-            <div class="progress">
-                <div class="progress-bar" style="width: {{ percent }}%"></div>
-            </div>
-            {% if how_long %}
-                <span class="progress-description">
-                    {{ percent }}% Increase in {{ how_long }}
-                </span>
-            {% endif %}
-        {% endif %}
-    </div><!-- /.info-box-content -->
-</div><!-- /.info-box -->
+  </div>
 
 {% endblock content %}
