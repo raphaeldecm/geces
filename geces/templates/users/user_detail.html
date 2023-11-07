@@ -1,25 +1,38 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load breadcrumb_item %}
 
 {% block title %}
   User:
   {{ object.name }}
 {% endblock title %}
+
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb float-sm-right">
+  <ol class="breadcrumb">
+      {% breadcrumb_item text="Página Inicial" url="home" %}
+      {% breadcrumb_item text="Lista de Usuários" url="users:list" %}
+      {% breadcrumb_item text="Visualizar usuário" active="active" %}
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
+
 {% block content %}
+  
   <div class="container m-5">
-    <h2 class="text-weight-bold">Dados da usuário:</h2>
+    <h2 class="">Dados da usuário:</h2>
     <div class="row align-items-center mb-2">
-      <div class="col-md-1 col-sm-12 text-weight-bold">Nome:</div>
-      <div id="nome-completo" class="col-md-11 col-sm-12">{{ object.name }}</div>
+      <div class="col-lg-1 col-md-2 col-12"><strong>Nome:</strong></div>
+      <div id="nome-completo" class="col-lg-1 col-md-2 col-12">{{ object.name }}</div>
     </div>
     <div class="row align-items-center mb-2">
-      <div class="col-md-1 col-sm-12 text-weight-bold">Email:</div>
-      <div id="email" class="col-md-11 col-sm-12">{{ object.email }}</div>
+      <div class="col-lg-1 col-md-2 col-12"><strong>Email:</strong></div>
+      <div id="email" class="col-lg-1 col-md-2 col-12">{{ object.email }}</div>
     </div>
     <div class="row align-items-center mb-2">
-      <div class="col-md-1 col-sm-12 text-weight-bold">Permissões:</div>
-      <div id="grupo" class="col-md-11 col-sm-12 ml-3">
+      <div class="col-lg-1 col-md-2 col-12"><strong>Grupo:</strong></div>
+      <div id="grupo" class="col-lg-1 col-md-2 col-12">
         {% for group in object.groups.all %}
           {{ group.name }}
           {% if not forloop.last %},{% endif %}
@@ -27,8 +40,8 @@
       </div>
     </div>
     <div class="row align-items-center mb-2">
-      <div class="col-md-1 col-sm-12 text-weight-bold">Situação:</div>
-      <div id="situacao" class="col-md-11 col-sm-12">
+      <div class="col-lg-1 col-md-2 col-12"><strong>Situação:</strong></div>
+      <div id="situacao" class="col-lg-1 col-md-2 col-12">
         {% if object.is_active %}
           <span class="badge bg-success">Ativo</span>
         {% else %}
@@ -36,11 +49,11 @@
         {% endif %}
       </div>
     </div>
-    <div class="row justify-content-between">
-      <div class="col-lg-2 col-md-3  col-12 mt-3">
+    <div class="row justify-content-between m-3">
+      <div class="col-lg-4 col-md-6 col-12 m-3">
         <a type="button" class="btn btn-secondary" href="{% url 'users:list' %}"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
       </div>
-      <div class="col-lg-2 col-md-3 col-12 mt-3">
+      <div class="col-lg-2 col-md-3 col-12 m-3">
         <a class="btn btn-primary" href="{% url 'users:edit' object.pk %}">Editar</a>
       </div>
     </div>
