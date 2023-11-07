@@ -24,20 +24,62 @@
 {% block nav_links %}
   <li class="nav-item">
     <a href="{% url 'home' %}" class="nav-link">
-      <i class="nav-icon fas fa-tachometer-alt"></i>
-      <p>Home</p>
+      <i class="nav-icon fas fa-home" aria-hidden="true"></i>
+      <p>Página Inicial</p>
     </a>
+  </li>
+  <li class="nav-item has-tree-view ">
+    <a href="#" class="nav-link">
+      <i class="nav-icon fas fa-users" aria-hidden="true"></i><p>Pessoas</p>
+      <p><i class="right fas fa-angle-left"></i></p>
+    </a>
+    <ul class="nav nav-treeview menu-open">
+      <li class="nav-item active">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-user-graduate" aria-hidden="true"></i>Discentes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-user" aria-hidden="true"></i>Responsáveis
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-truck" aria-hidden="true"></i>Fornecedores
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item has-tree-view ">
+    <a href="#" class="nav-link">
+      <i class="nav-icon fas fa-exchange-alt" aria-hidden="true"></i><p>Movimentação</p>
+      <p><i class="right fas fa-angle-left"></i></p>
+    </a>
+    <ul class="nav nav-treeview menu-open">
+      <li class="nav-item active">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-cart-arrow-down" aria-hidden="true"></i>Compras
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-credit-card" aria-hidden="true"></i>Vendas
+        </a>
+      </li>
+    </ul>
   </li>
   <li class="nav-item">
     <a href="{% url 'movement:listar_produtos' %}" class="nav-link">
-      <i class="nav-icon fas fa-list-alt"></i>
+      <i class="nav-icon fas fa-cubes" aria-hidden="true"></i>
       <p>Produtos</p>
     </a>
   </li>
   <li class="nav-item">
     <a href="{% url 'users:list' %}" class="nav-link">
-      <i class="nav-icon fas fa-user"></i>
+      <i class="nav-icon fas fa-user" aria-hidden="true"></i>
       <p>Usuários</p>
     </a>
   </li>
+  
 {% endblock nav_links %}
