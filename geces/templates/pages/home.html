@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% load bootstrap5 %}
+{% load humanize %}
 
 {% block title %}
   Página Inicial
 {% endblock title %}
 {% block content %}
+  
   <div class="card text-center col-8 mx-auto p-0">
     <div class="card-header">GeCEs</div>
     <div class="card-body">
@@ -19,4 +21,25 @@
     </div>
     <div class="card-footer text-muted">desde 2023</div>
   </div>
+
+  <div class="info-box bg-{{ color }}">
+    {% if not hide_icon %}
+        <span class="info-box-icon"><i class="fa fa-{{ icon }}"></i></span>
+    {% endif %}
+    <div class="info-box-content">
+        <span class="info-box-text">{{ header }}</span>
+        <span class="info-box-number">{{ number }} {{ unit }}</span>
+        {% if percent %}
+            <div class="progress">
+                <div class="progress-bar" style="width: {{ percent }}%"></div>
+            </div>
+            {% if how_long %}
+                <span class="progress-description">
+                    {{ percent }}% Increase in {{ how_long }}
+                </span>
+            {% endif %}
+        {% endif %}
+    </div><!-- /.info-box-content -->
+</div><!-- /.info-box -->
+
 {% endblock content %}
