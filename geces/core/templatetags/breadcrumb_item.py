@@ -12,17 +12,12 @@ def breadcrumb_item(*args, **kwargs):
     else:
         active = kwargs.get("active")
 
-    link = kwargs.get("link")
+    link = None
 
     if "url" in kwargs:
         k = {}
         if "pk" in kwargs:
             k["pk"] = kwargs.get("pk")
-        if "itinerary" in kwargs:
-            k["itinerary"] = kwargs.get("itinerary")
-        if "unit" in kwargs:
-            k["unit"] = kwargs.get("unit")
-
         link = reverse_lazy(kwargs.get("url"), kwargs=k)
 
     return {

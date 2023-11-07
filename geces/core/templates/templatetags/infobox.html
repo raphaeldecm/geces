@@ -1,21 +1,14 @@
 <div class="col-md-4 col-12">
-    <div class="info-box bg-{{ color }}">
-        {% if not hide_icon %}
-            <span class="info-box-icon"><i class="fa fa-{{ icon }}"></i></span>
-        {% endif %}
-        <div class="info-box-content">
-            <span class="info-box-text">{{ header }}</span>
-            <span class="info-box-number">{{ number }} {{ unit }}</span>
-            {% if percent %}
-                <div class="progress">
-                    <div class="progress-bar" style="width: {{ percent }}%"></div>
-                </div>
-                {% if how_long %}
-                    <span class="progress-description">
-                        {{ percent }}% Increase in {{ how_long }}
-                    </span>
-                {% endif %}
-            {% endif %}
-        </div>
+    <div class="small-box bg-{{ color }}">
+      <div class="inner">
+        <h3>{{ number }}</h3>
+        <p>{{ text }}</p>
+      </div>
+      <div class="icon">
+        <i class="{{ icon }}"></i>
+      </div>
+      <a href="{{ link }}" class="small-box-footer">
+        Mais informações <i class="fas fa-arrow-circle-right"></i>
+      </a>
     </div>
 </div>

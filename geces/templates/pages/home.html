@@ -2,6 +2,7 @@
 
 {% load bootstrap5 %}
 {% load breadcrumb_item %}
+{% load infobox %}
 
 {% block title %}
   Página Inicial
@@ -18,79 +19,11 @@
 {% block content %}
   
   <div class="row justify-content-start m-3">
-    
-    {% comment %} {% include "custom_info_box.html" with color="success" icon="check" header="Total Users" number=123 unit="users" percent=25 how_long="last month" %} {% endcomment %}
-    
-    <div class="col-md-4 col-12">
-      <div class="small-box bg-gradient-success">
-        <div class="inner">
-          <h3>1</h3>
-          <p>User Registrations</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-user-plus"></i>
-        </div>
-        <a href="#" class="small-box-footer">
-          More info <i class="fas fa-arrow-circle-right"></i>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-4 col-12">
-      <div class="small-box bg-gradient-success">
-        <div class="inner">
-          <h3>1</h3>
-          <p>User Registrations</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-user-plus"></i>
-        </div>
-        <a href="#" class="small-box-footer">
-          More info <i class="fas fa-arrow-circle-right"></i>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-4 col-12">
-      <div class="small-box bg-info">
-        <div class="inner">
-          <h3>150</h3>
-          <p>Vendas no mês atual</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-shopping-cart"></i>
-        </div>
-        <a href="#" class="small-box-footer">
-          More info <i class="fas fa-arrow-circle-right"></i>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-4 col-12">
-      <div class="small-box bg-warning">
-        <div class="inner">
-          <h3>3</h3>
-          <p>Balanço Mensal</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-chart-pie"></i>
-        </div>
-        <a href="#" class="small-box-footer">
-          More info <i class="fas fa-arrow-circle-right"></i>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-4 col-12">
-      <div class="small-box bg-danger">
-        <div class="inner">
-          <h3>4</h3>
-          <p>User Registrations</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-user-plus"></i>
-        </div>
-        <a href="#" class="small-box-footer">
-          More info <i class="fas fa-arrow-circle-right"></i>
-        </a>
-      </div>
-    </div>
+
+    {% infobox color="gradient-success" number=users_number text="Usuários cadastrados" icon="fas fa-user-plus" link="home" %}
+    {% infobox color="info" number=10 text="Vendas realizadas no mês" icon="fas fa-shopping-cart" link="home" %}
+    {% infobox color="warning" number=10 text="Balanço mensal" icon="fas fa-chart-pie" link="home" %}    
+    {% infobox color="danger" number=10 text="Produtos cadastrados" icon="fas fa-chart-pie" link="home" %}    
 
   </div>
 
