@@ -57,8 +57,15 @@
   </head>
   <body>
     <main class="container">
-
+      {% block page_name %}{% endblock %}
+      {% block page_actions %}{% endblock %}
       {% block breadcrumbs %}
+        <nav class="ml-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            {% block breadcrumb_items %}
+            {% endblock breadcrumb_items %}
+          </ol>
+        </nav>
       {% endblock breadcrumbs %}
       
       {% block content %}

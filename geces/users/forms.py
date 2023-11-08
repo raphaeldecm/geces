@@ -24,7 +24,7 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
 
     group = ModelChoiceField(
         queryset=models.Group.objects.all(),
-        required=False,
+        required=True,
         label=_("Grupo de permissões"),
         widget=forms.Select(
             attrs={

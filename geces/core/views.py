@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render  # noqa: F401
 from django.views.generic import TemplateView
 
@@ -5,7 +6,7 @@ from geces.users.models import User
 
 
 # Create your views here.
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "pages/home.html"
 
     def get_context_data(self, **kwargs):
