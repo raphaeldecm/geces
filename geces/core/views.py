@@ -11,6 +11,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["logged_user"] = self.request.user
         context["users_number"] = User.objects.exclude(is_superuser=True).exclude(email="deleted").count()
 
         return context

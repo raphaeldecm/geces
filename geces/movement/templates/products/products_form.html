@@ -1,21 +1,26 @@
 {% extends "base.html" %}
 
 {% load bootstrap5 %}
+{% load save_cancel_buttons %}
 
 {% block title %}
   Cadastro de Produtos
 {% endblock title %}
+
 {% block content %}
-  <div class="card card-primary">
+
+  <div class="card card-primary mx-3">
     <div class="card-header">
       <div class="card-title">Cadastro de Produtos</div>
     </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% url "movement:products_list" as product_list %}
+        {% save_cancel_buttons link_back=product_list has_form=True %}
+      </form>
+    </div>
   </div>
-  <div class="card-body">
-    <form method="post">
-      {% csrf_token %}
-      {% bootstrap_form form_product %}
-      <button class="btn btn-primary" type="submit">Registrar</button>
-    </form>
-  </div>
+
 {% endblock content %}

@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
+{% load save_cancel_buttons %}
+
 {% block title %}
   Listagem de Produtos
 {% endblock title %}
+
 {% block content %}
   <div class="card">
     <div class="card-header">
@@ -13,20 +16,33 @@
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Preço</th>
-            <th>Estoque</th>
-            <th>Ações</th>
+            <th class="text-center">Preço</th>
+            <th class="text-center">Estoque</th>
+            <th class="text-center">Ações</th>
           </tr>
         </thead>
         <tbody>
-          {% for produto in produtos %}
+          {% for object in object_list %}
             <tr>
-              <td>{{ produto.name }}</td>
-              <td>{{ produto.price }}</td>
-              <td>{{ produto.stock }}</td>
+              <td>{{ object.name }}</td>
+              <td class="text-center">R$ {{ object.price }}</td>
+              <td class="text-center">{{ object.stock }}</td>
+              <td class="text-center">
+                <a href="{% url 'movement:product_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                <a href="{% url 'movement:product_update' object.pk %}"
+                   type="button"
+                   aria-label="editar"
+                   title="editar">
+                  <i class="fas fa-edit" aria-hidden="true"></i></a>
+                <a type="button"
+                   data-bs-toggle="modal"
+                   data-bs-target="#deleteModal-{{ object.pk }}"
+                   aria-label="excluir"
+                   title="excluir">
+                  <i class="fas fa-trash" aria-hidden="true"></i></a>
+                {% include "products/product_confirm_delete.html" %}
+              </td>
               <td>
-                <a href="{% url 'movement:editar_produto' produto.pk %}">Editar</a>
-                <a href="{% url 'movement:excluir_produto' produto.pk %}">Excluir</a>
               </td>
             </tr>
           {% endfor %}
@@ -34,5 +50,8 @@
       </table>
     </div>
   </div>
-  <a class="btn btn-primary" href="{% url 'movement:cadastrar_produto' %}">Cadastrar</a>
+  
+  {% url "home" as home_url %}
+  {% url "movement:product_form" as product_form %}
+  {% save_cancel_buttons link_back=home_url link_forward=product_form %}
 {% endblock content %}
