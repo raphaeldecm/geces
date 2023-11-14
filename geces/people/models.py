@@ -108,7 +108,6 @@ class Responsible(BaseModel):
 
 
 class Student(BaseModel):
-
     class Status(models.IntegerChoices):
         PENDING = 1, _("Pendente")
         ENROLLED = 2, _("Matriculado")
@@ -119,11 +118,6 @@ class Student(BaseModel):
         choices=Status.choices,
         validators=[MinValueValidator(1), MaxValueValidator(8)],
         default=Status.PENDING,
-    )
-    serie = models.ForeignKey(
-        Serie,
-        verbose_name=_("Série"),
-        on_delete=models.PROTECT,
     )
     person = models.OneToOneField(
         Person,
@@ -167,7 +161,7 @@ class StudentGroup(BaseModel):
     students = models.ManyToManyField(
         Student,
         verbose_name=_("Discentes"),
-        related_name="class_groups",
+        related_name="student_group",
     )
 
     class Meta:
@@ -176,3 +170,9 @@ class StudentGroup(BaseModel):
 
     def __str__(self):
         return f"{self.code} - {self.serie.name}/{self.shift.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.code:
+            self.code = f"GRP-{self.shift.code[:3]}-{self.serie.code[:3]}-{self.reference_year}"
+
+        super().save(*args, **kwargs)

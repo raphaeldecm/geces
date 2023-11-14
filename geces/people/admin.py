@@ -6,17 +6,32 @@ from geces.people import models
 
 
 class SupplierAdmin(admin.ModelAdmin):
-    search_fields = ["name", "email"]
+    search_fields = ["person__name", "email"]
 
 
 class ResponsibleAdmin(admin.ModelAdmin):
-    search_fields = ["name", "email"]
+    search_fields = ["person__name", "email"]
 
 
 class StudentAdmin(admin.ModelAdmin):
-    search_fields = ["name", "serie", "responsible__name"]
+    fields = [
+        "created_by",
+        "person",
+        "status",
+        "serie",
+        "responsible",
+    ]
+    readonly_fields = ("updated_by", "balance", )
+    search_fields = ["person__name", "serie", "responsible__name"]
 
 
+class StudentGroupAdmin(admin.ModelAdmin):
+    search_fields = ["reference_year", "shift__name", "serie__name"]
+    ordering = ["reference_year"]
+    readonly_fields = ["updated_by"]
+
+
+admin.site.register(models.StudentGroup, StudentGroupAdmin)
 admin.site.register(models.Suplier, SupplierAdmin)
 admin.site.register(models.Responsible, ResponsibleAdmin)
 admin.site.register(models.Student, StudentAdmin)
