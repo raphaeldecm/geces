@@ -1,6 +1,4 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
@@ -42,5 +40,5 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
 
 class ProductDetailView(LoginRequiredMixin, generic.DetailView):
     model = Product
-    template_name = "products/products_detail.html"
+    template_name = "products/product_detail.html"
     queryset = Product.objects.all()

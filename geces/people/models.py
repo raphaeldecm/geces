@@ -3,6 +3,52 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from geces.core import constants
+from geces.core.models import BaseModel
+
+
+class State(BaseModel):
+    name = models.CharField(
+        verbose_name=_("Nome"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH, unique=True
+    )
+    abbreviation = models.CharField(
+        verbose_name=_("Abreviação"), max_length=2, unique=True
+    )
+
+    class Meta:
+        verbose_name = _("Estado")
+        verbose_name_plural = _("Estados")
+
+    def __str__(self):
+        return self.abbreviation
+
+
+class Address(BaseModel):
+    country_state = models.ForeignKey(
+        State,
+        verbose_name=_("Estado"),
+        on_delete=models.PROTECT,
+    )
+    city = models.CharField(
+        verbose_name=_("Cidade"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH
+    )
+    address = models.CharField(
+        verbose_name=_("Endereço"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH
+    )
+    zip_code = models.CharField(verbose_name=_("CEP"), max_length=8)
+    phone = models.CharField(verbose_name=_("Telefone"), max_length=11)
+
+    class Meta:
+        verbose_name = _("Endereço")
+        verbose_name_plural = _("Endereços")
+
+    def __str__(self):
+        full_address = _("{address}, {city}, {state}, CEP {zip_code}")
+        return full_address.format(
+            address=self.address,
+            city=self.city,
+            state=self.country_state.abbreviation,
+            zip_code=self.zip_code,
+        )
 
 
 class Person(models.Model):
@@ -13,9 +59,14 @@ class Person(models.Model):
     email = models.EmailField(
         verbose_name=_("E-mail"),
         max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH,
-        unique=True,
+        unique=False,
     )
     phone = models.CharField(verbose_name=_("Telefone"), max_length=11)
+    address = models.ForeignKey(
+        Address,
+        verbose_name=_("Endereço"),
+        on_delete=models.PROTECT,
+    )
 
     class Meta:
         verbose_name = _("Pessoa")
@@ -25,7 +76,7 @@ class Person(models.Model):
         return self.name
 
 
-class Suplier(models.Model):
+class Suplier(BaseModel):
     person = models.OneToOneField(
         Person,
         on_delete=models.CASCADE,
@@ -40,7 +91,7 @@ class Suplier(models.Model):
         return str(self.person)
 
 
-class Responsible(models.Model):
+class Responsible(BaseModel):
     person = models.OneToOneField(
         Person,
         on_delete=models.CASCADE,
@@ -55,7 +106,7 @@ class Responsible(models.Model):
         return str(self.person)
 
 
-class Student(models.Model):
+class Student(BaseModel):
     class Shift(models.IntegerChoices):
         MORNING = 1, _("Matutino")
         AFTERNOON = 2, _("Vespertino")
@@ -81,7 +132,7 @@ class Student(models.Model):
         choices=Series.choices,
         validators=[MinValueValidator(1), MaxValueValidator(3)],
     )
-    serie = models.PositiveSmallIntegerField(
+    turno = models.PositiveSmallIntegerField(
         verbose_name=_("TURNO"),
         choices=Shift.choices,
         validators=[MinValueValidator(1), MaxValueValidator(8)],

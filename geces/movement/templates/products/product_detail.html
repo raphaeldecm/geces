@@ -11,8 +11,8 @@
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
-  {% breadcrumb_item text="Lista de Usuários" url="users:list" %}
-  {% breadcrumb_item text="Visualizar usuário" active="active" %}
+  {% breadcrumb_item text="Lista de Produtos" url="movement:products_list" %}
+  {% breadcrumb_item text="Visualizar Produto" active="active" %}
 {% endblock breadcrumb_items %}
 
 {% block content %}
@@ -27,27 +27,15 @@
       <div id="nome-completo" class="col-md-10 col-sm-12">{{ object.name }}</div>
     </div>
     <div class="row align-items-center m-3">
-      <div class="col-md-2 col-sm-12"><strong>Email:</strong></div>
-      <div id="email" class="col-md-10 col-sm-12">{{ object.email }}</div>
+      <div class="col-md-2 col-sm-12"><strong>Preço:</strong></div>
+      <div id="email" class="col-md-10 col-sm-12">R$ {{ object.price }}</div>
     </div>
     <div class="row align-items-center m-3">
-      <div class="col-md-2 col-sm-12"><strong>Grupo:</strong></div>
-      <div id="grupo" class="col-md-10 col-sm-12">
-        {% for group in object.groups.all %}
-          {{ group.name }}
-          {% if not forloop.last %},{% endif %}
-        {% endfor %}
-      </div>
+      <div class="col-md-2 col-sm-12"><strong>Estoque:</strong></div>
+      <div id="grupo" class="col-md-10 col-sm-12">{{ object.stock }}</div>
     </div>
     <div class="row align-items-center m-3">
-      <div class="col-md-2 col-sm-12"><strong>Situação:</strong></div>
-      <div id="situacao" class="col-md-10 col-sm-12">
-        {% if object.is_active %}
-          <span class="badge bg-success">Ativo</span>
-        {% else %}
-          <span class="badge bg-danger">Inativo</span>
-        {% endif %}
-      </div>
+        <p>TESTE</p>
     </div>
     <div class="row justify-content-between m-3">
       <div class="col-lg-4 col-md-6 col-12 m-3">

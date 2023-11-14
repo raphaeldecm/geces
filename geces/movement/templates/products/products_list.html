@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 
 {% load save_cancel_buttons %}
+{% load breadcrumb_item %}
 
 {% block title %}
-  Listagem de Produtos
+  Lista de Produtos
 {% endblock title %}
 
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Lista de Produtos" active="active" %}
+{% endblock breadcrumb_items %}
+
 {% block content %}
-  <div class="card">
+  <div class="card card-primary">
     <div class="card-header">
       <h3 class="card-title">Lista de Produtos</h3>
     </div>
