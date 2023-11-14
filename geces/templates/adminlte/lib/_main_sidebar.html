@@ -28,28 +28,11 @@
       <p>Página Inicial</p>
     </a>
   </li>
-  <li class="nav-item has-tree-view ">
-    <a href="#" class="nav-link">
-      <i class="nav-icon fas fa-users" aria-hidden="true"></i><p>Pessoas</p>
-      <p><i class="right fas fa-angle-left"></i></p>
+  <li class="nav-item">
+    <a href="{% url 'people:people_home' %}" class="nav-link">
+      <i class="nav-icon fas fa-users" aria-hidden="true"></i>
+      <p>Pessoas</p>
     </a>
-    <ul class="nav nav-treeview menu-open">
-      <li class="nav-item active">
-        <a href="{% url 'people:student_list' %}" class="nav-link">
-          <i class="nav-icon fas fa-user-graduate" aria-hidden="true"></i>Discentes
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-user" aria-hidden="true"></i>Responsáveis
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-truck" aria-hidden="true"></i>Fornecedores
-        </a>
-      </li>
-    </ul>
   </li>
   <li class="nav-item has-tree-view ">
     <a href="#" class="nav-link">

@@ -30,13 +30,14 @@ class Command(BaseCommand):
         if Serie.objects.count() == 0:
             Serie.objects.bulk_create(
                 [
+                    Serie(name="Maternal", created_by=admin),
                     Serie(name="Nível I", created_by=admin),
                     Serie(name="Nível II", created_by=admin),
                     Serie(name="Nível III", created_by=admin),
-                    Serie(name="Alfabetização", created_by=admin),
                     Serie(name="1° Ano", created_by=admin),
                     Serie(name="2° Ano", created_by=admin),
                     Serie(name="3° Ano", created_by=admin),
                     Serie(name="4° Ano", created_by=admin),
+                    Serie(name="5° Ano", created_by=admin),
                 ]
             )

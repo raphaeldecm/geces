@@ -46,15 +46,15 @@ class Person(models.Model):
         unique=False,
     )
     phone = models.CharField(verbose_name=_("Telefone"), max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH)
-    address = models.ForeignKey(
-        Address,
-        verbose_name=_("Endereço"),
-        on_delete=models.PROTECT,
-    )
     gender = models.CharField(
         verbose_name=_("Gênero"),
         max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
         choices=Gender.choices,
+    )
+    address = models.ForeignKey(
+        Address,
+        verbose_name=_("Endereço"),
+        on_delete=models.PROTECT,
     )
 
     class Meta:
@@ -75,6 +75,21 @@ class Suplier(BaseModel):
     class Meta:
         verbose_name = _("Fornecedor")
         verbose_name_plural = _("Fornecedores")
+
+    def __str__(self):
+        return str(self.person)
+
+
+class Teacher(BaseModel):
+    person = models.OneToOneField(
+        Person,
+        on_delete=models.CASCADE,
+        related_name="teacher",
+    )
+
+    class Meta:
+        verbose_name = _("Professor")
+        verbose_name_plural = _("Professores")
 
     def __str__(self):
         return str(self.person)

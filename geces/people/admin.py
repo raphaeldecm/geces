@@ -18,11 +18,10 @@ class StudentAdmin(admin.ModelAdmin):
         "created_by",
         "person",
         "status",
-        "serie",
         "responsible",
     ]
     readonly_fields = ("updated_by", "balance", )
-    search_fields = ["person__name", "serie", "responsible__name"]
+    search_fields = ["person__name", "responsible__name"]
 
 
 class StudentGroupAdmin(admin.ModelAdmin):

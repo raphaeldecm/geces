@@ -5,8 +5,6 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
-from geces.people.models import State
-
 User = get_user_model()
 
 STUDENTS_CSV = str(settings.APPS_DIR / "people" / "bin" / "lista_alunos_mat.csv")
@@ -17,7 +15,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         admin = User.objects.filter(is_superuser=True).first()
-        
+
         with open(STUDENTS_CSV, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
 
