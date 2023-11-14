@@ -7,28 +7,7 @@ from geces.core import constants
 from geces.core.models import BaseModel
 
 
-class State(BaseModel):
-    name = models.CharField(
-        verbose_name=_("Nome"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH, unique=True
-    )
-    abbreviation = models.CharField(
-        verbose_name=_("Abreviação"), max_length=2, unique=True
-    )
-
-    class Meta:
-        verbose_name = _("Estado")
-        verbose_name_plural = _("Estados")
-
-    def __str__(self):
-        return self.abbreviation
-
-
 class Address(BaseModel):
-    country_state = models.ForeignKey(
-        State,
-        verbose_name=_("Estado"),
-        on_delete=models.PROTECT,
-    )
     city = models.CharField(
         verbose_name=_("Cidade"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH
     )
@@ -53,6 +32,10 @@ class Address(BaseModel):
 
 
 class Person(models.Model):
+    class Gender(models.TextChoices):
+        MALE = "MALE", _("Masculino")
+        FEMALE = "FEMALE", _("Feminino")
+
     name = models.CharField(
         verbose_name=_("Nome"),
         max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH,
@@ -62,11 +45,16 @@ class Person(models.Model):
         max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH,
         unique=False,
     )
-    phone = models.CharField(verbose_name=_("Telefone"), max_length=11)
+    phone = models.CharField(verbose_name=_("Telefone"), max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH)
     address = models.ForeignKey(
         Address,
         verbose_name=_("Endereço"),
         on_delete=models.PROTECT,
+    )
+    gender = models.CharField(
+        verbose_name=_("Gênero"),
+        max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
+        choices=Gender.choices,
     )
 
     class Meta:
