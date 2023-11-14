@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
     "bootstrap5",
+    "adminlte3",
 ]
 
 LOCAL_APPS = [
@@ -89,7 +90,7 @@ LOCAL_APPS = [
     "geces.users",
     "geces.movement",
     "geces.people",
-    "adminlte3",
+    "geces.academics",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

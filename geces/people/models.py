@@ -2,6 +2,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from geces.academics.models import Serie, Shift
 from geces.core import constants
 from geces.core.models import BaseModel
 
@@ -107,35 +108,27 @@ class Responsible(BaseModel):
 
 
 class Student(BaseModel):
-    class Shift(models.IntegerChoices):
-        MORNING = 1, _("Matutino")
-        AFTERNOON = 2, _("Vespertino")
-        NIGHT = 3, _("Noturno")
 
-    class Series(models.IntegerChoices):
-        LEVEL1 = 1, _("Nível I")
-        LEVEL2 = 2, _("Nível II")
-        LEVEL3 = 3, _("Nível III")
-        LEVEL4 = 4, _("Alfabetização")
-        YEAR1 = 5, _("1° Ano")
-        YEAR2 = 6, _("2° Ano")
-        YEAR3 = 7, _("3° Ano")
-        YEAR4 = 8, _("4° Ano")
+    class Status(models.IntegerChoices):
+        PENDING = 1, _("Pendente")
+        ENROLLED = 2, _("Matriculado")
+        STUDYING = 3, _("Cursando")
 
+    status = models.PositiveSmallIntegerField(
+        verbose_name=_("Situação"),
+        choices=Status.choices,
+        validators=[MinValueValidator(1), MaxValueValidator(8)],
+        default=Status.PENDING,
+    )
+    serie = models.ForeignKey(
+        Serie,
+        verbose_name=_("Série"),
+        on_delete=models.PROTECT,
+    )
     person = models.OneToOneField(
         Person,
         on_delete=models.CASCADE,
         related_name="student",
-    )
-    serie = models.PositiveSmallIntegerField(
-        verbose_name=_("Série"),
-        choices=Series.choices,
-        validators=[MinValueValidator(1), MaxValueValidator(3)],
-    )
-    turno = models.PositiveSmallIntegerField(
-        verbose_name=_("TURNO"),
-        choices=Shift.choices,
-        validators=[MinValueValidator(1), MaxValueValidator(8)],
     )
     responsible = models.ForeignKey(
         Responsible,
@@ -152,3 +145,34 @@ class Student(BaseModel):
 
     def __str__(self):
         return str(self.person)
+
+
+class StudentGroup(BaseModel):
+    code = models.CharField(
+        verbose_name=_("Código"),
+        max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
+        unique=True,
+    )
+    reference_year = models.PositiveSmallIntegerField(verbose_name=_("Ano referência"))
+    shift = models.ForeignKey(
+        Shift,
+        verbose_name=_("Turno"),
+        on_delete=models.PROTECT,
+    )
+    serie = models.ForeignKey(
+        Serie,
+        verbose_name=_("Série"),
+        on_delete=models.PROTECT,
+    )
+    students = models.ManyToManyField(
+        Student,
+        verbose_name=_("Discentes"),
+        related_name="class_groups",
+    )
+
+    class Meta:
+        verbose_name = _("Turma")
+        verbose_name_plural = _("Turmas")
+
+    def __str__(self):
+        return f"{self.code} - {self.serie.name}/{self.shift.name}"
