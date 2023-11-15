@@ -31,7 +31,7 @@ class Address(BaseModel):
         )
 
 
-class Person(models.Model):
+class Person(BaseModel):
     class Gender(models.TextChoices):
         MALE = "MALE", _("Masculino")
         FEMALE = "FEMALE", _("Feminino")
@@ -65,52 +65,37 @@ class Person(models.Model):
         return self.name
 
 
-class Suplier(BaseModel):
-    person = models.OneToOneField(
-        Person,
-        on_delete=models.CASCADE,
-        related_name="suplier",
-    )
+class Suplier(Person):
 
     class Meta:
         verbose_name = _("Fornecedor")
         verbose_name_plural = _("Fornecedores")
 
     def __str__(self):
-        return str(self.person)
+        return str(self.name)
 
 
-class Teacher(BaseModel):
-    person = models.OneToOneField(
-        Person,
-        on_delete=models.CASCADE,
-        related_name="teacher",
-    )
+class Teacher(Person):
 
     class Meta:
         verbose_name = _("Professor")
         verbose_name_plural = _("Professores")
 
     def __str__(self):
-        return str(self.person)
+        return str(self.name)
 
 
-class Responsible(BaseModel):
-    person = models.OneToOneField(
-        Person,
-        on_delete=models.CASCADE,
-        related_name="responsible",
-    )
+class Responsible(Person):
 
     class Meta:
         verbose_name = _("Responsável")
         verbose_name_plural = _("Responsáveis")
 
     def __str__(self):
-        return str(self.person)
+        return str(self.name)
 
 
-class Student(BaseModel):
+class Student(Person):
     class Status(models.IntegerChoices):
         PENDING = 1, _("Pendente")
         ENROLLED = 2, _("Matriculado")
@@ -122,17 +107,12 @@ class Student(BaseModel):
         validators=[MinValueValidator(1), MaxValueValidator(8)],
         default=Status.PENDING,
     )
-    person = models.OneToOneField(
-        Person,
-        on_delete=models.CASCADE,
-        related_name="student",
-    )
-    responsible = models.ForeignKey(
+    responsible_student = models.ForeignKey(
         Responsible,
         verbose_name=_("Responsável"),
         on_delete=models.PROTECT,
         null=True,
-        related_name="students",
+        related_name="responsible_student",
     )
     balance = models.DecimalField(_("Saldo"), max_digits=5, decimal_places=2)
 
@@ -141,7 +121,7 @@ class Student(BaseModel):
         verbose_name_plural = _("Discentes")
 
     def __str__(self):
-        return str(self.person)
+        return str(self.name)
 
 
 class StudentGroup(BaseModel):

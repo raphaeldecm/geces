@@ -21,7 +21,9 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-  
+{% block alerts %}
+  {% include "layouts/alerts.html" %}
+{% endblock alerts %}
   <div class="card card-primary m-3">
     <div class="card-header">
       <h3 class="card-title">Cadastro de Responsáveis</h3>
@@ -31,6 +33,7 @@
         {% csrf_token %}
         {% comment %} {% include "people/_person_form.html" with form=person_form address_form=address_form only %} {% endcomment %}
         {{ form.as_p }}
+        {{ address_form.as_p }}
         {% url "people:responsible_list" as users_list_url %}
         {% save_cancel_buttons link_back=users_list_url has_form=True %}
       </form>

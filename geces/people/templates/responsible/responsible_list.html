@@ -40,7 +40,7 @@
             <tr>
               <td>{{ object.name }}</td>
               <td>{{ object.email }}</td>
-              <td>{{ object.fone }}</td>
+              <td>{{ object.address.phone }}</td>
               <td class="text-center">
                 <a href="{% url 'users:detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
                 <a href="{% url 'users:edit' object.pk %}"

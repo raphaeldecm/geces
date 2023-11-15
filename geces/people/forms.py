@@ -1,26 +1,19 @@
 from django import forms
 
-from .models import Person, Responsible, Student
+from .models import Address, Responsible, Student
 
 
-class PersonForm(forms.ModelForm):
-    id = forms.IntegerField(widget=forms.HiddenInput, required=False)
+class AddressForm(forms.ModelForm):
 
     class Meta:
-        model = Person
-        fields = ["id", "name", "gender", "email"]
+        model = Address
+        fields = ["city", "address", "zip_code", "phone"]
 
 
 class ResponsibleForm(forms.ModelForm):
     class Meta:
         model = Responsible
-        fields = ["person__name", "person__email", "person__phone", "person__gender", "address"]
-
-    def clean_phone_number(self):
-        phone_number = self.cleaned_data['phone']
-        if not phone_number.isdigit():
-            raise forms.ValidationError('O número de telefone deve conter apenas números.')
-        return phone_number
+        fields = ["id", "name", "gender", "email"]
 
 
 class StudentForm(forms.ModelForm):
