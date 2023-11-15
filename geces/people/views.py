@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, ListView, TemplateView
 
 from geces.people import forms, models
+from geces.people.mixins import PeopleCreateViewMixin
 
 
 # Create your views here.
@@ -27,22 +28,16 @@ class ResponsbileList(LoginRequiredMixin, ListView):
     ordering = ["name"]
 
 
-class ResponsibleForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, CreateView):
+class ResponsibleForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, CreateView):
     model = models.Responsible
     template_name = "responsible/responsible_form.html"
     form_class = forms.ResponsibleForm
     success_message = _("O responsável foi cadastrado com sucesso")
     success_url = reverse_lazy("people:responsible_list")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if 'address_form' not in context:
-            context['address_form'] = forms.AddressForm()  # Adiciona o formulário de endereço ao contexto
-        return context
-
     @transaction.atomic
     def form_valid(self, form):
-        address_form = forms.AddressForm(self.request.POST)  # Cria o formulário de Address
+        address_form = forms.AddressForm(self.request.POST)
         if address_form.is_valid():
             responsible = form.save(commit=False)
             address = address_form.save()
@@ -51,7 +46,3 @@ class ResponsibleForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, Cr
             return super().form_valid(form)
         else:
             return self.form_invalid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, _("Erro ao salvar o formulário. Verifique os campos."))
-        return self.render_to_response(self.get_context_data(form=form))

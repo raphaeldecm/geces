@@ -43,7 +43,7 @@ class Person(BaseModel):
     email = models.EmailField(
         verbose_name=_("E-mail"),
         max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH,
-        unique=False,
+        unique=True,
     )
     phone = models.CharField(verbose_name=_("Telefone"), max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH)
     gender = models.CharField(

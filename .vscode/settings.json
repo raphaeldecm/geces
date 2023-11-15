@@ -1,4 +1,14 @@
 {
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "none",
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.analysis.extraPaths": [
+        "./config"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": []
