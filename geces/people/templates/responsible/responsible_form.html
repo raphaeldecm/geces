@@ -24,16 +24,47 @@
 {% block alerts %}
   {% include "layouts/alerts.html" %}
 {% endblock alerts %}
-  <div class="card card-primary m-3">
+  <div class="card card-primary mx-3">
     <div class="card-header">
       <h3 class="card-title">Cadastro de Responsáveis</h3>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0 mt-3">
       <form method="post">
         {% csrf_token %}
-        {% comment %} {% include "people/_person_form.html" with form=person_form address_form=address_form only %} {% endcomment %}
-        {{ form.as_p }}
-        {{ address_form.as_p }}
+        <div class="row mx-auto mb-3">
+          <div class="col">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+          </div>
+          <div class="col">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+          </div>
+        </div>
+        <div class="row mx-auto mb-3">
+          <div class="col">
+            {{ form.gender.label_tag }}
+            {{ form.gender }}
+          </div>
+          <div class="col">
+            {{ address_form.phone.label_tag }}
+            {{ address_form.phone }}
+          </div>
+        </div>
+        <div class="row mx-auto mb-3">
+          <div class="col"> 
+            {{ address_form.city.label_tag }}
+            {{ address_form.city }}
+          </div>
+          <div class="col">
+            {{ address_form.address.label_tag }}
+            {{ address_form.address }}
+          </div>
+          <div class="col">
+            {{ address_form.zip_code.label_tag }}
+            {{ address_form.zip_code }}
+          </div>
+        </div>
         {% url "people:responsible_list" as users_list_url %}
         {% save_cancel_buttons link_back=users_list_url has_form=True %}
       </form>
