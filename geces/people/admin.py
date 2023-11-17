@@ -22,7 +22,10 @@ class StudentAdmin(admin.ModelAdmin):
         "status",
         "responsible",
     ]
-    readonly_fields = ("updated_by", "balance", )
+    readonly_fields = (
+        "updated_by",
+        "balance",
+    )
     search_fields = ["name", "responsible__name"]
 
 

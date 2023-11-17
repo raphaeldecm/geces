@@ -8,12 +8,8 @@ from geces.core.models import BaseModel
 
 
 class Address(BaseModel):
-    city = models.CharField(
-        verbose_name=_("Cidade"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH
-    )
-    address = models.CharField(
-        verbose_name=_("Endereço"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH
-    )
+    city = models.CharField(verbose_name=_("Cidade"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH)
+    address = models.CharField(verbose_name=_("Endereço"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH)
     zip_code = models.CharField(verbose_name=_("CEP"), max_length=8)
     phone = models.CharField(verbose_name=_("Telefone"), max_length=11)
 
@@ -66,7 +62,6 @@ class Person(BaseModel):
 
 
 class Suplier(Person):
-
     class Meta:
         verbose_name = _("Fornecedor")
         verbose_name_plural = _("Fornecedores")
@@ -76,7 +71,6 @@ class Suplier(Person):
 
 
 class Teacher(Person):
-
     class Meta:
         verbose_name = _("Professor")
         verbose_name_plural = _("Professores")
@@ -86,7 +80,6 @@ class Teacher(Person):
 
 
 class Responsible(Person):
-
     class Meta:
         verbose_name = _("Responsável")
         verbose_name_plural = _("Responsáveis")

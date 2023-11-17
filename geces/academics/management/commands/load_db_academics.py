@@ -15,15 +15,9 @@ class Command(BaseCommand):
         if Shift.objects.count() == 0:
             Shift.objects.bulk_create(
                 [
-                    Shift(
-                        name="Matutino", created_by=admin
-                    ),
-                    Shift(
-                        name="Vespertino", created_by=admin
-                    ),
-                    Shift(
-                        name="Noturno", created_by=admin
-                    ),
+                    Shift(name="Matutino", created_by=admin),
+                    Shift(name="Vespertino", created_by=admin),
+                    Shift(name="Noturno", created_by=admin),
                 ]
             )
 

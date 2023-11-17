@@ -6,7 +6,6 @@ register = template.Library()
 
 @register.inclusion_tag("templatetags/breadcrumb_item.html")
 def breadcrumb_item(*args, **kwargs):
-
     if "active" not in kwargs:
         active = False
     else:

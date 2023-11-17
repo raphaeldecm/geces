@@ -8,14 +8,12 @@
 {% block head_title %}
   {% trans "Signup" %}
 {% endblock head_title %}
-
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
   {% breadcrumb_item text="Lista de Usuários" url="users:list" %}
   {% breadcrumb_item text="Cadastro de Usuários" active="active" %}
 {% endblock breadcrumb_items %}
-
 {% block content %}
   <div class="card card-primary mx-3">
     <div class="card-header">

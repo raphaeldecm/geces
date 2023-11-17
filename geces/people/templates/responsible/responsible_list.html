@@ -8,19 +8,16 @@
 {% block head %}
   <title>{% translate "Lista de Responsáveis" %}</title>
 {% endblock head %}
-
 {% block breadcrumbs %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
       {% breadcrumb_item text="Página Inicial" url="home" %}
       {% breadcrumb_item text="Pessoas" url="people:people_home" %}
       {% breadcrumb_item text="Lista de Responsáveis" active="active" %}
     </ol>
   </nav>
 {% endblock breadcrumbs %}
-
 {% block content %}
-  
   <div class="card card-primary m-3">
     <div class="card-header">
       <h3 class="card-title">Lista de Responsáveis Cadastrados</h3>

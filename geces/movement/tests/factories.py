@@ -12,7 +12,7 @@ class ProductFactory(DjangoModelFactory):
         model = models.Product
 
     created_by = factory.SubFactory(UserFactory)
-    name = Faker('name')
+    name = Faker("name")
     price = FuzzyDecimal(0.01, 1000.00)
     stock = FuzzyInteger(0, 1000)
     image = factory.django.ImageField()

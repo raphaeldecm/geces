@@ -7,9 +7,7 @@ from geces.core.models import BaseModel
 
 # Create your models here.
 class Shift(BaseModel):
-    name = models.CharField(
-        verbose_name=_("Nome"), max_length=MAX_CHAR_FIELD_NAME_LENGTH, unique=True
-    )
+    name = models.CharField(verbose_name=_("Nome"), max_length=MAX_CHAR_FIELD_NAME_LENGTH, unique=True)
 
     class Meta:
         verbose_name = _("Turno")
@@ -20,9 +18,7 @@ class Shift(BaseModel):
 
 
 class Serie(BaseModel):
-    name = models.CharField(
-        verbose_name=_("Nome"), max_length=MAX_CHAR_FIELD_NAME_LENGTH, unique=True
-    )
+    name = models.CharField(verbose_name=_("Nome"), max_length=MAX_CHAR_FIELD_NAME_LENGTH, unique=True)
 
     class Meta:
         verbose_name = _("Série")

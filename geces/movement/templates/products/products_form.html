@@ -7,16 +7,13 @@
 {% block title %}
   Cadastro de Produtos
 {% endblock title %}
-
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
   {% breadcrumb_item text="Lista de Produtos" url="movement:products_list" %}
   {% breadcrumb_item text="Lista de Produtos" active="active" %}
 {% endblock breadcrumb_items %}
-
 {% block content %}
-
   <div class="card card-primary mx-3">
     <div class="card-header">
       <div class="card-title">Cadastro de Produtos</div>
@@ -30,5 +27,4 @@
       </form>
     </div>
   </div>
-
 {% endblock content %}

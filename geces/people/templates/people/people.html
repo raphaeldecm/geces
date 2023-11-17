@@ -7,24 +7,19 @@
 {% block title %}
   Pessoas
 {% endblock title %}
-
 {% block breadcrumbs %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
       {% breadcrumb_item text="Página Inicial" url="home" %}
       {% breadcrumb_item text="Pessoas" url="home" active="active" %}
     </ol>
   </nav>
 {% endblock breadcrumbs %}
-
 {% block content %}
   <div class="row justify-content-start m-3">
-
-    {% infobox color="light" number=10 text="Docentes" icon="fas fa-chalkboard-teacher fa-2x" link="home" %}
-    {% infobox color="light" number=10 text="Discentes" icon="fas fa-user-graduate" link="people:student_list" %}
-    {% infobox color="light" number=10 text="Responsáveis" icon="fas fa-user" link="people:responsible_list" %}
-    {% infobox color="light" number=10 text="Fornecedores" icon="fas fa-truck" link="home" %}    
-
+    {% infobox color="primary" number=10 text="Docentes" icon="fas fa-chalkboard-teacher fa-2x" link="home" %}
+    {% infobox color="primary" number=10 text="Discentes" icon="fas fa-user-graduate" link="people:student_list" %}
+    {% infobox color="primary" number=10 text="Responsáveis" icon="fas fa-user" link="people:responsible_list" %}
+    {% infobox color="primary" number=10 text="Fornecedores" icon="fas fa-truck" link="home" %}
   </div>
-
 {% endblock content %}

@@ -3,9 +3,9 @@ from django.test import TestCase
 
 class TestMovementBase(TestCase):
     def setUp(self) -> None:
-        print('setUp')
+        print("setUp")
         return super().setUp()
 
     def tearDown(self) -> None:
-        print('tearDown')
+        print("tearDown")
         return super().tearDown()

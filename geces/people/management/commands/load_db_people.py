@@ -16,16 +16,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         admin = User.objects.filter(is_superuser=True).first()
 
-        with open(STUDENTS_CSV, 'r', encoding='utf-8') as file:
+        with open(STUDENTS_CSV, encoding="utf-8") as file:
             reader = csv.DictReader(file)
 
             for row in reader:
                 # Acessando os dados de cada coluna do CSV
-                name = row['Nome']
-                fone = row['Telefones']
-                birth_date = datetime.strptime(row['Data Nasc.'], '%d/%m/%Y').date()
-                cpf = row['CPF']
-                gender = row['Sexo']
+                name = row["Nome"]
+                fone = row["Telefones"]
+                birth_date = datetime.strptime(row["Data Nasc."], "%d/%m/%Y").date()
+                cpf = row["CPF"]
+                gender = row["Sexo"]
                 print("## ", name, gender, birth_date, cpf, fone)
 
                 # Crie um objeto Address
@@ -53,4 +53,3 @@ class Command(BaseCommand):
                 #     # ... Outros campos do modelo Student
                 # )
                 # Adicione os campos restantes conforme necessário'
-

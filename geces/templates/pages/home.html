@@ -7,23 +7,18 @@
 {% block title %}
   Página Inicial
 {% endblock title %}
-
 {% block breadcrumbs %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
       {% breadcrumb_item text="Página Inicial" url="home" active="active" %}
     </ol>
   </nav>
 {% endblock breadcrumbs %}
-
 {% block content %}
   <div class="row justify-content-start m-3">
-
     {% infobox color="gradient-success" number=users_number text="Usuários cadastrados" icon="fas fa-user-plus" link="home" %}
     {% infobox color="info" number=10 text="Vendas realizadas no mês" icon="fas fa-shopping-cart" link="home" %}
-    {% infobox color="warning" number=10 text="Balanço mensal" icon="fas fa-chart-pie" link="home" %}    
-    {% infobox color="danger" number=10 text="Produtos cadastrados" icon="fas fa-chart-pie" link="home" %}    
-
+    {% infobox color="warning" number=10 text="Balanço mensal" icon="fas fa-chart-pie" link="home" %}
+    {% infobox color="danger" number=10 text="Produtos cadastrados" icon="fas fa-chart-pie" link="home" %}
   </div>
-
 {% endblock content %}

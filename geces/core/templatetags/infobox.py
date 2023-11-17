@@ -15,7 +15,6 @@ delete -- true ou false para indicar que há um botāo de voltar
 
 @register.inclusion_tag("templatetags/infobox.html", takes_context=True)
 def infobox(context, *args, **kwargs):
-
     color = kwargs.get("color", "gradient-success")
     number = kwargs.get("number", 0)
     text = kwargs.get("text", None)
