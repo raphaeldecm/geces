@@ -13,6 +13,13 @@ from geces.people.mixins import PeopleCreateViewMixin
 class PeopleHome(LoginRequiredMixin, generic.TemplateView):
     template_name = "people/people.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["teacher_count"] = models.Teacher.objects.count()
+        context["student_count"] = models.Student.objects.count()
+        context["responsible_count"] = models.Responsible.objects.count()
+        return context
+
 
 class StudentList(LoginRequiredMixin, generic.ListView):
     model = models.Student
@@ -80,6 +87,64 @@ class ResponsibleUpdate(
             address = address_form.save()
             responsible.address = address
             responsible.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class TeacherList(LoginRequiredMixin, generic.ListView):
+    model = models.Teacher
+    template_name = "teacher/teacher_list.html"
+    paginate_by = 10
+    ordering = ["name"]
+
+
+class TeacherForm(
+    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView
+):
+    model = models.Teacher
+    template_name = "teacher/teacher_form.html"
+    form_class = forms.TeacherForm
+    success_message = _("O professor foi cadastrado com sucesso")
+    success_url = reverse_lazy("people:teacher_list")
+
+    @transaction.atomic
+    def form_valid(self, form):
+        address_form = forms.AddressForm(self.request.POST)
+        if address_form.is_valid():
+            teacher = form.save(commit=False)
+            address = address_form.save()
+            teacher.address = address
+            teacher.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class TeacherDetail(LoginRequiredMixin, generic.DetailView):
+    model = models.Teacher
+    slug_field = "id"
+    slug_url_kwarg = "id"
+    template_name = "teacher/teacher_detail.html"
+
+
+class TeacherUpdate(
+    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView
+):
+    model = models.Teacher
+    template_name = "teacher/teacher_form.html"
+    form_class = forms.TeacherForm
+    success_message = _("O professor foi atualizado com sucesso.")
+    success_url = reverse_lazy("people:teacher_list")
+
+    @transaction.atomic
+    def form_valid(self, form):
+        address_form = forms.AddressForm(self.request.POST)
+        if address_form.is_valid():
+            teacher = form.save(commit=False)
+            address = address_form.save()
+            teacher.address = address
+            teacher.save()
             return super().form_valid(form)
         else:
             return self.form_invalid(form)

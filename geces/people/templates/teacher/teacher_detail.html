@@ -11,13 +11,13 @@
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
   {% breadcrumb_item text="Pessoas" url="people:people_home" %}
-  {% breadcrumb_item text="Lista de Responsáveis" url="people:responsible_list" %}
-  {% breadcrumb_item text="Visualizar Responsável" active="active" %}
+  {% breadcrumb_item text="Lista de Professores" url="people:teacher_list" %}
+  {% breadcrumb_item text="Visualizar Professor" active="active" %}
 {% endblock breadcrumb_items %}
 {% block content %}
   <div class="card card-primary m-3">
     <div class="card-header">
-      <h3 class="card-title">Dados da Responsável</h3>
+      <h3 class="card-title">Dados do Professor</h3>
     </div>
     <div class="card-body p-0">
       <div class="row align-items-center m-3">
@@ -64,10 +64,10 @@
       </div>
       <div class="row justify-content-between m-3">
         <div class="col-lg-4 col-md-6 col-12 m-3">
-          <a type="button" class="btn btn-secondary" href="{% url 'people:responsible_list' %}"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
+          <a type="button" class="btn btn-secondary" href="{% url 'people:teacher_list' %}"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
         </div>
         <div class="col-lg-2 col-md-3 col-12 m-3">
-          <a class="btn btn-primary" href="{% url 'people:responsible_edit' object.pk %}">Editar</a>
+          <a class="btn btn-primary" href="{% url 'people:teacher_edit' object.pk %}">Editar</a>
         </div>
       </div>
     </div>

@@ -6,21 +6,21 @@
 {% load breadcrumb_item %}
 
 {% block head %}
-  <title>{% translate "Lista de Responsáveis" %}</title>
+  <title>{% translate "Lista de Professores" %}</title>
 {% endblock head %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       {% breadcrumb_item text="Página Inicial" url="home" %}
       {% breadcrumb_item text="Pessoas" url="people:people_home" %}
-      {% breadcrumb_item text="Lista de Responsáveis" active="active" %}
+      {% breadcrumb_item text="Lista de Professores" active="active" %}
     </ol>
   </nav>
 {% endblock breadcrumbs %}
 {% block content %}
   <div class="card card-primary m-3">
     <div class="card-header">
-      <h3 class="card-title">Lista de Responsáveis Cadastrados</h3>
+      <h3 class="card-title">Lista de Professores Cadastrados</h3>
     </div>
     <div class="card-body p-0">
       <table class="table table-condensed">
@@ -39,8 +39,8 @@
               <td>{{ object.email }}</td>
               <td>{{ object.address.phone }}</td>
               <td class="text-center">
-                <a href="{% url 'people:responsible_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
-                <a class="mx-1" href="{% url 'people:responsible_edit' object.pk %}"
+                <a href="{% url 'people:teacher_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+                <a class="mx-1" href="{% url 'people:teacher_edit' object.pk %}"
                    type="button"
                    aria-label="editar"
                    title="editar">
@@ -57,7 +57,7 @@
           {% empty %}
             <tr>
               <td colspan="4">
-                <p>Não existem usuários cadastrados.</p>
+                <p>Não existem professores cadastrados.</p>
               </td>
             </tr>
           {% endfor %}
@@ -66,6 +66,6 @@
     </div>
   </div>
   {% url "people:people_home" as people_home %}
-  {% url "people:responsible_form" as responsible_form %}
-  {% save_cancel_buttons link_back=people_home link_forward=responsible_form %}
+  {% url "people:teacher_form" as teacher_form %}
+  {% save_cancel_buttons link_back=people_home link_forward=teacher_form %}
 {% endblock content %}

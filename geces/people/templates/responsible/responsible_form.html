@@ -6,7 +6,7 @@
 {% load breadcrumb_item %}
 
 {% block head %}
-  <title>{% translate "Lista de Responsáveis" %}</title>
+  <title>{% translate "Cadastro de Responsáveis" %}</title>
 {% endblock head %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb">
@@ -37,8 +37,8 @@
           <div class="col-12 col-sm-6">{% bootstrap_field form.email %}</div>
         </div>
         {% include "people/_address_form.html" %}
-        {% url "people:responsible_list" as users_list_url %}
-        {% save_cancel_buttons link_back=users_list_url has_form=True %}
+        {% url "people:responsible_list" as responsible_list %}
+        {% save_cancel_buttons link_back=responsible_list has_form=True %}
       </form>
     </div>
   </div>
