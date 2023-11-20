@@ -9,5 +9,7 @@ urlpatterns = [
     # Responsible URLs
     path("responsible_list/", views.ResponsbileList.as_view(), name="responsible_list"),
     path("responsible_form/", views.ResponsibleForm.as_view(), name="responsible_form"),
-    path("responsible_edit/<int:pk>/", views.ResponsibleUpdate.as_view(), name="responsible_update"),
+    path("responsible_edit/<int:pk>/", views.ResponsibleUpdate.as_view(), name="responsible_edit"),
+    path("responsible_detail/<int:pk>/", views.ResponsbileDetail.as_view(), name="responsible_detail"),
+    path("responsible_delete/<int:pk>/", views.ResponsbileDelete.as_view(), name="responsible_delete"),
 ]

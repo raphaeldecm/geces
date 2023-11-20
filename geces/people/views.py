@@ -28,6 +28,19 @@ class ResponsbileList(LoginRequiredMixin, generic.ListView):
     ordering = ["name"]
 
 
+class ResponsbileDelete(LoginRequiredMixin, generic.DeleteView):
+    model = models.Responsible
+    success_url = reverse_lazy("people:responsible_list")
+    success_message = _("Responsável excluído com sucesso!")
+
+
+class ResponsbileDetail(LoginRequiredMixin, generic.DetailView):
+    model = models.Responsible
+    slug_field = "id"
+    slug_url_kwarg = "id"
+    template_name = "responsible/responsible_detail.html"
+
+
 class ResponsibleForm(
     LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView
 ):
@@ -56,7 +69,7 @@ class ResponsibleUpdate(
     model = models.Responsible
     template_name = "responsible/responsible_form.html"
     form_class = forms.ResponsibleForm
-    success_message = _("O responsável foi cadastrado com sucesso")
+    success_message = _("O responsável foi atualizado com sucesso")
     success_url = reverse_lazy("people:responsible_list")
 
     @transaction.atomic
