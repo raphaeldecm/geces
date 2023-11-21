@@ -26,7 +26,7 @@ class Address(BaseModel):
         )
 
 
-class Person(BaseModel):
+class PersonBase(BaseModel):
     class Gender(models.TextChoices):
         MALE = "MALE", _("Masculino")
         FEMALE = "FEMALE", _("Feminino")
@@ -53,6 +53,7 @@ class Person(BaseModel):
     )
 
     class Meta:
+        abstract = True
         verbose_name = _("Pessoa")
         verbose_name_plural = _("Pessoas")
 
@@ -60,7 +61,7 @@ class Person(BaseModel):
         return self.name
 
 
-class Suplier(Person):
+class Suplier(PersonBase):
     class Meta:
         verbose_name = _("Fornecedor")
         verbose_name_plural = _("Fornecedores")
@@ -69,7 +70,7 @@ class Suplier(Person):
         return str(self.name)
 
 
-class Teacher(Person):
+class Teacher(PersonBase):
     class Meta:
         verbose_name = _("Professor")
         verbose_name_plural = _("Professores")
@@ -78,7 +79,7 @@ class Teacher(Person):
         return str(self.name)
 
 
-class Responsible(Person):
+class Responsible(PersonBase):
     class Meta:
         verbose_name = _("Responsável")
         verbose_name_plural = _("Responsáveis")
@@ -87,7 +88,7 @@ class Responsible(Person):
         return str(self.name)
 
 
-class Student(Person):
+class Student(PersonBase):
     class Status(models.IntegerChoices):
         PENDING = 1, _("Pendente")
         ENROLLED = 2, _("Matriculado")
