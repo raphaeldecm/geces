@@ -24,6 +24,7 @@ class Serie(BaseModel):
         Shift,
         verbose_name=_("Turno"),
         on_delete=models.PROTECT,
+        related_name="series",
     )
     teacher = models.ForeignKey(
         Teacher,
@@ -52,6 +53,7 @@ class StudentGroup(BaseModel):
         Serie,
         verbose_name=_("Série"),
         on_delete=models.PROTECT,
+        related_name="student_groups",
     )
     students = models.ManyToManyField(
         Student,

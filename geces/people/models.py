@@ -50,6 +50,7 @@ class PersonBase(BaseModel):
         Address,
         verbose_name=_("Endereço"),
         on_delete=models.PROTECT,
+        related_name="%(class)s",
     )
 
     class Meta:
