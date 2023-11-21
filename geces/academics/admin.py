@@ -19,9 +19,10 @@ class SerieAdmin(admin.ModelAdmin):
 
 
 class StudentGroupAdmin(admin.ModelAdmin):
-    search_fields = ["reference_year", "shift__name", "serie__name"]
-    ordering = ["reference_year"]
-    readonly_fields = ["updated_by"]
+    list_display = ("code", "reference_year", "serie")
+    search_fields = ("reference_year", "serie__name",)
+    ordering = ("reference_year",)
+    readonly_fields = ("updated_by",)
 
 
 admin.site.register(models.Shift, ShiftAdmin)

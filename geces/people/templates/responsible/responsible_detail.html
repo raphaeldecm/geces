@@ -54,13 +54,24 @@
         <div class="col-md-2 col-sm-12">
           <strong>CEP:</strong>
         </div>
-        <div id="address" class="col-md-10 col-sm-12">{{ object.address.zip_code }}</div>
+        <div id="zip_code" class="col-md-10 col-sm-12">{{ object.address.zip_code }}</div>
       </div>
       <div class="row align-items-center m-3">
         <div class="col-md-2 col-sm-12">
           <strong>Telefone:</strong>
         </div>
-        <div id="address" class="col-md-10 col-sm-12">{{ object.address.phone }}</div>
+        <div id="phone" class="col-md-10 col-sm-12">{{ object.address.phone }}</div>
+      </div>
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
+          <strong>Discentes:</strong>
+        </div>
+        <div id="address" class="col-md-10 col-sm-12">
+          {% for student in object.students.all %}
+            {{ student.name }}
+            {% if not forloop.last %},{% endif %}
+          {% endfor %}
+        </div>
       </div>
       <div class="row justify-content-between m-3">
         <div class="col-lg-4 col-md-6 col-12 m-3">

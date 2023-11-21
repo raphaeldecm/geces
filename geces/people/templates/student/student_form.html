@@ -6,15 +6,15 @@
 {% load breadcrumb_item %}
 
 {% block head %}
-  <title>{% translate "Cadastro de Professores" %}</title>
+  <title>{% translate "Cadastro de Discentes" %}</title>
 {% endblock head %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       {% breadcrumb_item text="Página Inicial" url="home" %}
       {% breadcrumb_item text="Pessoas" url="people:people_home" %}
-      {% breadcrumb_item text="Lista de Professores" url="people:responsible_list" %}
-      {% breadcrumb_item text="Cadastro de Professores" active="active" %}
+      {% breadcrumb_item text="Lista de Discentes" url="people:student_list" %}
+      {% breadcrumb_item text="Cadastro de Discentes" active="active" %}
     </ol>
   </nav>
 {% endblock breadcrumbs %}
@@ -24,7 +24,7 @@
   {% endblock alerts %}
   <div class="card card-primary mx-3">
     <div class="card-header">
-      <h3 class="card-title">Cadastro de Professores</h3>
+      <h3 class="card-title">Cadastro de Discente</h3>
     </div>
     <div class="card-body p-0 mt-3">
       <form method="post">
@@ -38,8 +38,11 @@
           <div class="col-12 col-sm-6">{% bootstrap_field form.gender %}</div>
         </div>
         {% include "people/_address_form.html" %}
-        {% url "people:teacher_list" as teacher_list %}
-        {% save_cancel_buttons link_back=teacher_list has_form=True %}
+        <div class="row mx-auto mb-3">
+          <div class="col">{% bootstrap_field form.responsible %}</div>
+        </div>
+        {% url "people:student_list" as student_list %}
+        {% save_cancel_buttons link_back=student_list has_form=True %}
       </form>
     </div>
   </div>

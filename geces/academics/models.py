@@ -66,7 +66,7 @@ class StudentGroup(BaseModel):
         verbose_name_plural = _("Turmas")
 
     def __str__(self):
-        return f"{self.code} - {self.serie.name}/{self.shift.name}"
+        return f"{self.code} - {self.serie.name}/{self.serie.shift.name}"
 
     def save(self, *args, **kwargs):
         if not self.code:

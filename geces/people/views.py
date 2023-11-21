@@ -28,6 +28,69 @@ class StudentList(LoginRequiredMixin, generic.ListView):
     ordering = ["name"]
 
 
+class StudentForm(
+    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView
+):
+    model = models.Student
+    template_name = "student/student_form.html"
+    form_class = forms.StudentForm
+    success_message = _("O aluno foi cadastrado com sucesso")
+    success_url = reverse_lazy("people:student_list")
+
+    @transaction.atomic
+    def form_valid(self, form):
+        address_form = forms.AddressForm(self.request.POST)
+        if address_form.is_valid():
+            student = form.save(commit=False)
+            address = address_form.save()
+            student.address = address
+            student.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class StudentDetail(LoginRequiredMixin, generic.DetailView):
+    model = models.Student
+    slug_field = "id"
+    slug_url_kwarg = "id"
+    template_name = "student/student_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["student_group"] = self.get_object().student_groups.all()
+        print(context["student_group"])
+        return context
+
+
+class StudentUpdate(
+    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView
+):
+    model = models.Student
+    template_name = "student/student_form.html"
+    form_class = forms.StudentForm
+    success_message = _("O aluno foi atualizado com sucesso")
+    success_url = reverse_lazy("people:student_list")
+
+    @transaction.atomic
+    def form_valid(self, form):
+        address_form = forms.AddressForm(self.request.POST)
+        if address_form.is_valid():
+            student = form.save(commit=False)
+            address = address_form.save()
+            student.address = address
+            student.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+class StudentDelete(LoginRequiredMixin, generic.DeleteView):
+    model = models.Student
+    success_url = reverse_lazy("people:student_list")
+    success_message = _("Aluno excluído com sucesso!")
+
+
 class ResponsbileList(LoginRequiredMixin, generic.ListView):
     model = models.Responsible
     template_name = "responsible/responsible_list.html"

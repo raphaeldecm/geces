@@ -108,7 +108,7 @@ class Student(PersonBase):
         null=True,
         related_name="students",
     )
-    balance = models.DecimalField(_("Saldo"), max_digits=5, decimal_places=2)
+    balance = models.DecimalField(_("Saldo"), max_digits=5, decimal_places=2, default=0.00)
 
     class Meta:
         verbose_name = _("Discente")

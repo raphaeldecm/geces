@@ -67,13 +67,13 @@ class ProductPurchase(models.Model):
         Product,
         verbose_name=_("Produto"),
         on_delete=models.PROTECT,
-        related_name="product_purchase",
+        related_name="product_purchases",
     )
     purchase = models.ForeignKey(
         Purchase,
         verbose_name=_("Compra"),
         on_delete=models.PROTECT,
-        related_name="product_purchase",
+        related_name="product_purchases",
     )
     quantity = models.IntegerField(_("Quantidade"), default=0)
 
@@ -95,13 +95,13 @@ class Sell(BaseModel):
         Student,
         verbose_name=_("Estudante"),
         on_delete=models.PROTECT,
-        related_name="vendas",
+        related_name="sells",
         null=True,
     )
     products = models.ManyToManyField(
         Product,
         verbose_name=_("Produtos"),
-        related_name="vendas",
+        related_name="sells",
         blank=True,
         through="ProductSell",
     )
