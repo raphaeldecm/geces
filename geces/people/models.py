@@ -100,12 +100,12 @@ class Student(PersonBase):
         validators=[MinValueValidator(1), MaxValueValidator(8)],
         default=Status.PENDING,
     )
-    responsible_student = models.ForeignKey(
+    responsible = models.ForeignKey(
         Responsible,
         verbose_name=_("Responsável"),
         on_delete=models.PROTECT,
         null=True,
-        related_name="responsible_student",
+        related_name="students",
     )
     balance = models.DecimalField(_("Saldo"), max_digits=5, decimal_places=2)
 
