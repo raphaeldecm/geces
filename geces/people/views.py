@@ -99,9 +99,7 @@ class TeacherList(LoginRequiredMixin, generic.ListView):
     ordering = ["name"]
 
 
-class TeacherForm(
-    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView
-):
+class TeacherForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView):
     model = models.Teacher
     template_name = "teacher/teacher_form.html"
     form_class = forms.TeacherForm
@@ -128,9 +126,7 @@ class TeacherDetail(LoginRequiredMixin, generic.DetailView):
     template_name = "teacher/teacher_detail.html"
 
 
-class TeacherUpdate(
-    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView
-):
+class TeacherUpdate(LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView):
     model = models.Teacher
     template_name = "teacher/teacher_form.html"
     form_class = forms.TeacherForm

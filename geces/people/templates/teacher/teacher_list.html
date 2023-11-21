@@ -40,7 +40,8 @@
               <td>{{ object.address.phone }}</td>
               <td class="text-center">
                 <a href="{% url 'people:teacher_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
-                <a class="mx-1" href="{% url 'people:teacher_edit' object.pk %}"
+                <a class="mx-1"
+                   href="{% url 'people:teacher_edit' object.pk %}"
                    type="button"
                    aria-label="editar"
                    title="editar">
@@ -51,7 +52,7 @@
                    aria-label="excluir"
                    title="excluir">
                   <i class="fas fa-trash" aria-hidden="true"></i></a>
-                  {% include "people/people_confirm_delete.html" with delete_url="people:teacher_delete" %}
+                {% include "people/people_confirm_delete.html" with delete_url="people:teacher_delete" %}
               </td>
             </tr>
           {% empty %}

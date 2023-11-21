@@ -7,11 +7,11 @@ from geces.people import forms
 class PeopleCreateViewMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if 'address_form' not in context:
-            if getattr(self, 'object', None):
-                context['address_form'] = forms.AddressForm(instance=getattr(self, 'object', None).address)
+        if "address_form" not in context:
+            if getattr(self, "object", None):
+                context["address_form"] = forms.AddressForm(instance=getattr(self, "object", None).address)
             else:
-                context['address_form'] = forms.AddressForm()
+                context["address_form"] = forms.AddressForm()
         return context
 
     def form_invalid(self, form):
