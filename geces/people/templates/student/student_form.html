@@ -47,3 +47,14 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block inline_javascript %}
+<script>
+  $(function () {
+      $("#product").autocomplete({
+          source: ['maçã', 'banana', 'laranja'],
+          minLength: 2
+      });
+  });
+</script>
+{% endblock inline_javascript %}
