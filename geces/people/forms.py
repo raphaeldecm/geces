@@ -38,6 +38,13 @@ class TeacherForm(forms.ModelForm):
 
 
 class StudentForm(forms.ModelForm):
+
+    responsible = forms.ModelChoiceField(
+        label=_("Responsável"),
+        queryset=Responsible.objects.all(),
+        widget=forms.Select(attrs={'class': 'select2', 'data-placeholder': 'Selecione o responsável'}),
+    )
+
     class Meta:
         model = Student
         fields = ["id", "name", "email", "gender", "birth", "responsible"]

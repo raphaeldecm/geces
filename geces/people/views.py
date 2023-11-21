@@ -59,7 +59,6 @@ class StudentDetail(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["student_group"] = self.get_object().student_groups.all()
-        print(context["student_group"])
         return context
 
 
