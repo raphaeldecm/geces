@@ -56,7 +56,7 @@ class StudentGroup(BaseModel):
     students = models.ManyToManyField(
         Student,
         verbose_name=_("Discentes"),
-        related_name="student_group",
+        related_name="student_groups",
     )
 
     class Meta:
