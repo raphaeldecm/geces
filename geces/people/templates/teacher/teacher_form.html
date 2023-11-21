@@ -30,11 +30,12 @@
       <form method="post">
         {% csrf_token %}
         <div class="row mx-auto mb-3">
-          <div class="col">{% bootstrap_field form.name %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.name %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.email %}</div>
         </div>
         <div class="row mx-auto mb-3">
+          <div class="col-12 col-sm-6">{% bootstrap_field form.birth %}</div>
           <div class="col-12 col-sm-6">{% bootstrap_field form.gender %}</div>
-          <div class="col-12 col-sm-6">{% bootstrap_field form.email %}</div>
         </div>
         {% include "people/_address_form.html" %}
         {% url "people:teacher_list" as teacher_list %}

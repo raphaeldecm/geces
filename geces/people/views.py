@@ -148,3 +148,9 @@ class TeacherUpdate(
             return super().form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class TeacherDelete(LoginRequiredMixin, generic.DeleteView):
+    model = models.Teacher
+    success_url = reverse_lazy("people:teacher_list")
+    success_message = _("Professor excluído com sucesso!")

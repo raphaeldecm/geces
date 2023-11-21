@@ -122,7 +122,11 @@
           {% endfor %}
         </tbody>
       </table>
-      {% include 'adminlte/lib/_pagination.html' %}
+      
+      {% if object_list %}
+        {% include 'adminlte/lib/_pagination.html' %}
+      {% endif %}
+        
     </div>
   </div>
   {% url "home" as home_url %}

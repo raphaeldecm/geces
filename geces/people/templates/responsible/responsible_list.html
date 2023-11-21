@@ -51,7 +51,7 @@
                    aria-label="excluir"
                    title="excluir">
                   <i class="fas fa-trash" aria-hidden="true"></i></a>
-                {% include "people/people_confirm_delete.html" %}
+                {% include "people/people_confirm_delete.html" with delete_url="people:responsible_delete" %}
               </td>
             </tr>
           {% empty %}
@@ -63,6 +63,9 @@
           {% endfor %}
         </tbody>
       </table>
+      {% if object_list %}
+        {% include 'adminlte/lib/_pagination.html' %}
+      {% endif %}
     </div>
   </div>
   {% url "people:people_home" as people_home %}

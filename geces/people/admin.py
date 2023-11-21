@@ -16,6 +16,13 @@ class ResponsibleAdmin(admin.ModelAdmin):
     search_fields = ["name", "email"]
 
 
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", "series")
+    search_fields = ("name",)
+    ordering = ("name",)
+    readonly_fields = ("updated_by",)
+
+
 class StudentAdmin(admin.ModelAdmin):
     fields = [
         "created_by",
@@ -29,14 +36,8 @@ class StudentAdmin(admin.ModelAdmin):
     search_fields = ["name", "responsible__name"]
 
 
-class StudentGroupAdmin(admin.ModelAdmin):
-    search_fields = ["reference_year", "shift__name", "serie__name"]
-    ordering = ["reference_year"]
-    readonly_fields = ["updated_by"]
-
-
 admin.site.register(models.Address, AddressAdmin)
-admin.site.register(models.StudentGroup, StudentGroupAdmin)
 admin.site.register(models.Suplier, SupplierAdmin)
 admin.site.register(models.Responsible, ResponsibleAdmin)
 admin.site.register(models.Student, StudentAdmin)
+admin.site.register(models.Teacher, TeacherAdmin)

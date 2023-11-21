@@ -20,18 +20,28 @@ class Command(BaseCommand):
                     Shift(name="Noturno", created_by=admin),
                 ]
             )
-
+        mat = Shift.objects.get(name="Matutino")
+        ves = Shift.objects.get(name="Vespertino")
         if Serie.objects.count() == 0:
             Serie.objects.bulk_create(
                 [
-                    Serie(name="Maternal", created_by=admin),
-                    Serie(name="Nível I", created_by=admin),
-                    Serie(name="Nível II", created_by=admin),
-                    Serie(name="Nível III", created_by=admin),
-                    Serie(name="1° Ano", created_by=admin),
-                    Serie(name="2° Ano", created_by=admin),
-                    Serie(name="3° Ano", created_by=admin),
-                    Serie(name="4° Ano", created_by=admin),
-                    Serie(name="5° Ano", created_by=admin),
+                    Serie(name="Maternal", shift=mat, created_by=admin),
+                    Serie(name="Maternal", shift=ves, created_by=admin),
+                    Serie(name="Nível I", shift=mat, created_by=admin),
+                    Serie(name="Nível I", shift=ves, created_by=admin),
+                    Serie(name="Nível II", shift=mat, created_by=admin),
+                    Serie(name="Nível II", shift=ves, created_by=admin),
+                    Serie(name="Nível III", shift=mat, created_by=admin),
+                    Serie(name="Nível III", shift=ves, created_by=admin),
+                    Serie(name="1° Ano", shift=mat, created_by=admin),
+                    Serie(name="1° Ano", shift=ves, created_by=admin),
+                    Serie(name="2° Ano", shift=mat, created_by=admin),
+                    Serie(name="2° Ano", shift=ves, created_by=admin),
+                    Serie(name="3° Ano", shift=mat, created_by=admin),
+                    Serie(name="3° Ano", shift=ves, created_by=admin),
+                    Serie(name="4° Ano", shift=mat, created_by=admin),
+                    Serie(name="4° Ano", shift=ves, created_by=admin),
+                    Serie(name="5° Ano", shift=mat, created_by=admin),
+                    Serie(name="5° Ano", shift=ves, created_by=admin),
                 ]
             )

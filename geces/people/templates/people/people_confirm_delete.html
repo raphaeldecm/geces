@@ -1,14 +1,14 @@
-<form action="{% url 'people:responsible_delete' object.pk %}" method="post">
+<form action="{% url delete_url object.pk %}" method="post">
   {% csrf_token %}
   <div class="modal fade"
-       id="deleteModal-{{ object.pk }}"
-       tabindex="-1"
-       aria-labelledby="deleteModalLabel"
-       aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="deleteModalLabel">Confirmação de Exclusão</h1>
+  id="deleteModal-{{ object.pk }}"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirmação de Exclusão</h1>
           <button type="button"
                   class="btn-close"
                   data-bs-dismiss="modal"
