@@ -46,13 +46,7 @@
             referrerpolicy="no-referrer" />
       <!-- place project specific Javascript in this file -->
       <script defer src="{% static 'js/project.js' %}"></script>
-      <script>
-        $(document).ready(function() {
-          $('.money').mask('000,00', {
-            reverse: true
-          });
-        })
-      </script>
+      
     {% endblock javascript %}
   </head>
   <body>

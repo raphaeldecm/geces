@@ -48,13 +48,11 @@
   </div>
 {% endblock content %}
 
-{% block inline_javascript %}
+{% block javascript %}
+{{block.super}}
 <script>
-  $(function () {
-      $("#product").autocomplete({
-          source: ['maçã', 'banana', 'laranja'],
-          minLength: 2
-      });
+  $(document).ready(function() {
+    console.log("ready!");
   });
 </script>
-{% endblock inline_javascript %}
+{% endblock javascript %}

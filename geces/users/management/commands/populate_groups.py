@@ -9,5 +9,5 @@ class Command(BaseCommand):
     help = "Load resources database"
 
     def handle(self, *args, **options):
-        groups = ["Director", "Manager", "Seeler"]
+        groups = ["Diretor", "Secretário", "Vendedor"]
         [Group.objects.get_or_create(name=group) for group in groups]

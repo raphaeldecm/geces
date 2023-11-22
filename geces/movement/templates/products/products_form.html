@@ -28,3 +28,14 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+  $(document).ready(function() {
+    $('.money').mask('000,00', {
+      reverse: true
+    });
+  })
+</script>
+{% endblock javascript %}
