@@ -42,7 +42,7 @@ class StudentForm(forms.ModelForm):
     responsible = forms.ModelChoiceField(
         label=_("Responsável"),
         queryset=Responsible.objects.all(),
-        widget=forms.Select(attrs={'class': 'select2', 'data-placeholder': 'Selecione o responsável'}),
+        widget=forms.TextInput(attrs={'class': 'basicAutoComplete', 'data-placeholder': 'Selecione o responsável'}),
     )
 
     class Meta:
@@ -51,5 +51,5 @@ class StudentForm(forms.ModelForm):
         widgets = {
             "birth": forms.DateInput(
                 attrs={"placeholder": _("dd/mm/aaaa"), "data-input": "data-input", "type": "date"}
-            )
+            ),
         }

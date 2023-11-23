@@ -29,8 +29,7 @@
   </div>
 {% endblock content %}
 
-{% block javascript %}
-{{ block.super }}
+{% block extra_js %}
 <script>
   $(document).ready(function() {
     $('.money').mask('000,00', {
@@ -38,4 +37,4 @@
     });
   })
 </script>
-{% endblock javascript %}
+{% endblock extra_js %}

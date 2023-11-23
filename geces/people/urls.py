@@ -5,6 +5,7 @@ from . import views
 app_name = "people"
 urlpatterns = [
     path("", views.PeopleHome.as_view(), name="people_home"),
+    path("autocomplete/", views.autocomplete, name="autocomplete"),
     # Responsible URLs
     path("responsible_list/", views.ResponsbileList.as_view(), name="responsible_list"),
     path("responsible_form/", views.ResponsibleForm.as_view(), name="responsible_form"),

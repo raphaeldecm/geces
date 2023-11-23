@@ -23,8 +23,7 @@
     <!-- Le javascript
     ================================================== -->
     {# Placed at the top of the document so pages load faster with defer #}
-    {% block javascript %}
-      {{ block.super }}
+    {% block extra_head %}
       <!-- Bootstrap JS -->
       <script defer
               src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
@@ -32,10 +31,7 @@
               crossorigin="anonymous"
               referrerpolicy="no-referrer"></script>
       <!-- Your stuff: Third-party javascript libraries go here -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"
-              integrity="sha512-oJCa6FS2+zO3EitUSj+xeiEN9UTr+AjqlBZO58OPadb2RfqwxHpjTU8ckIC8F4nKvom7iru2s8Jwdo+Z8zm0Vg=="
-              crossorigin="anonymous"
-              referrerpolicy="no-referrer"></script>
+      
       <!-- This file stores project-specific CSS -->
       <link href="{% static 'css/project.css' %}" rel="stylesheet" />
       <!-- Latest compiled and minified Bootstrap CSS -->
@@ -46,8 +42,9 @@
             referrerpolicy="no-referrer" />
       <!-- place project specific Javascript in this file -->
       <script defer src="{% static 'js/project.js' %}"></script>
+      <script defer src="{% static 'js/jquery.mask.min.js' %}"></script>
       
-    {% endblock javascript %}
+    {% endblock extra_head %}
   </head>
   <body>
     <main class="container">
@@ -70,8 +67,8 @@
     <!-- /container -->
     {% block modal %}
     {% endblock modal %}
-    {% block inline_javascript %}
-      {% comment %}
+    {% block extra_js %}
+    {% comment %}
     Script tags with only code, no src (defer by default). To run
     with a "defer" so that you run inline code:
     <script>
@@ -79,7 +76,8 @@
         /* Run whatever you want */
       });
     </script>
-      {% endcomment %}
-    {% endblock inline_javascript %}
+    {% endcomment %}
+    {% endblock extra_js %}
+    
   </body>
 </html>

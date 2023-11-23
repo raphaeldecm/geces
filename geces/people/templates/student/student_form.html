@@ -39,8 +39,9 @@
         </div>
         {% include "people/_address_form.html" %}
         <div class="row mx-auto mb-3">
-          <div class="col">{% bootstrap_field form.responsible %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.responsible %}</div>
         </div>
+        
         {% url "people:student_list" as student_list %}
         {% save_cancel_buttons link_back=student_list has_form=True %}
       </form>
@@ -48,11 +49,26 @@
   </div>
 {% endblock content %}
 
-{% block javascript %}
-{{block.super}}
-<script>
-  $(document).ready(function() {
-    console.log("ready!");
-  });
-</script>
-{% endblock javascript %}
+{% block extra_js %}
+  <script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+        $('#id_responsible').autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{% url 'people:autocomplete' %}",
+                    dataType: 'json',
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 3
+        });
+    });
+  </script>
+{% endblock extra_js %}

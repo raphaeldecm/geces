@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
@@ -212,3 +213,9 @@ class TeacherDelete(LoginRequiredMixin, generic.DeleteView):
     model = models.Teacher
     success_url = reverse_lazy("people:teacher_list")
     success_message = _("Professor excluído com sucesso!")
+
+
+def autocomplete(request):
+    responsibles = models.Responsible.objects.filter(name__icontains=request.GET.get('term', ''))
+    responsible_list = [responsible.name for responsible in responsibles]
+    return JsonResponse(responsible_list, safe=False)
