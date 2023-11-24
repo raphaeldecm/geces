@@ -39,12 +39,6 @@ class TeacherForm(forms.ModelForm):
 
 class StudentForm(forms.ModelForm):
 
-    responsible = forms.ModelChoiceField(
-        label=_("Responsável"),
-        queryset=Responsible.objects.all(),
-        widget=forms.TextInput(attrs={'class': 'basicAutoComplete', 'data-placeholder': 'Selecione o responsável'}),
-    )
-
     class Meta:
         model = Student
         fields = ["id", "name", "email", "gender", "birth", "responsible"]
@@ -52,4 +46,5 @@ class StudentForm(forms.ModelForm):
             "birth": forms.DateInput(
                 attrs={"placeholder": _("dd/mm/aaaa"), "data-input": "data-input", "type": "date"}
             ),
+            "responsible": forms.TextInput(attrs={"placeholder": _("Nome do responsável")}),
         }

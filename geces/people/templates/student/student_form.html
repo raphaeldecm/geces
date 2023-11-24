@@ -44,14 +44,17 @@
         
         {% url "people:student_list" as student_list %}
         {% save_cancel_buttons link_back=student_list has_form=True %}
-      </form>
+      </form> 
+      
     </div>
   </div>
 {% endblock content %}
 
 {% block extra_js %}
   <script src="https://cdn.rawgit.com/xcash/bootstrap-autocomplete/3de7ad37/dist/latest/bootstrap-autocomplete.js"></script>
-  
+  <!-- Carregue o Select2 usando a variável jQuery3 -->
+  {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> {% endcomment %}
+
   <script>
     $(document).ready(function() {
         $('#id_responsible').autocomplete({
