@@ -16,6 +16,7 @@ urlpatterns = [
     path("users/", include("geces.users.urls", namespace="users")),
     path("movement/", include("geces.movement.urls", namespace="movement")),
     path("people/", include("geces.people.urls", namespace="people")),
+    path("academics/", include("geces.academics.urls", namespace="academics")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("select2/", include("django_select2.urls")),
