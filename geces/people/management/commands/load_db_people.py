@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 
 User = get_user_model()
 
-STUDENTS_CSV = str(settings.APPS_DIR / "people" / "bin" / "lista_alunos_mat.csv")
+STUDENTS_CSV = str(settings.APPS_DIR / "people" / "bin" / "students_responsibles.csv")
 
 
 class Command(BaseCommand):
@@ -22,11 +22,18 @@ class Command(BaseCommand):
             for row in reader:
                 # Acessando os dados de cada coluna do CSV
                 name = row["Nome"]
-                fone = row["Telefones"]
-                birth_date = datetime.strptime(row["Data Nasc."], "%d/%m/%Y").date()
-                cpf = row["CPF"]
+                serie = row["Curso"]
+                birth_date = datetime.strptime(row["Nascimento"], "%d/%m/%Y").date()
+                Nacionalidade = row["Nacionalidade"]
+                Naturalidade = row["Naturalidade"]
                 gender = row["Sexo"]
-                print("## ", name, gender, birth_date, cpf, fone)
+                fone = row["Telefones"]
+                Endereco = f"row['Endereco'], row['Bairro']"
+                cidade = row['Cidade']
+                cep = row['CEP']
+
+                print("### ", name, serie, birth_date, Nacionalidade, Naturalidade, gender, fone, Endereco, cidade, cep)
+
 
                 # Crie um objeto Address
                 # address = Address.objects.create(
