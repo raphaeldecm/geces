@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django_select2 import forms as s2forms
 
 from .models import Address, Responsible, Student, Teacher
 
@@ -46,5 +47,8 @@ class StudentForm(forms.ModelForm):
             "birth": forms.DateInput(
                 attrs={"placeholder": _("dd/mm/aaaa"), "data-input": "data-input", "type": "date"}
             ),
-            "responsible": forms.TextInput(attrs={"placeholder": _("Nome do responsável")}),
+            "responsible": s2forms.ModelSelect2Widget(
+                model=Responsible,
+                search_fields=['name__icontains'],
+            )
         }

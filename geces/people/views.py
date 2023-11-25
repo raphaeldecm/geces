@@ -42,7 +42,10 @@ class StudentForm(
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
         if address_form.is_valid():
+            responsible_name = form.cleaned_data['responsible']
+            responsible = models.Responsible.objects.filter(name=responsible_name).first()
             student = form.save(commit=False)
+            student.responsible = responsible
             address = address_form.save()
             student.address = address
             student.save()

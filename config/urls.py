@@ -18,6 +18,7 @@ urlpatterns = [
     path("people/", include("geces.people.urls", namespace="people")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path("select2/", include("django_select2.urls")),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:

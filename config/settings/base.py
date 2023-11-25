@@ -83,6 +83,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "bootstrap5",
     "adminlte3",
+    "django_select2",
 ]
 
 LOCAL_APPS = [
