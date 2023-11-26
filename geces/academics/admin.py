@@ -5,14 +5,14 @@ from geces.academics import models
 
 # Register your models here.
 class ShiftAdmin(admin.ModelAdmin):
-    list_display = ("name", "created_at", "updated_at")
+    list_display = ("code", "name", "created_at", "updated_at")
     search_fields = ("name",)
     ordering = ("name",)
     readonly_fields = ("updated_by",)
 
 
 class SerieAdmin(admin.ModelAdmin):
-    list_display = ("name", "shift", "teacher")
+    list_display = ("code", "name", "shift", "teacher")
     search_fields = ("name",)
     ordering = ("name",)
     readonly_fields = ("updated_by",)

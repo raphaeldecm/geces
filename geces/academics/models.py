@@ -8,6 +8,11 @@ from geces.people.models import Student, Teacher
 
 # Create your models here.
 class Shift(BaseModel):
+    code = models.CharField(
+        verbose_name=_("Código"),
+        max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
+        unique=True,
+    )
     name = models.CharField(verbose_name=_("Nome"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH, unique=True)
 
     class Meta:
@@ -19,6 +24,11 @@ class Shift(BaseModel):
 
 
 class Serie(BaseModel):
+    code = models.CharField(
+        verbose_name=_("Código"),
+        max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
+        unique=True,
+    )
     name = models.CharField(verbose_name=_("Nome"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH)
     shift = models.ForeignKey(
         Shift,
@@ -57,6 +67,7 @@ class StudentGroup(BaseModel):
     )
     students = models.ManyToManyField(
         Student,
+        through="Enrollment",
         verbose_name=_("Discentes"),
         related_name="student_groups",
     )
@@ -70,6 +81,36 @@ class StudentGroup(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.code:
-            self.code = f"GRP-{self.shift.code[:3]}-{self.serie.code[:3]}-{self.reference_year}"
+            self.code = f"{self.shift.code}{self.serie.code}{self.reference_year}"
 
         super().save(*args, **kwargs)
+
+# TODO: Add a signal to create the enrollment when a student is added to a student group
+# TODO: Verify the relationshio between student and student group
+
+
+class Enrollment(BaseModel):
+    code = models.CharField(
+        verbose_name=_("Código"),
+        max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
+        unique=True,
+    )
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE,
+    )
+    student_group = models.ForeignKey(
+        StudentGroup,
+        on_delete=models.CASCADE,
+    )
+    enrollment_date = models.DateField(
+        verbose_name=_("Data de Matrícula"),
+        auto_now_add=True,
+    )
+
+    class Meta:
+        verbose_name = _("Matrícula")
+        verbose_name_plural = _("Matrículas")
+
+    def __str__(self):
+        return f"{self.student.name} matriculado em {self.student_group.code}"
