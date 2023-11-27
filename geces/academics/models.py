@@ -85,9 +85,6 @@ class StudentGroup(BaseModel):
 
         super().save(*args, **kwargs)
 
-# TODO: Add a signal to create the enrollment when a student is added to a student group
-# TODO: Verify the relationshio between student and student group
-
 
 class Enrollment(BaseModel):
     code = models.CharField(

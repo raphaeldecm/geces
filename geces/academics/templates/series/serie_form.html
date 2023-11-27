@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load bootstrap5 %}
+{% load save_cancel_buttons %}
+{% load breadcrumb_item %}
+
+{% block head %}
+  <title>{% translate "Cadastro de Séries" %}</title>
+{% endblock head %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% breadcrumb_item text="Página Inicial" url="home" %}
+      {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+      {% breadcrumb_item text="Lista de Séries" url="academics:serie_list" %}
+      {% breadcrumb_item text="Cadastro de Séries" active="active" %}
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+  {% block alerts %}
+    {% include "layouts/alerts.html" %}
+  {% endblock alerts %}
+  <div class="card card-primary mx-3">
+    <div class="card-header">
+      <h3 class="card-title">Cadastro de Série</h3>
+    </div>
+    <div class="card-body p-0 mt-3">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row mx-auto mb-3">
+          <div class="col-12 col-sm-6">{% bootstrap_field form.code %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.name %}</div>
+        </div>
+        <div class="row mx-auto mb-3">
+          <div class="col-12 col-sm-6">{% bootstrap_field form.shift %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.teacher %}</div>
+        </div>
+        {% url "academics:serie_list" as serie_list %}
+        {% save_cancel_buttons link_back=serie_list has_form=True %}
+      </form>
+    </div>
+  </div>
+{% endblock content %}
