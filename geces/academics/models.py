@@ -94,11 +94,21 @@ class Enrollment(BaseModel):
     )
     student = models.ForeignKey(
         Student,
+        verbose_name=_("Discente"),
+        related_name="enrollments",
         on_delete=models.CASCADE,
     )
     student_group = models.ForeignKey(
         StudentGroup,
+        verbose_name=_("Turma"),
+        related_name="enrollments",
         on_delete=models.CASCADE,
+    )
+    serie = models.ForeignKey(
+        Serie,
+        verbose_name=_("Série"),
+        related_name="enrollments",
+        on_delete=models.PROTECT,
     )
     enrollment_date = models.DateField(
         verbose_name=_("Data de Matrícula"),
@@ -111,3 +121,9 @@ class Enrollment(BaseModel):
 
     def __str__(self):
         return f"{self.student.name} matriculado em {self.student_group.code}"
+
+    def save(self, *args, **kwargs):
+        if not self.code:
+            self.code = f"{self.pk}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.enrollment_date.year}"
+
+        super().save(*args, **kwargs)

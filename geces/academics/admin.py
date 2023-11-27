@@ -25,6 +25,14 @@ class StudentGroupAdmin(admin.ModelAdmin):
     readonly_fields = ("updated_by",)
 
 
+class EnrollmentAdmin(admin.ModelAdmin):
+    list_display = ("student", "student_group", "created_at", "updated_at")
+    search_fields = ("student__name", "student_group__serie__name",)
+    ordering = ("student__name",)
+    readonly_fields = ("updated_by",)
+
+
 admin.site.register(models.Shift, ShiftAdmin)
 admin.site.register(models.Serie, SerieAdmin)
 admin.site.register(models.StudentGroup, StudentGroupAdmin)
+admin.site.register(models.Enrollment, EnrollmentAdmin)
