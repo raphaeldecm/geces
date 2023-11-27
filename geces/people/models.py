@@ -1,3 +1,6 @@
+import re
+
+from cpf_field.models import CPFField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -40,6 +43,7 @@ class PersonBase(BaseModel):
         max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH,
         unique=True,
     )
+    cpf = CPFField(_("CPF"), unique=True)
     gender = models.CharField(
         verbose_name=_("Gênero"),
         max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
@@ -60,6 +64,9 @@ class PersonBase(BaseModel):
 
     def __str__(self):
         return self.name
+    
+    def get_clean_cpf(self):
+        return re.sub("[^0-9]", "", self.cpf)
 
 
 class Suplier(PersonBase):

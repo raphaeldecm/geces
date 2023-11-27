@@ -84,6 +84,7 @@ THIRD_PARTY_APPS = [
     "bootstrap5",
     "adminlte3",
     "django_select2",
+    "cpf_field",
 ]
 
 LOCAL_APPS = [

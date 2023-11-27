@@ -1,3 +1,9 @@
+# TODO List
+
+    - Notas, conceitos, boletins, disciplinas;
+    - Pagamentos;
+    - Update requirements;
+
 # Gerenciamento de Cantina Escolar
 
 Behold My Awesome Project!
