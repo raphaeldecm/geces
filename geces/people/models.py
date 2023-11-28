@@ -20,11 +20,10 @@ class Address(BaseModel):
         verbose_name_plural = _("Endereços")
 
     def __str__(self):
-        full_address = _("{address}, {city}, {state}, CEP {zip_code}")
+        full_address = _("{address}, {city}, CEP {zip_code}")
         return full_address.format(
             address=self.address,
             city=self.city,
-            state=self.country_state.abbreviation,
             zip_code=self.zip_code,
         )
 

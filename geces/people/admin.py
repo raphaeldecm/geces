@@ -24,11 +24,7 @@ class TeacherAdmin(admin.ModelAdmin):
 
 
 class StudentAdmin(admin.ModelAdmin):
-    fields = [
-        "created_by",
-        "status",
-        "responsible",
-    ]
+    list_display = ("name", "email", "status", "responsible", "balance")
     readonly_fields = (
         "updated_by",
         "balance",
