@@ -29,6 +29,13 @@ class SerieListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
     title = _("Lista de Séries")
 
 
+class EnrollmentListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
+    model = models.Enrollment
+    template_name = "enrollments/enrollment_list.html"
+    paginate_by = 10
+    title = _("Lista de Matrículas")
+
+
 class SerieCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):
     model = models.Serie
     template_name = "series/serie_form.html"

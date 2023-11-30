@@ -22,7 +22,7 @@
     <div class="card-header">
       <h3 class="card-title">Lista de Professores Cadastrados</h3>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0" style="overflow-x: auto">
       <table class="table table-condensed">
         <thead>
           <tr>
@@ -64,10 +64,10 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
       {% if object_list %}
         {% include 'adminlte/lib/_pagination.html' %}
       {% endif %}
-    </div>
   </div>
   {% url "people:people_home" as people_home %}
   {% url "people:teacher_form" as teacher_form %}
