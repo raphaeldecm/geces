@@ -18,8 +18,7 @@ class SerieForm(forms.ModelForm):
 class EnrollmentForm(forms.ModelForm):
     class Meta:
         model = Enrollment
-        fields = ["student", "student_group", "serie"]
+        fields = ["student", "student_group"]
         labels = {
             "student": _("Aluno"),
-            "serie": _("Série"),
         }

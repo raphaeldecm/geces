@@ -3,10 +3,9 @@
 {% load static %}
 {% load breadcrumb_item %}
 
-{% block title %}
-  Série:
-  {{ object.name }}
-{% endblock title %}
+{% block page_name %}
+  {{title}}
+{% endblock page_name %}
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}

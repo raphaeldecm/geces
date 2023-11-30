@@ -104,12 +104,6 @@ class Enrollment(BaseModel):
         related_name="enrollments",
         on_delete=models.CASCADE,
     )
-    serie = models.ForeignKey(
-        Serie,
-        verbose_name=_("Série"),
-        related_name="enrollments",
-        on_delete=models.PROTECT,
-    )
     enrollment_date = models.DateField(
         verbose_name=_("Data de Matrícula"),
         auto_now_add=True,
@@ -124,6 +118,6 @@ class Enrollment(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.code:
-            self.code = f"{self.pk}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.enrollment_date.year}"
+            self.code = f"{self.pk}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.enrollment_date.year}" # noqa
 
         super().save(*args, **kwargs)

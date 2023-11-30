@@ -39,28 +39,47 @@ class EnrollmentListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListVie
 
 class EnrollmentDetailView(LoginRequiredMixin, TitleBaseViewMixin, generic.DetailView):
     model = models.Enrollment
+    title = _("Detalhes da Matrícula")
     template_name = "enrollments/enrollment_detail.html"
     title = _("Detalhes da Matrícula")
 
 
 class EnrollmentCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):
     model = models.Enrollment
+    title = _("Cadastro de Matrícula")
     template_name = "enrollments/enrollment_form.html"
     form_class = forms.EnrollmentForm
     success_url = reverse_lazy("academics:enrollment_list")
     success_message = _("A matrícula foi cadastrada com sucesso")
 
 
-class SerieCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):
+class EnrollmentUpdateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.UpdateView):
+    model = models.Enrollment
+    title = _("Atualização de Matrícula")
+    template_name = "enrollments/enrollment_form.html"
+    form_class = forms.EnrollmentForm
+    success_url = reverse_lazy("academics:enrollment_list")
+    success_message = _("A matrícula foi atualizada com sucesso")
+
+
+class EnrollmentDeleteView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DeleteView):
+    model = models.Enrollment
+    success_url = reverse_lazy("academics:enrollment_list")
+    success_message = _("A matrícula foi excluída com sucesso")
+
+
+class SerieCreateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.CreateView):
     model = models.Serie
+    title = _("Cadastro de Matrícula")
     template_name = "series/serie_form.html"
     form_class = forms.SerieForm
     success_url = reverse_lazy("academics:serie_list")
     success_message = _("A série foi cadastrada com sucesso")
 
 
-class SerieUpdateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.UpdateView):
+class SerieUpdateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView):
     model = models.Serie
+    title = _("Atualização de Série")
     template_name = "series/serie_form.html"
     form_class = forms.SerieForm
     success_url = reverse_lazy("academics:serie_list")
