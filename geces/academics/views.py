@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
 
+from geces.core.mixins import TitleBaseViewMixin
+
 from . import forms, models
 
 # Create your views here.
@@ -20,10 +22,11 @@ class AcademicsHome(generic.TemplateView):
         return context
 
 
-class SerieListView(LoginRequiredMixin, generic.ListView):
+class SerieListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
     model = models.Serie
     template_name = "series/series_list.html"
     paginate_by = 10
+    title = _("Lista de Séries")
 
 
 class SerieCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):

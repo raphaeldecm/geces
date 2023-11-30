@@ -5,9 +5,8 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block head %}
-  <title>{% translate "Lista de Séries" %}</title>
-{% endblock head %}
+{% block page_name %}{{title}}{% endblock %}
+
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -20,9 +19,9 @@
 {% block content %}
   <div class="card card-primary m-3">
     <div class="card-header">
-      <h3 class="card-title">Lista de Séries Cadastradas</h3>
+      <h3 class="card-title">Séries Cadastradas</h3>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0" style="overflow-x: auto">
       <table class="table table-condensed">
         <thead>
           <tr>
