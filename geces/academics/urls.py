@@ -13,4 +13,8 @@ urlpatterns = [
     path("serie_delete/<int:pk>/", views.SerieDeleteView.as_view(), name="serie_delete"),
     # Enrollment URLs
     path("enrollments/", views.EnrollmentListView.as_view(), name="enrollment_list"),
+    # path("enrollment_create/", views.EnrollmentCreateView.as_view(), name="enrollment_create"),
+    # path("enrollment_update/<int:pk>/", views.EnrollmentUpdateView.as_view(), name="enrollment_update"),
+    path("enrollment_detail/<int:pk>/", views.EnrollmentDetailView.as_view(), name="enrollment_detail"),
+    # path("enrollment_delete/<int:pk>/", views.EnrollmentDeleteView.as_view(), name="enrollment_delete"),
 ]

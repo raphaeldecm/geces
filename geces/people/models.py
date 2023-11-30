@@ -63,7 +63,7 @@ class PersonBase(BaseModel):
 
     def __str__(self):
         return self.name
-    
+
     def get_clean_cpf(self):
         return re.sub("[^0-9]", "", self.cpf)
 

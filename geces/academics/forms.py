@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Serie
+from .models import Enrollment, Serie
 
 
 class SerieForm(forms.ModelForm):
@@ -12,4 +12,14 @@ class SerieForm(forms.ModelForm):
             "name": _("Nome"),
             "shift": _("Turno"),
             "teacher": _("Professor"),
+        }
+
+
+class EnrollmentForm(forms.ModelForm):
+    class Meta:
+        model = Enrollment
+        fields = ["student", "student_group", "serie"]
+        labels = {
+            "student": _("Aluno"),
+            "serie": _("Série"),
         }

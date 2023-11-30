@@ -29,9 +29,7 @@ class StudentList(LoginRequiredMixin, generic.ListView):
     ordering = ["name"]
 
 
-class StudentForm(
-    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView
-):
+class StudentForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView):
     model = models.Student
     template_name = "student/student_form.html"
     form_class = forms.StudentForm
@@ -42,7 +40,7 @@ class StudentForm(
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
         if address_form.is_valid():
-            responsible_name = form.cleaned_data['responsible']
+            responsible_name = form.cleaned_data["responsible"]
             responsible = models.Responsible.objects.filter(name=responsible_name).first()
             student = form.save(commit=False)
             student.responsible = responsible
@@ -66,9 +64,7 @@ class StudentDetail(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class StudentUpdate(
-    LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView
-):
+class StudentUpdate(LoginRequiredMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView):
     model = models.Student
     template_name = "student/student_form.html"
     form_class = forms.StudentForm
@@ -219,6 +215,6 @@ class TeacherDelete(LoginRequiredMixin, generic.DeleteView):
 
 
 def autocomplete(request):
-    responsibles = models.Responsible.objects.filter(name__icontains=request.GET.get('term', ''))
+    responsibles = models.Responsible.objects.filter(name__icontains=request.GET.get("term", ""))
     responsible_list = [responsible.name for responsible in responsibles]
     return JsonResponse(responsible_list, safe=False)

@@ -28,10 +28,18 @@
       </div>
       <div class="row align-items-center m-3">
         <div class="col-md-2 col-sm-12">
+          <strong>Situação:</strong>
+        </div>
+        <div id="nome-completo" class="col-md-10 col-sm-12">{{ object.get_status_display }}</div>
+      </div>
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
           <strong>Turma:</strong>
         </div>
         {% for group in student_group %}
-          <div id="group" class="col-md-10 col-sm-12">{{ group.serie.name }} - {{ group.serie.shift.name }} - {{ group.reference_year }}</div>
+          <div id="group" class="col-md-10 col-sm-12">
+            {{ group.serie.name }} - {{ group.serie.shift.name }} - {{ group.reference_year }}
+          </div>
         {% endfor %}
       </div>
       <div class="row align-items-center m-3">
@@ -72,7 +80,7 @@
       </div>
       <div class="row align-items-center m-3">
         <div class="col-md-2 col-sm-12">
-          <strong>Repsonsável:</strong>
+          <strong>Responsável:</strong>
         </div>
         <div id="address" class="col-md-10 col-sm-12">{{ object.responsible.name }}</div>
       </div>

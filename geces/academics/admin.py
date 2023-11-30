@@ -20,14 +20,20 @@ class SerieAdmin(admin.ModelAdmin):
 
 class StudentGroupAdmin(admin.ModelAdmin):
     list_display = ("code", "reference_year", "serie")
-    search_fields = ("reference_year", "serie__name",)
+    search_fields = (
+        "reference_year",
+        "serie__name",
+    )
     ordering = ("reference_year",)
     readonly_fields = ("updated_by",)
 
 
 class EnrollmentAdmin(admin.ModelAdmin):
     list_display = ("student", "student_group", "created_at", "updated_at")
-    search_fields = ("student__name", "student_group__serie__name",)
+    search_fields = (
+        "student__name",
+        "student_group__serie__name",
+    )
     ordering = ("student__name",)
     readonly_fields = ("updated_by",)
 

@@ -29,11 +29,12 @@ class Command(BaseCommand):
                 gender = row["Sexo"]
                 fone = row["Telefones"]
                 Endereco = f"row['Endereco'], row['Bairro']"
-                cidade = row['Cidade']
-                cep = row['CEP']
+                cidade = row["Cidade"]
+                cep = row["CEP"]
 
-                print("### ", name, serie, birth_date, Nacionalidade, Naturalidade, gender, fone, Endereco, cidade, cep)
-
+                print(
+                    "### ", name, serie, birth_date, Nacionalidade, Naturalidade, gender, fone, Endereco, cidade, cep
+                )
 
                 # Crie um objeto Address
                 # address = Address.objects.create(

@@ -8,16 +8,16 @@
 {% block user_panel %}
   <!-- Sidebar user panel (optional) -->
   {% if not request.user.is_anonymous %}
-  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-    <div class="image">
-      <img src="{% avatar_url size=90 %}"
-           class="img-circle elevation-2"
-           alt="User Image" />
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="{% avatar_url size=90 %}"
+             class="img-circle elevation-2"
+             alt="User Image" />
+      </div>
+      <div class="info">
+        <a href="{% url 'home' %}" class="d-block">{% firstof request.user.name request.user.username %}</a>
+      </div>
     </div>
-    <div class="info">
-      <a href="{% url 'home' %}" class="d-block">{% firstof request.user.name request.user.username %}</a>
-    </div>
-  </div>
   {% endif %}
 {% endblock user_panel %}
 {% block nav_heading %}

@@ -5,8 +5,7 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block page_name %}{{title}}{% endblock %}
-
+{% block page_name %}{{ title }}{% endblock %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -66,9 +65,9 @@
         </tbody>
       </table>
     </div>
-      {% if object_list %}
-        {% include 'adminlte/lib/_pagination.html' %}
-      {% endif %}
+    {% if object_list %}
+      {% include 'adminlte/lib/_pagination.html' %}
+    {% endif %}
   </div>
   {% url "academics:academics_home" as academics_home %}
   {% url "academics:serie_create" as serie_create %}

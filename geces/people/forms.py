@@ -39,7 +39,6 @@ class TeacherForm(forms.ModelForm):
 
 
 class StudentForm(forms.ModelForm):
-
     class Meta:
         model = Student
         fields = ["id", "name", "email", "gender", "birth", "responsible"]
@@ -49,6 +48,6 @@ class StudentForm(forms.ModelForm):
             ),
             "responsible": s2forms.ModelSelect2Widget(
                 model=Responsible,
-                search_fields=['name__icontains'],
-            )
+                search_fields=["name__icontains"],
+            ),
         }

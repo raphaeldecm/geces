@@ -31,7 +31,6 @@
               crossorigin="anonymous"
               referrerpolicy="no-referrer"></script>
       <!-- Your stuff: Third-party javascript libraries go here -->
-      
       <!-- This file stores project-specific CSS -->
       <link href="{% static 'css/project.css' %}" rel="stylesheet" />
       <!-- Latest compiled and minified Bootstrap CSS -->
@@ -43,7 +42,6 @@
       <!-- place project specific Javascript in this file -->
       <script defer src="{% static 'js/project.js' %}"></script>
       <script defer src="{% static 'js/jquery.mask.min.js' %}"></script>
-      
     {% endblock extra_head %}
   </head>
   <body>
@@ -68,7 +66,7 @@
     {% block modal %}
     {% endblock modal %}
     {% block extra_js %}
-    {% comment %}
+      {% comment %}
     Script tags with only code, no src (defer by default). To run
     with a "defer" so that you run inline code:
     <script>
@@ -76,8 +74,7 @@
         /* Run whatever you want */
       });
     </script>
-    {% endcomment %}
+      {% endcomment %}
     {% endblock extra_js %}
-    
   </body>
 </html>

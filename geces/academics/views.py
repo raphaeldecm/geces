@@ -19,6 +19,7 @@ class AcademicsHome(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context["series_count"] = models.Serie.objects.count()
         context["student_groups"] = models.StudentGroup.objects.count()
+        context["enrollments_count"] = models.Enrollment.objects.count()
         return context
 
 
@@ -34,6 +35,20 @@ class EnrollmentListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListVie
     template_name = "enrollments/enrollment_list.html"
     paginate_by = 10
     title = _("Lista de Matrículas")
+
+
+class EnrollmentDetailView(LoginRequiredMixin, TitleBaseViewMixin, generic.DetailView):
+    model = models.Enrollment
+    template_name = "enrollments/enrollment_detail.html"
+    title = _("Detalhes da Matrícula")
+
+
+class EnrollmentCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):
+    model = models.Enrollment
+    template_name = "enrollments/enrollment_form.html"
+    form_class = forms.EnrollmentForm
+    success_url = reverse_lazy("academics:enrollment_list")
+    success_message = _("A matrícula foi cadastrada com sucesso")
 
 
 class SerieCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):
