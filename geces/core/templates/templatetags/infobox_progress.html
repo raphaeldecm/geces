@@ -1,20 +1,19 @@
-<a href="{{ link }}">
-  <div class="col-md-4 col-12">
+<div class="col-md-4 col-12">
+    <a href="{{ link }}">
     <div class="info-box bg-{{ color }}">
       {% if not hide_icon %}<span class="info-box-icon"><i class="fas fa-{{ icon }}"></i></span>{% endif %}
       <div class="info-box-content">
-        <span class="info-box-text">{{ header }}</span>
-        <span class="info-box-number">{{ number }} {{ unit }}</span>
-        {% if percent %}
+        <span class="info-box-text">{{ header1 }} {{ header2 }}</span>
+        <span class="info-box-number">{{ subtitle1 }} {{ subtitle2 }}</span>
+        {% comment %} {% if percent %} {% endcomment %}
           <div class="progress">
             <div class="progress-bar" style="width: {{ percent }}%"></div>
           </div>
           {% if how_long %}
-            <span class="progress-description">{{ percent }} de {{ how_long }} vagas.</span>
+            <span class="progress-description">{{ number }} de {{ how_long }} vagas disponíveis.</span>
           {% endif %}
-        {% endif %}
+        {% comment %} {% endif %} {% endcomment %}
       </div>
     </div>
+  </a>
   </div>
-</a>
-

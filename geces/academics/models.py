@@ -59,6 +59,7 @@ class StudentGroup(BaseModel):
         unique=True,
     )
     reference_year = models.PositiveSmallIntegerField(verbose_name=_("Ano referência"))
+    offers = models.PositiveSmallIntegerField(verbose_name=_("Limite de Discentes"))
     serie = models.ForeignKey(
         Serie,
         verbose_name=_("Série"),

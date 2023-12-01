@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render  # noqa
+from django.db.models import Count, ExpressionWrapper, F, IntegerField
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
@@ -102,3 +102,15 @@ class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListV
     template_name = "student_group/student_group_list.html"
     paginate_by = 10
     title = _("Lista de Turmas")
+    ordering = ["serie__name"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["student_groups"] = models.StudentGroup.objects.annotate(
+            num_students=Count('students'),
+            percentage=ExpressionWrapper(
+                (F('num_students') * 100.0) / F('offers'),
+                output_field=IntegerField()
+            )
+        )
+        return context

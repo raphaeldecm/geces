@@ -19,15 +19,9 @@
 {% block content %}
   
   <div class="row justify-content-start mx-3">
-    
-    {% for object in object_list %}
-
-    {% infobox color="primary" header=object.serie.name number=object.student_count unit="Discentes" icon="book-reader" percent=object.student_count|div:object.student_count|mul:100 how_long=15 link="academics:student_group_detail" link_args=object.id %}
-    
+    {% for object in student_groups %} 
+      {% infobox color="primary" icon="book-reader" header1=object.serie.name header2=object.serie.shift.name subtitle1="Docente:" subtitle2=object.serie.teacher.name  percent=object.percentage number=object.num_students how_long=object.offers link="academics:serie_list" %}
     {% endfor %}
-    
-    {% infobox color="primary" header="Series" number=3 unit="Discentes" icon="book-reader" percent=100 how_long=15 link="academics:serie_list" %}
-
   </div>
 
   {% url "academics:academics_home" as academics_home %}

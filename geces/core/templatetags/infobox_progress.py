@@ -17,9 +17,11 @@ delete -- true ou false para indicar que há um botāo de voltar
 def infobox(context, *args, **kwargs):
     color = kwargs.get("color", "gradient-success")
     icon = kwargs.get("icon", None)
-    header = kwargs.get("header", None)
+    header1 = kwargs.get("header1", None)
+    header2 = kwargs.get("header2", None)
+    subtitle1 = kwargs.get("subtitle1", None)
+    subtitle2 = kwargs.get("subtitle2", None)
     number = kwargs.get("number", 0)
-    unit = kwargs.get("unit", None)
     percent = kwargs.get("percent", 0)
     how_long = kwargs.get("how_long", 0)
     link = kwargs.get("link", None)
@@ -31,9 +33,11 @@ def infobox(context, *args, **kwargs):
     return {
         "color": color,
         "icon": icon,
-        "header": header,
+        "header1": header1,
+        "header2": header2,
+        "subtitle1": subtitle1,
+        "subtitle2": subtitle2,
         "number": number,
-        "unit": unit,
         "percent": percent,
         "how_long": how_long,
         "link": link,
