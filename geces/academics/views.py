@@ -18,7 +18,7 @@ class AcademicsHome(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["series_count"] = models.Serie.objects.count()
-        context["student_groups"] = models.StudentGroup.objects.count()
+        context["student_groups_count"] = models.StudentGroup.objects.count()
         context["enrollments_count"] = models.Enrollment.objects.count()
         return context
 
@@ -28,6 +28,35 @@ class SerieListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
     template_name = "series/series_list.html"
     paginate_by = 10
     title = _("Lista de Séries")
+
+
+class SerieCreateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.CreateView):
+    model = models.Serie
+    title = _("Cadastro de Matrícula")
+    template_name = "series/serie_form.html"
+    form_class = forms.SerieForm
+    success_url = reverse_lazy("academics:serie_list")
+    success_message = _("A série foi cadastrada com sucesso")
+
+
+class SerieUpdateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView):
+    model = models.Serie
+    title = _("Atualização de Série")
+    template_name = "series/serie_form.html"
+    form_class = forms.SerieForm
+    success_url = reverse_lazy("academics:serie_list")
+    success_message = _("A série foi atualizada com sucesso")
+
+
+class SerieDetailView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DetailView):
+    model = models.Serie
+    template_name = "series/serie_detail.html"
+
+
+class SerieDeleteView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DeleteView):
+    model = models.Serie
+    success_url = reverse_lazy("academics:serie_list")
+    success_message = _("A série foi excluída com sucesso")
 
 
 class EnrollmentListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
@@ -68,30 +97,8 @@ class EnrollmentDeleteView(LoginRequiredMixin, messages.views.SuccessMessageMixi
     success_message = _("A matrícula foi excluída com sucesso")
 
 
-class SerieCreateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.CreateView):
-    model = models.Serie
-    title = _("Cadastro de Matrícula")
-    template_name = "series/serie_form.html"
-    form_class = forms.SerieForm
-    success_url = reverse_lazy("academics:serie_list")
-    success_message = _("A série foi cadastrada com sucesso")
-
-
-class SerieUpdateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView):
-    model = models.Serie
-    title = _("Atualização de Série")
-    template_name = "series/serie_form.html"
-    form_class = forms.SerieForm
-    success_url = reverse_lazy("academics:serie_list")
-    success_message = _("A série foi atualizada com sucesso")
-
-
-class SerieDetailView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DetailView):
-    model = models.Serie
-    template_name = "series/serie_detail.html"
-
-
-class SerieDeleteView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DeleteView):
-    model = models.Serie
-    success_url = reverse_lazy("academics:serie_list")
-    success_message = _("A série foi excluída com sucesso")
+class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
+    model = models.StudentGroup
+    template_name = "student_group/student_group_list.html"
+    paginate_by = 10
+    title = _("Lista de Turmas")

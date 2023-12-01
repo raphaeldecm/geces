@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load bootstrap5 %}
+{% load save_cancel_buttons %}
+{% load breadcrumb_item %}
+{% load infobox_progress %}
+
+{% block page_name %}{{ title }}{% endblock %}
+{% block breadcrumbs %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% breadcrumb_item text="Página Inicial" url="home" %}
+      {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+      {% breadcrumb_item text="Lista de Turmas" active="active" %}
+    </ol>
+  </nav>
+{% endblock breadcrumbs %}
+{% block content %}
+  
+  <div class="row justify-content-start mx-3">
+    
+    {% for object in object_list %}
+
+    {% infobox color="primary" header=object.serie.name number=object.student_count unit="Discentes" icon="book-reader" percent=object.student_count|div:object.student_count|mul:100 how_long=15 link="academics:student_group_detail" link_args=object.id %}
+    
+    {% endfor %}
+    
+    {% infobox color="primary" header="Series" number=3 unit="Discentes" icon="book-reader" percent=100 how_long=15 link="academics:serie_list" %}
+
+  </div>
+
+  {% url "academics:academics_home" as academics_home %}
+  {% url "academics:student_group_list" as student_group_list %}
+  {% save_cancel_buttons link_back=academics_home link_forward=student_group_list %}
+{% endblock content %}
