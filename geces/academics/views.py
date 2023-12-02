@@ -127,3 +127,14 @@ class StudentGroupCreateView(
     form_class = forms.StudentGroupForm
     success_url = reverse_lazy("academics:student_group_list")
     success_message = _("A turma foi cadastrada com sucesso")
+
+
+class StudentGroupUpdateView(
+    LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView
+):
+    model = models.StudentGroup
+    title = _("Atualização de Turma")
+    template_name = "student_group/student_group_form.html"
+    form_class = forms.StudentGroupForm
+    success_url = reverse_lazy("academics:student_group_list")
+    success_message = _("A turma foi atualizada com sucesso")

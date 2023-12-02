@@ -1,8 +1,8 @@
 <div class="col-md-4 col-12">
     <a href="{{ link }}">
-    <div class="info-box bg-{{ color }}">
+    <div class="info-box bg-{{ color }}" style="height: 134px;">
       {% if not hide_icon %}<span class="info-box-icon"><i class="fas fa-{{ icon }}"></i></span>{% endif %}
-      <div class="info-box-content">
+      <div class="info-box-content my-auto">
         <span class="info-box-text">{{ header1 }} {{ header2 }} {{ header3 }}</span>
         <span class="info-box-number">{{ subtitle1 }} {{ subtitle2 }}</span>
         {% comment %} {% if percent %} {% endcomment %}

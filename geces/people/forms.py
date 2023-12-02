@@ -30,7 +30,7 @@ class ResponsibleForm(forms.ModelForm):
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ["id", "name", "email", "gender", "birth"]
+        fields = ["id", "name", "email", "cpf", "gender", "birth"]
         widgets = {
             "birth": forms.DateInput(
                 attrs={"placeholder": _("dd/mm/aaaa"), "data-input": "data-input", "type": "date"}
