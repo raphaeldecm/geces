@@ -20,11 +20,11 @@
   
   <div class="row justify-content-start mx-3">
     {% for object in student_groups %} 
-      {% infobox color="primary" icon="book-reader" header1=object.serie.name header2=object.serie.shift.name subtitle1="Docente:" subtitle2=object.serie.teacher.name  percent=object.percentage number=object.num_students how_long=object.offers link="academics:serie_list" %}
+      {% infobox color="primary" icon="book-reader" header1=object.serie.name header2=object.serie.shift.name header3=object.reference_year subtitle1="Docente:" subtitle2=object.serie.teacher.name  percent=object.percentage number=object.num_students how_long=object.offers link="academics:serie_list" %}
     {% endfor %}
   </div>
 
   {% url "academics:academics_home" as academics_home %}
-  {% url "academics:student_group_list" as student_group_list %}
-  {% save_cancel_buttons link_back=academics_home link_forward=student_group_list %}
+  {% url "academics:student_group_create" as student_group_create %}
+  {% save_cancel_buttons link_back=academics_home link_forward=student_group_create %}
 {% endblock content %}

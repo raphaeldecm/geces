@@ -82,7 +82,7 @@ class StudentGroup(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.code:
-            self.code = f"{self.shift.code}{self.serie.code}{self.reference_year}"
+            self.code = f"{self.serie.shift.code}{self.serie.code}{self.reference_year}"
 
         super().save(*args, **kwargs)
 

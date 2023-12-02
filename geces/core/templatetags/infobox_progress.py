@@ -19,6 +19,7 @@ def infobox(context, *args, **kwargs):
     icon = kwargs.get("icon", None)
     header1 = kwargs.get("header1", None)
     header2 = kwargs.get("header2", None)
+    header3 = kwargs.get("header3", None)
     subtitle1 = kwargs.get("subtitle1", None)
     subtitle2 = kwargs.get("subtitle2", None)
     number = kwargs.get("number", 0)
@@ -35,6 +36,7 @@ def infobox(context, *args, **kwargs):
         "icon": icon,
         "header1": header1,
         "header2": header2,
+        "header3": header3,
         "subtitle1": subtitle1,
         "subtitle2": subtitle2,
         "number": number,
