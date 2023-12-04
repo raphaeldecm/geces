@@ -17,10 +17,13 @@ class ResponsibleAdmin(admin.ModelAdmin):
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "series")
+    list_display = ("name", "email", "display_series")
     search_fields = ("name",)
     ordering = ("name",)
     readonly_fields = ("updated_by",)
+
+    def display_series(self, obj):
+        return ", ".join([serie.name for serie in obj.series.all()])
 
 
 class StudentAdmin(admin.ModelAdmin):
