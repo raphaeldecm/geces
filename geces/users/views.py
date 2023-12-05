@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, RedirectView, UpdateView
 from django_filters.views import FilterView
 
+from geces.core.mixins import TitleBaseViewMixin
+
 from .filters import UserFilterSet
 from .forms import UserAdminCreationForm
 
@@ -38,8 +40,9 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 user_redirect_view = UserRedirectView.as_view()
 
 
-class UsersListView(LoginRequiredMixin, FilterView):
+class UsersListView(LoginRequiredMixin, TitleBaseViewMixin, FilterView):
     model = User
+    title = _("Lista de Usuários")
     paginate_by = 5
     ordering = ["name"]
     filterset_class = UserFilterSet
@@ -54,16 +57,18 @@ class UserBaseMixin:
         return context
 
 
-class UserCreateView(UserBaseMixin, LoginRequiredMixin, views.SuccessMessageMixin, CreateView):
+class UserCreateView(UserBaseMixin, TitleBaseViewMixin, LoginRequiredMixin, views.SuccessMessageMixin, CreateView):
     model = User
+    title = _("Cadastro de Usuário")
     form_class = UserAdminCreationForm
     success_url = reverse_lazy("users:list")
     success_message = _("Usuário cadastrado com sucesso!")
     template_name = "users/signup.html"
 
 
-class ThirdUserUpdateView(UserBaseMixin, LoginRequiredMixin, views.SuccessMessageMixin, UpdateView):
+class ThirdUserUpdateView(UserBaseMixin, TitleBaseViewMixin, LoginRequiredMixin, views.SuccessMessageMixin, UpdateView):
     model = User
+    title = _("Atualização de Usuário")
     form_class = UserAdminCreationForm
     success_url = reverse_lazy("users:list")
     success_message = _("Usuário atualizado com sucesso!")
@@ -76,8 +81,9 @@ class UserDeleteView(LoginRequiredMixin, views.SuccessMessageMixin, DeleteView):
     success_message = _("Usuário excluído com sucesso!")
 
 
-class UserDetailView(UserBaseMixin, LoginRequiredMixin, DetailView):
+class UserDetailView(UserBaseMixin, TitleBaseViewMixin, LoginRequiredMixin, DetailView):
     model = User
+    title = _("Detalhes do Usuário")
     slug_field = "id"
     slug_url_kwarg = "id"
     template_name = "users/user_detail.html"
