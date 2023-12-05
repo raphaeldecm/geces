@@ -12,7 +12,7 @@ from geces.core.models import BaseModel
 class Address(BaseModel):
     city = models.CharField(verbose_name=_("Cidade"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH)
     address = models.CharField(verbose_name=_("Endereço"), max_length=constants.MAX_CHAR_FIELD_NAME_LENGTH)
-    zip_code = models.CharField(verbose_name=_("CEP"), max_length=8)
+    zip_code = models.CharField(verbose_name=_("CEP"), max_length=10)
     phone = models.CharField(verbose_name=_("Telefone"), max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH)
 
     class Meta:

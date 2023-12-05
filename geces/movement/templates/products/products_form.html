@@ -19,7 +19,7 @@
       <div class="card-title">Cadastro de Produtos</div>
     </div>
     <div class="card-body">
-      <form method="post">
+      <form method="post" autocomplete="off">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% url "movement:products_list" as product_list %}
