@@ -39,6 +39,8 @@ class StudentForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, People
     @transaction.atomic
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
+        address_form.created_by = self.request.user
+        form.instance.created_by = self.request.user
         if address_form.is_valid():
             responsible_name = form.cleaned_data["responsible"]
             responsible = models.Responsible.objects.filter(name=responsible_name).first()
@@ -74,6 +76,8 @@ class StudentUpdate(LoginRequiredMixin, messages.views.SuccessMessageMixin, Peop
     @transaction.atomic
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
+        address_form.updated_by = self.request.user
+        form.instance.updated_by = self.request.user
         if address_form.is_valid():
             student = form.save(commit=False)
             address = address_form.save()
@@ -122,6 +126,8 @@ class ResponsibleForm(
     @transaction.atomic
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
+        address_form.created_by = self.request.user
+        form.instance.created_by = self.request.user
         if address_form.is_valid():
             responsible = form.save(commit=False)
             address = address_form.save()
@@ -144,6 +150,8 @@ class ResponsibleUpdate(
     @transaction.atomic
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
+        address_form.updated_by = self.request.user
+        form.instance.updated_by = self.request.user
         if address_form.is_valid():
             responsible = form.save(commit=False)
             address = address_form.save()
@@ -171,6 +179,8 @@ class TeacherForm(LoginRequiredMixin, messages.views.SuccessMessageMixin, People
     @transaction.atomic
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
+        address_form.created_by = self.request.user
+        form.instance.created_by = self.request.user
         if address_form.is_valid():
             teacher = form.save(commit=False)
             address = address_form.save()
@@ -198,6 +208,8 @@ class TeacherUpdate(LoginRequiredMixin, messages.views.SuccessMessageMixin, Peop
     @transaction.atomic
     def form_valid(self, form):
         address_form = forms.AddressForm(self.request.POST)
+        address_form.updated_by = self.request.user
+        form.instance.updated_by = self.request.user
         if address_form.is_valid():
             teacher = form.save(commit=False)
             address = address_form.save()
@@ -212,9 +224,3 @@ class TeacherDelete(LoginRequiredMixin, generic.DeleteView):
     model = models.Teacher
     success_url = reverse_lazy("people:teacher_list")
     success_message = _("Professor excluído com sucesso!")
-
-
-def autocomplete(request):
-    responsibles = models.Responsible.objects.filter(name__icontains=request.GET.get("term", ""))
-    responsible_list = [responsible.name for responsible in responsibles]
-    return JsonResponse(responsible_list, safe=False)

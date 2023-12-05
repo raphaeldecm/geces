@@ -30,16 +30,19 @@
       <form method="post" autocomplete="off">
         {% csrf_token %}
         <div class="row mx-auto mb-3">
+          <div class="col-12 col-sm-6">{% bootstrap_field form.cpf %}</div>
           <div class="col-12 col-sm-6">{% bootstrap_field form.name %}</div>
-          <div class="col-12 col-sm-6">{% bootstrap_field form.email %}</div>
         </div>
         <div class="row mx-auto mb-3">
+          <div class="col-12 col-sm-6">{% bootstrap_field form.email %}</div>
           <div class="col-12 col-sm-6">{% bootstrap_field form.birth %}</div>
+        </div>
+        <div class="row mx-auto mb-3">
           <div class="col-12 col-sm-6">{% bootstrap_field form.gender %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.responsible %}</div>
         </div>
         {% include "people/_address_form.html" %}
         <div class="row mx-auto mb-3">
-          <div class="col-12 col-sm-6">{% bootstrap_field form.responsible %}</div>
         </div>
         {% url "people:student_list" as student_list %}
         {% save_cancel_buttons link_back=student_list has_form=True %}

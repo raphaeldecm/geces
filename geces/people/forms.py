@@ -55,7 +55,7 @@ class TeacherForm(forms.ModelForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ["id", "name", "email", "gender", "birth", "responsible"]
+        fields = ["id", "name", "email", "cpf", "gender", "birth", "responsible"]
         widgets = {
             "birth": forms.DateInput(
                 attrs={"placeholder": _("dd/mm/aaaa"), "data-input": "data-input", "type": "date"}
@@ -64,4 +64,8 @@ class StudentForm(forms.ModelForm):
                 model=Responsible,
                 search_fields=["name__icontains"],
             ),
+            "cpf": forms.TextInput(attrs={
+                "placeholder": _("999.999.999-99"),
+                "onkeydown": "mask(this, maskCPF)",
+            }),
         }
