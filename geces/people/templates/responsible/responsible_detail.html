@@ -3,16 +3,15 @@
 {% load static %}
 {% load breadcrumb_item %}
 
-{% block title %}
-  User:
-  {{ object.name }}
-{% endblock title %}
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
   {% breadcrumb_item text="Pessoas" url="people:people_home" %}
   {% breadcrumb_item text="Lista de Responsáveis" url="people:responsible_list" %}
-  {% breadcrumb_item text="Visualizar Responsável" active="active" %}
+  {% breadcrumb_item text=title active="active" %}
 {% endblock breadcrumb_items %}
 {% block content %}
   <div class="card card-primary m-3">

@@ -8,15 +8,12 @@
 {% block page_name %}
   {{ title }}
 {% endblock page_name %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
-      {% breadcrumb_item text="Lista de Séries" active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+  {% breadcrumb_item text=title active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   <div class="card card-primary m-3">
     <div class="card-header">

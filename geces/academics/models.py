@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from geces.core import constants
@@ -88,6 +89,7 @@ class StudentGroup(BaseModel):
         super().save(*args, **kwargs)
 
 
+# TODO: Verify active enrollments before new enrollment
 class Enrollment(BaseModel):
     class Status(models.IntegerChoices):
         ACTIVE = 1, _("Ativa")
@@ -100,7 +102,6 @@ class Enrollment(BaseModel):
         verbose_name=_("Situação"),
         choices=Status.choices,
         validators=[MinValueValidator(1), MaxValueValidator(5)],
-        default=Status.PENDING,
     )
 
     code = models.CharField(
@@ -134,6 +135,7 @@ class Enrollment(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.code:
-            self.code = f"{self.pk}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.enrollment_date.year}"  # noqa
-
+            super().save(*args, **kwargs)
+            enrollment_date = self.created_at.date() if self.created_at else timezone.now().date()
+            self.code = f"{enrollment_date.year}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.pk}" # noqa
         super().save(*args, **kwargs)

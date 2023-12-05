@@ -5,18 +5,15 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block head %}
-  <title>{% translate "Lista de Responsáveis" %}</title>
-{% endblock head %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Pessoas" url="people:people_home" %}
-      {% breadcrumb_item text="Lista de Responsáveis" active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Pessoas" url="people:people_home" %}
+  {% breadcrumb_item text="Lista de Responsáveis" active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   <div class="card card-primary m-3">
     <div class="card-header">

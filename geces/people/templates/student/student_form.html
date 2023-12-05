@@ -5,19 +5,16 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block head %}
-  <title>{% translate "Cadastro de Discentes" %}</title>
-{% endblock head %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Pessoas" url="people:people_home" %}
-      {% breadcrumb_item text="Lista de Discentes" url="people:student_list" %}
-      {% breadcrumb_item text="Cadastro de Discentes" active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Pessoas" url="people:people_home" %}
+  {% breadcrumb_item text="Lista de Discentes" url="people:student_list" %}
+  {% breadcrumb_item text=title active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   {% block alerts %}
     {% include "layouts/alerts.html" %}

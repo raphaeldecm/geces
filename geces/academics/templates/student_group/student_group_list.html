@@ -6,16 +6,13 @@
 {% load breadcrumb_item %}
 {% load infobox_progress %}
 
-{% block page_name %}{{ title }}{% endblock %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
-      {% breadcrumb_item text="Lista de Turmas" active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block page_name %}{{ title }}{% endblock page_name %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+  {% breadcrumb_item text="Lista de Turmas" active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   <div class="row justify-content-start mx-3">
     {% for object in student_groups %}

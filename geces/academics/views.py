@@ -12,8 +12,9 @@ from . import forms, models
 # Create your views here.
 
 
-class AcademicsHome(generic.TemplateView):
+class AcademicsHome(TitleBaseViewMixin, generic.TemplateView):
     template_name = "academics/academics.html"
+    title = _("Acadêmico")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,8 +49,9 @@ class SerieUpdateView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.Suc
     success_message = _("A série foi atualizada com sucesso")
 
 
-class SerieDetailView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DetailView):
+class SerieDetailView(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.DetailView):
     model = models.Serie
+    title = _("Detalhes da Série")
     template_name = "series/serie_detail.html"
 
 
@@ -73,7 +75,9 @@ class EnrollmentDetailView(LoginRequiredMixin, TitleBaseViewMixin, generic.Detai
     title = _("Detalhes da Matrícula")
 
 
-class EnrollmentCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.CreateView):
+class EnrollmentCreateView(
+    LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.CreateView
+):
     model = models.Enrollment
     title = _("Cadastro de Matrícula")
     template_name = "enrollments/enrollment_form.html"
@@ -82,7 +86,9 @@ class EnrollmentCreateView(LoginRequiredMixin, messages.views.SuccessMessageMixi
     success_message = _("A matrícula foi cadastrada com sucesso")
 
 
-class EnrollmentUpdateView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.UpdateView):
+class EnrollmentUpdateView(
+    LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView
+):
     model = models.Enrollment
     title = _("Atualização de Matrícula")
     template_name = "enrollments/enrollment_form.html"

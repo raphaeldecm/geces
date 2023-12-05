@@ -4,17 +4,14 @@
 {% load breadcrumb_item %}
 {% load infobox %}
 
-{% block title %}
-  Pessoas
-{% endblock title %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Pessoas" url="home" active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Pessoas" url="home" active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   <div class="row justify-content-start m-3">
     {% infobox color="primary" number=teacher_count text="Docentes" icon="fas fa-chalkboard-teacher fa-2x" link="people:teacher_list" %}

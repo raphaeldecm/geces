@@ -8,16 +8,13 @@
 {% block page_name %}
   {{ title }}
 {% endblock page_name %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
-      {% breadcrumb_item text="Lista de Séries" url="academics:serie_list" %}
-      {% breadcrumb_item text="Cadastro de Séries" active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+    {% breadcrumb_item text="Página Inicial" url="home" %}
+    {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+    {% breadcrumb_item text="Lista de Matrículas" url="academics:enrollment_list" %}
+    {% breadcrumb_item text=title active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   {% block alerts %}
     {% include "layouts/alerts.html" %}
@@ -30,15 +27,16 @@
       <form method="post" autocomplete="off">
         {% csrf_token %}
         <div class="row mx-auto mb-3">
-          <div class="col-12 col-sm-6">{% bootstrap_field form.code %}</div>
-          <div class="col-12 col-sm-6">{% bootstrap_field form.name %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.student %}</div>
         </div>
         <div class="row mx-auto mb-3">
-          <div class="col-12 col-sm-6">{% bootstrap_field form.shift %}</div>
-          <div class="col-12 col-sm-6">{% bootstrap_field form.teacher %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.student_group %}</div>
         </div>
-        {% url "academics:serie_list" as serie_list %}
-        {% save_cancel_buttons link_back=serie_list has_form=True %}
+        <div class="row mx-auto mb-3">
+          <div class="col-12 col-sm-6">{% bootstrap_field form.status %}</div>
+        </div>
+        {% url "academics:enrollment_list" as enrollment_list %}
+        {% save_cancel_buttons link_back=enrollment_list has_form=True %}
       </form>
     </div>
   </div>

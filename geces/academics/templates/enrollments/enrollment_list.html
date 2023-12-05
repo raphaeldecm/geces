@@ -5,16 +5,13 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block page_name %}{{ title }}{% endblock %}
-{% block breadcrumbs %}
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      {% breadcrumb_item text="Página Inicial" url="home" %}
-      {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
-      {% breadcrumb_item text=title active="active" %}
-    </ol>
-  </nav>
-{% endblock breadcrumbs %}
+{% block page_name %}{{ title }}{% endblock page_name %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+    {% breadcrumb_item text="Página Inicial" url="home" %}
+    {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+    {% breadcrumb_item text=title active="active" %}
+{% endblock breadcrumb_items %}
 {% block content %}
   <div class="card card-primary m-3">
     <div class="card-header">
@@ -24,10 +21,9 @@
       <table class="table table-condensed">
         <thead>
           <tr>
+            <th>Código</th>
             <th>Discente</th>
-            <th>Cod. Turma</th>
-            <th>Série</th>
-            <th>Turno</th>
+            <th>Turma</th>
             <th>Ano</th>
             <th class="text-center">Ações</th>
           </tr>
@@ -35,15 +31,14 @@
         <tbody>
           {% for object in object_list %}
             <tr>
+              <td>{{ object.code }}</td>
               <td>{{ object.student }}</td>
-              <td>{{ object.student_group.code }}</td>
-              <td>{{ object.student_group.serie.name }}</td>
-              <td>{{ object.student_group.serie.shift.name }}</td>
+              <td>{{ object.student_group }}</td>
               <td>{{ object.student_group.reference_year }}</td>
               <td class="text-center">
                 <a href="{% url 'academics:enrollment_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
                 <a class="mx-1"
-                   href="{% url 'academics:serie_update' object.pk %}"
+                   href="{% url 'academics:enrollment_update' object.pk %}"
                    type="button"
                    aria-label="editar"
                    title="editar">
@@ -54,7 +49,7 @@
                    aria-label="excluir"
                    title="excluir">
                   <i class="fas fa-trash" aria-hidden="true"></i></a>
-                {% include "academics/academics_confirm_delete.html" with delete_url="academics:serie_delete" %}
+                {% include "academics/academics_confirm_delete.html" with delete_url="academics:enrollment_delete" %}
               </td>
             </tr>
           {% empty %}
@@ -72,6 +67,6 @@
     {% endif %}
   </div>
   {% url "academics:academics_home" as academics_home %}
-  {% url "academics:serie_create" as serie_create %}
-  {% save_cancel_buttons link_back=academics_home link_forward=serie_create %}
+  {% url "academics:enrollment_create" as enrollment_create %}
+  {% save_cancel_buttons link_back=academics_home link_forward=enrollment_create %}
 {% endblock content %}
