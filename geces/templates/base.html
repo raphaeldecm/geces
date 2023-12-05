@@ -46,8 +46,10 @@
   </head>
   <body>
     <main class="container">
-      {% block page_name %}{% endblock %}
-      {% block page_actions %}{% endblock %}
+      {% block page_name %}
+      {% endblock page_name %}
+      {% block page_actions %}
+      {% endblock page_actions %}
       {% block breadcrumbs %}
         <nav class="ml-3"
              style="--bs-breadcrumb-divider: '>'"

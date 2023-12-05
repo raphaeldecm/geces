@@ -107,13 +107,11 @@ class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListV
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["student_groups"] = models.StudentGroup.objects.annotate(
-            num_students=Count('students'),
-            percentage=ExpressionWrapper(
-                (F('num_students') * 100.0) / F('offers'),
-                output_field=IntegerField()
-            )
+            num_students=Count("students"),
+            percentage=ExpressionWrapper((F("num_students") * 100.0) / F("offers"), output_field=IntegerField()),
         )
         return context
+
 
 # TODO: Select reference year to filter student groups
 

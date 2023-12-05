@@ -119,6 +119,6 @@ class Enrollment(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.code:
-            self.code = f"{self.pk}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.enrollment_date.year}" # noqa
+            self.code = f"{self.pk}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.enrollment_date.year}"  # noqa
 
         super().save(*args, **kwargs)

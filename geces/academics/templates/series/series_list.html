@@ -5,7 +5,9 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block page_name %}{{ title }}{% endblock %}
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
 {% block breadcrumbs %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
