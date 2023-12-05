@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -78,7 +79,7 @@ class StudentGroup(BaseModel):
         verbose_name_plural = _("Turmas")
 
     def __str__(self):
-        return f"{self.code} - {self.serie.name}/{self.serie.shift.name}"
+        return f"{self.serie.name}/{self.serie.shift.name}"
 
     def save(self, *args, **kwargs):
         if not self.code:
@@ -88,6 +89,20 @@ class StudentGroup(BaseModel):
 
 
 class Enrollment(BaseModel):
+    class Status(models.IntegerChoices):
+        ACTIVE = 1, _("Ativa")
+        CANCELED = 2, _("Cancelada")
+        PENDING = 3, _("Pendente")
+        CLOSED = 4, _("Trancada")
+        FINISHED = 5, _("Concluída")  # Discente concluiu a oferta de disciplina
+
+    status = models.PositiveSmallIntegerField(
+        verbose_name=_("Situação"),
+        choices=Status.choices,
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        default=Status.PENDING,
+    )
+
     code = models.CharField(
         verbose_name=_("Código"),
         max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,

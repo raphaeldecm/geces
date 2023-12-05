@@ -42,7 +42,7 @@ class PersonBase(BaseModel):
         max_length=constants.MEDIUM_CHAR_FIELD_NAME_LENGTH,
         unique=True,
     )
-    cpf = CPFField(_("CPF"), unique=True)
+    cpf = CPFField(_("CPF"), unique=False)
     gender = models.CharField(
         verbose_name=_("Gênero"),
         max_length=constants.SMALL_CHAR_FIELD_NAME_LENGTH,
@@ -104,7 +104,7 @@ class Student(PersonBase):
     status = models.PositiveSmallIntegerField(
         verbose_name=_("Situação"),
         choices=Status.choices,
-        validators=[MinValueValidator(1), MaxValueValidator(8)],
+        validators=[MinValueValidator(1), MaxValueValidator(3)],
         default=Status.PENDING,
     )
     responsible = models.ForeignKey(
@@ -115,6 +115,10 @@ class Student(PersonBase):
         related_name="students",
     )
     balance = models.DecimalField(_("Saldo"), max_digits=5, decimal_places=2, default=0.00)
+
+    @property
+    def active_enrollment(self):
+        return self.enrollments.filter(status=1).first()
 
     class Meta:
         verbose_name = _("Discente")

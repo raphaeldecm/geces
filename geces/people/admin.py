@@ -13,7 +13,13 @@ class SupplierAdmin(admin.ModelAdmin):
 
 
 class ResponsibleAdmin(admin.ModelAdmin):
-    search_fields = ["name", "email"]
+    list_display = ("name", "email", "display_students")
+    search_fields = ("name",)
+    ordering = ("name",)
+    readonly_fields = ("updated_by",)
+
+    def display_students(self, obj):
+        return ", ".join([student.name for student in obj.students.all()])
 
 
 class TeacherAdmin(admin.ModelAdmin):
