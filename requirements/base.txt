@@ -25,6 +25,7 @@ drf-spectacular==0.26.5  # https://github.com/tfranzel/drf-spectacular
 django-adminlte-3==0.1.6  # https://pypi.org/project/django-adminlte-3/
 django-bootstrap-v5==1.0.11  # https://pypi.org/project/django-bootstrap-v5/
 django-filter==23.3  # https://django-filter.readthedocs.io/en/stable/
-
-#CPF
+# CPF
 django-cpf==0.1.0 # https://github.com/gabrielloliveira/django-cpf
+# Autocomplete select
+django-select2==8.1.2  # https://django-select2.readthedocs.io/en/latest/
