@@ -27,6 +27,7 @@ class EnrollmentForm(forms.ModelForm):
 class StudentGroupForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['code'].required = False
         current_year = date.today().year
         choices = [(current_year, current_year), (current_year + 1, current_year + 1)]
         self.fields["reference_year"] = forms.ChoiceField(
@@ -34,9 +35,21 @@ class StudentGroupForm(forms.ModelForm):
             label=_("Ano referência"),
         )
 
+    def clean(self):
+        cleaned_data = super().clean()
+        reference_year = cleaned_data.get('reference_year')
+        serie = cleaned_data.get('serie')
+
+        if reference_year and serie:
+            if StudentGroup.objects.filter(serie=serie, reference_year=reference_year).exists():
+                raise forms.ValidationError(_("Já existe uma turma para esta série e ano referência"))
+            else:
+                cleaned_data['code'] = f"{serie.shift.code}{serie.code}{reference_year}"
+        return cleaned_data
+
     class Meta:
         model = StudentGroup
-        fields = ["serie", "offers", "reference_year"]
+        fields = ["code", "serie", "offers", "reference_year"]
         labels = {
             "serie": _("Série"),
             "offers": _("Vagas"),

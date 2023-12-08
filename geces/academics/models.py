@@ -82,12 +82,6 @@ class StudentGroup(BaseModel):
     def __str__(self):
         return f"{self.serie.name}/{self.serie.shift.name}"
 
-    def save(self, *args, **kwargs):
-        if not self.code:
-            self.code = f"{self.serie.shift.code}{self.serie.code}{self.reference_year}"
-
-        super().save(*args, **kwargs)
-
 
 # TODO: Verify active enrollments before new enrollment
 class Enrollment(BaseModel):
