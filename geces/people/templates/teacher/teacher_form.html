@@ -8,7 +8,6 @@
 {% block page_name %}
   {{ title }}
 {% endblock page_name %}
-
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
@@ -16,7 +15,6 @@
   {% breadcrumb_item text="Lista de Professores" url="people:responsible_list" %}
   {% breadcrumb_item text=title active="active" %}
 {% endblock breadcrumb_items %}
-
 {% block content %}
   {% block alerts %}
     {% include "layouts/alerts.html" %}

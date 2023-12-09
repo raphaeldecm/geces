@@ -31,7 +31,13 @@ class StudentList(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
     ordering = ["name"]
 
 
-class StudentForm(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView):
+class StudentForm(
+    LoginRequiredMixin,
+    TitleBaseViewMixin,
+    messages.views.SuccessMessageMixin,
+    PeopleCreateViewMixin,
+    generic.CreateView,
+):
     model = models.Student
     title = _("Cadastro de Discente")
     template_name = "student/student_form.html"
@@ -71,7 +77,11 @@ class StudentDetail(LoginRequiredMixin, TitleBaseViewMixin, generic.DetailView):
 
 
 class StudentUpdate(
-    LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView
+    LoginRequiredMixin,
+    TitleBaseViewMixin,
+    messages.views.SuccessMessageMixin,
+    PeopleCreateViewMixin,
+    generic.UpdateView,
 ):
     model = models.Student
     title = _("Atualização de Discente")
@@ -124,7 +134,11 @@ class ResponsbileDetail(LoginRequiredMixin, TitleBaseViewMixin, generic.DetailVi
 
 
 class ResponsibleForm(
-    LoginRequiredMixin, messages.views.SuccessMessageMixin, TitleBaseViewMixin, PeopleCreateViewMixin, generic.CreateView
+    LoginRequiredMixin,
+    messages.views.SuccessMessageMixin,
+    TitleBaseViewMixin,
+    PeopleCreateViewMixin,
+    generic.CreateView,
 ):
     model = models.Responsible
     title = _("Cadastro de Responsável")
@@ -149,7 +163,11 @@ class ResponsibleForm(
 
 
 class ResponsibleUpdate(
-    LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView
+    LoginRequiredMixin,
+    TitleBaseViewMixin,
+    messages.views.SuccessMessageMixin,
+    PeopleCreateViewMixin,
+    generic.UpdateView,
 ):
     model = models.Responsible
     title = _("Atualização de Responsável")
@@ -181,7 +199,13 @@ class TeacherList(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
     ordering = ["name"]
 
 
-class TeacherForm(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.CreateView):
+class TeacherForm(
+    LoginRequiredMixin,
+    TitleBaseViewMixin,
+    messages.views.SuccessMessageMixin,
+    PeopleCreateViewMixin,
+    generic.CreateView,
+):
     model = models.Teacher
     title = _("Cadastro de Professor")
     template_name = "teacher/teacher_form.html"
@@ -212,7 +236,13 @@ class TeacherDetail(LoginRequiredMixin, TitleBaseViewMixin, generic.DetailView):
     template_name = "teacher/teacher_detail.html"
 
 
-class TeacherUpdate(LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, PeopleCreateViewMixin, generic.UpdateView):
+class TeacherUpdate(
+    LoginRequiredMixin,
+    TitleBaseViewMixin,
+    messages.views.SuccessMessageMixin,
+    PeopleCreateViewMixin,
+    generic.UpdateView,
+):
     model = models.Teacher
     title = _("Atualização de Professor")
     template_name = "teacher/teacher_form.html"

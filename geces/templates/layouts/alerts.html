@@ -1,7 +1,7 @@
 {% if form.errors %}
   <div class="alert alert-warning alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
-      {% include "_form_field_error.html" %}
+    {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+    {% include "_form_field_error.html" %}
   </div>
 {% endif %}

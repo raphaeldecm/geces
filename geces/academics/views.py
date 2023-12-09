@@ -124,6 +124,7 @@ class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, FilterView):
 
 # TODO: Select reference year to filter student groups
 
+
 class StudentGroupCreateView(
     LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.CreateView
 ):

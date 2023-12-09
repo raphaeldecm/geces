@@ -131,5 +131,5 @@ class Enrollment(BaseModel):
         if not self.code:
             super().save(*args, **kwargs)
             enrollment_date = self.created_at.date() if self.created_at else timezone.now().date()
-            self.code = f"{enrollment_date.year}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.pk}" # noqa
+            self.code = f"{enrollment_date.year}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.pk}"  # noqa
         super().save(*args, **kwargs)

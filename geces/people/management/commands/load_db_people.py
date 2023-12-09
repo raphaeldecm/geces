@@ -14,7 +14,7 @@ class Command(BaseCommand):
     help = "Load people database"
 
     def handle(self, *args, **options):
-        admin = User.objects.filter(is_superuser=True).first()
+        admin = User.objects.filter(is_superuser=True).first()  # noqa
 
         with open(STUDENTS_CSV, encoding="utf-8") as file:
             reader = csv.DictReader(file)
@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 Naturalidade = row["Naturalidade"]
                 gender = row["Sexo"]
                 fone = row["Telefones"]
-                Endereco = f"row['Endereco'], row['Bairro']"
+                Endereco = f"row['Endereco'], row['Bairro']"  # noqa
                 cidade = row["Cidade"]
                 cep = row["CEP"]
 

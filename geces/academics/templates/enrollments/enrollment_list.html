@@ -5,12 +5,14 @@
 {% load save_cancel_buttons %}
 {% load breadcrumb_item %}
 
-{% block page_name %}{{ title }}{% endblock page_name %}
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
 {% block breadcrumb_items %}
   {{ block.super }}
-    {% breadcrumb_item text="Página Inicial" url="home" %}
-    {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
-    {% breadcrumb_item text=title active="active" %}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Acadêmico" url="academics:academics_home" %}
+  {% breadcrumb_item text=title active="active" %}
 {% endblock breadcrumb_items %}
 {% block content %}
   <div class="card card-primary m-3">

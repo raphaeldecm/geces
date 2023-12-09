@@ -38,14 +38,14 @@ class StudentGroupFilterSet(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        years = StudentGroup.objects.values_list('reference_year', flat=True).distinct()
+        years = StudentGroup.objects.values_list("reference_year", flat=True).distinct()
         year_choices = [(year, year) for year in years]
         print(year_choices)
-        self.filters['reference_year'] = django_filters.ChoiceFilter(
-            field_name='reference_year',
-            label='Filtrar por ano letivo',
+        self.filters["reference_year"] = django_filters.ChoiceFilter(
+            field_name="reference_year",
+            label="Filtrar por ano letivo",
             choices=year_choices,
-            widget=forms.Select(attrs={"class": "form-select"})
+            widget=forms.Select(attrs={"class": "form-select"}),
         )
 
     class Meta:
