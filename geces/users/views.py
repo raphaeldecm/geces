@@ -66,7 +66,9 @@ class UserCreateView(UserBaseMixin, TitleBaseViewMixin, LoginRequiredMixin, view
     template_name = "users/signup.html"
 
 
-class ThirdUserUpdateView(UserBaseMixin, TitleBaseViewMixin, LoginRequiredMixin, views.SuccessMessageMixin, UpdateView):
+class ThirdUserUpdateView(
+    UserBaseMixin, TitleBaseViewMixin, LoginRequiredMixin, views.SuccessMessageMixin, UpdateView
+):
     model = User
     title = _("Atualização de Usuário")
     form_class = UserAdminCreationForm

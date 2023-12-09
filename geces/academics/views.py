@@ -4,7 +4,9 @@ from django.db.models import Count, ExpressionWrapper, F, IntegerField
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
+from django_filters.views import FilterView
 
+from geces.academics.filters import StudentGroupFilterSet
 from geces.core.mixins import TitleBaseViewMixin
 
 from . import forms, models
@@ -103,24 +105,24 @@ class EnrollmentDeleteView(LoginRequiredMixin, messages.views.SuccessMessageMixi
     success_message = _("A matrícula foi excluída com sucesso")
 
 
-class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, generic.ListView):
+class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, FilterView):
     model = models.StudentGroup
+    filterset_class = StudentGroupFilterSet
     template_name = "student_group/student_group_list.html"
     paginate_by = 10
     title = _("Lista de Turmas")
     ordering = ["serie__name"]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["student_groups"] = models.StudentGroup.objects.annotate(
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.annotate(
             num_students=Count("students"),
             percentage=ExpressionWrapper((F("num_students") * 100.0) / F("offers"), output_field=IntegerField()),
         )
-        return context
+        return queryset
 
 
 # TODO: Select reference year to filter student groups
-
 
 class StudentGroupCreateView(
     LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.CreateView
