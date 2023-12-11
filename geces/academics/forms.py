@@ -16,8 +16,24 @@ class SerieForm(forms.ModelForm):
             "teachers": _("Docentes"),
         }
 
+# TODO: Refactor this form ti use select2 on student field and filter student_group by year
+
 
 class EnrollmentForm(forms.ModelForm):
+    reference_year = forms.ChoiceField(
+        choices=[],
+        label="Ano referência"
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        current_year = date.today().year
+        choices = [(current_year, current_year), (current_year + 1, current_year + 1)]
+        self.fields["reference_year"] = forms.ChoiceField(
+            choices=choices,
+            label=_("Ano referência"),
+        )
+
     class Meta:
         model = Enrollment
         fields = ["status", "student", "student_group"]

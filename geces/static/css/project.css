@@ -12,7 +12,7 @@
     border-color: #eed3d7;
 }
 
-td a {
-    color: #000 !important;
+td a i {
+    color: var(--bs-link-color);
     text-decoration: none !important;
 }

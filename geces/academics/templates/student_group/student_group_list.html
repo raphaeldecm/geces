@@ -48,7 +48,7 @@
   </div>
   <div class="row justify-content-start mx-3">
     {% for object in object_list %}
-      {% infobox color="primary" icon="book-reader" header1=object.serie.name header2=object.serie.shift.name header3=object.reference_year subtitle1="Docente:" subtitle2=object.serie.teacher.name|default_if_none:"Sem Docente"  percent=object.percentage number=object.num_students how_long=object.offers link='academics:student_group_detail' pk=object.pk %}
+      {% infobox color="primary" icon="book-reader" header1=object.serie.name header2=object.serie.shift.name header3=object.reference_year subtitle1="Discentes matriculados:" subtitle2=object.students.all.count percent=object.percentage number=object.num_students how_long=object.offers link='academics:student_group_detail' pk=object.pk %}
     {% endfor %}
   </div>
   {% url "academics:academics_home" as academics_home %}

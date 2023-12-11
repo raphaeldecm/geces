@@ -78,7 +78,7 @@ class StudentGroup(BaseModel):
         verbose_name_plural = _("Turmas")
 
     def __str__(self):
-        return f"{self.serie.name}/{self.serie.shift.name}"
+        return f"{self.serie.name} - {self.serie.shift.name}"
 
 
 # TODO: Verify active enrollments before new enrollment

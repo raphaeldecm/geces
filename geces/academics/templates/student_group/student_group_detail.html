@@ -35,7 +35,14 @@
         <div class="col-md-2 col-sm-12">
           <strong>Docente(s):</strong>
         </div>
-        <div id="teacher" class="col-md-10 col-sm-12">{{ object.serie.teacher.name|default_if_none:"Não há docente associado a turma" }}</div>
+        <div id="teacher" class="col-md-10 col-sm-12">
+          {% for teacher in object.serie.teachers.all %}
+            {{ teacher }}
+            {% if not forloop.last %}
+              <br>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
       <div class="row align-items-center m-3">
         <div class="col-md-2 col-sm-12">
@@ -49,13 +56,52 @@
         </div>
         <div id="teacher" class="col-md-10 col-sm-12">{{ object.offers }}</div>
       </div>
-      <div class="row justify-content-between m-3">
-        <div class="col-lg-4 col-md-6 col-12 m-3">
-          <a type="button"
-             class="btn btn-secondary"
-             href="{% url 'academics:student_group_list' %}"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
-        </div>
-      </div>
+    </div>
+  </div>
+
+  <div class="card card-primary m-3">
+    <div class="card-header">
+      <h3 class="card-title">Lista de Discentes</h3>
+    </div>
+    <div class="card-body p-0" style="overflow-x: auto">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Situação</th>
+            <th>Responsável</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for object in object.students.all %}
+            <tr>
+              <td>{{ object.name }}</td>
+              <td>{{ object.get_status_display }}</td>
+              <td><a href="{% url 'people:responsible_detail' object.responsible.pk %}">{{ object.responsible }}</a></td>
+              <td class="text-center">
+                <a href="{% url 'people:student_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4">
+                <p>Não existem séries cadastradas.</p>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if object_list %}
+      {% include 'adminlte/lib/_pagination.html' %}
+    {% endif %}
+  </div>
+  <div class="row justify-content-between m-3">
+    <div class="col-lg-4 col-md-6 col-12 m-3">
+      <a type="button"
+         class="btn btn-secondary"
+         href="{% url 'academics:student_group_list' %}"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
     </div>
   </div>
 {% endblock content %}
