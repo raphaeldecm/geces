@@ -9,11 +9,11 @@ from .models import Enrollment, Serie, StudentGroup
 class SerieForm(forms.ModelForm):
     class Meta:
         model = Serie
-        fields = ["code", "name", "shift", "teacher"]
+        fields = ["code", "name", "shift", "teachers"]
         labels = {
             "name": _("Nome"),
             "shift": _("Turno"),
-            "teacher": _("Professor"),
+            "teachers": _("Docentes"),
         }
 
 

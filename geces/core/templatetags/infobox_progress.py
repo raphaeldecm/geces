@@ -1,16 +1,7 @@
 from django import template
-from django.urls import reverse_lazy
+from django.urls import reverse
 
 register = template.Library()
-
-"""
-Tag criada para 2 botões: save and cancel.
-
-Keywords:
-link_back ou url_back -- link do botāo de voltar
-link_edit ou link_edit -- link do botāo de editar
-delete -- true ou false para indicar que há um botāo de voltar
-"""
 
 
 @register.inclusion_tag("templatetags/infobox_progress.html", takes_context=True)
@@ -27,9 +18,8 @@ def infobox(context, *args, **kwargs):
     how_long = kwargs.get("how_long", 0)
     link = kwargs.get("link", None)
 
-    if "link" in kwargs:
-        k = {}
-        link = reverse_lazy(kwargs.get("link"), kwargs=k)
+    if "link" in kwargs and kwargs["link"] is not None:
+        link = reverse(kwargs["link"], kwargs={'pk': kwargs.get("pk")})
 
     return {
         "color": color,

@@ -26,7 +26,7 @@
             <th>Código</th>
             <th>Nome</th>
             <th>Turno</th>
-            <th>Professor</th>
+            <th>Docentes</th>
             <th class="text-center">Ações</th>
           </tr>
         </thead>
@@ -36,7 +36,12 @@
               <td>{{ object.code }}</td>
               <td>{{ object.name }}</td>
               <td>{{ object.shift }}</td>
-              <td>{{ object.teacher.name }}</td>
+              <td>
+                {% for docente in object.teachers.all %}
+                  {{ docente.name }}
+                  {% if not forloop.last %},{% endif %}
+                {% endfor %}
+              </td>
               <td class="text-center">
                 <a href="{% url 'academics:serie_detail' object.pk %}"><i class="fas fa-eye" aria-hidden="true"></i></a>
                 <a class="mx-1"

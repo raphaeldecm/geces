@@ -12,10 +12,13 @@ class ShiftAdmin(admin.ModelAdmin):
 
 
 class SerieAdmin(admin.ModelAdmin):
-    list_display = ("code", "name", "shift", "teacher")
+    list_display = ("code", "name", "shift", "teachers")
     search_fields = ("name",)
     ordering = ("name",)
     readonly_fields = ("updated_by",)
+
+    def teachers(self, obj):
+        return ", ".join([t.name for t in obj.teachers.all()])
 
 
 class StudentGroupAdmin(admin.ModelAdmin):

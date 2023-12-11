@@ -32,7 +32,7 @@
         </div>
         <div class="row mx-auto mb-3">
           <div class="col-12 col-sm-6">{% bootstrap_field form.shift %}</div>
-          <div class="col-12 col-sm-6">{% bootstrap_field form.teacher %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.teachers %}</div>
         </div>
         {% url "academics:serie_list" as serie_list %}
         {% save_cancel_buttons link_back=serie_list has_form=True %}

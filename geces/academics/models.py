@@ -38,12 +38,10 @@ class Serie(BaseModel):
         on_delete=models.PROTECT,
         related_name="series",
     )
-    teacher = models.ForeignKey(
+    teachers = models.ManyToManyField(
         Teacher,
-        verbose_name=_("Professor"),
-        on_delete=models.PROTECT,
+        verbose_name=_("Docente"),
         related_name="series",
-        null=True,
     )
 
     class Meta:

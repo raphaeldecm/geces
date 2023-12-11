@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load breadcrumb_item %}
+
+{% block page_name %}
+  {{ title }}
+{% endblock page_name %}
+{% block breadcrumb_items %}
+  {{ block.super }}
+  {% breadcrumb_item text="Página Inicial" url="home" %}
+  {% breadcrumb_item text="Academics" url="academics:academics_home" %}
+  {% breadcrumb_item text="Lista de Turmas" url="academics:student_group_list" %}
+  {% breadcrumb_item text=title active="active" %}
+{% endblock breadcrumb_items %}
+{% block content %}
+  <div class="card card-primary m-3">
+    <div class="card-header">
+      <h3 class="card-title">Dados da Turma</h3>
+    </div>
+    <div class="card-body p-0">
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
+          <strong>Código:</strong>
+        </div>
+        <div id="codigo" class="col-md-10 col-sm-12">{{ object.code }}</div>
+      </div>
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
+          <strong>Turma:</strong>
+        </div>
+        <div id="name" class="col-md-10 col-sm-12">{{ object }}</div>
+      </div>
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
+          <strong>Docente(s):</strong>
+        </div>
+        <div id="teacher" class="col-md-10 col-sm-12">{{ object.serie.teacher.name|default_if_none:"Não há docente associado a turma" }}</div>
+      </div>
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
+          <strong>Alunos Matriculados:</strong>
+        </div>
+        <div id="teacher" class="col-md-10 col-sm-12">{{ object.students.count }}</div>
+      </div>
+      <div class="row align-items-center m-3">
+        <div class="col-md-2 col-sm-12">
+          <strong>Total de Vagas:</strong>
+        </div>
+        <div id="teacher" class="col-md-10 col-sm-12">{{ object.offers }}</div>
+      </div>
+      <div class="row justify-content-between m-3">
+        <div class="col-lg-4 col-md-6 col-12 m-3">
+          <a type="button"
+             class="btn btn-secondary"
+             href="{% url 'academics:student_group_list' %}"> <i class="fas fa-chevron-left mr-1" aria-hidden="true"></i>Voltar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
