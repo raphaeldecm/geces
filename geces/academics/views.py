@@ -88,24 +88,9 @@ class EnrollmentCreateView(
     success_url = reverse_lazy("academics:enrollment_list")
     success_message = _("A matrícula foi cadastrada com sucesso")
 
-    def form_valid(self, form):
-        print("#################")
-        print(form.cleaned_data['reference_year'])
-        print(form.cleaned_data['student_group'])
-        print(form.cleaned_data['student'])
-        print(form.errors)
-
-        return super().form_valid(form)
-    
     def form_invalid(self, form):
-        print("#################")
-        print(form.cleaned_data['reference_year'])
-        # print(form.cleaned_data['student_group'])
-        print(form.cleaned_data['student'])
-        print(form.errors)
+        print("## ", form.errors)
         return super().form_invalid(form)
-    
-
 
 
 class EnrollmentUpdateView(
@@ -175,11 +160,11 @@ class StudentGroupDetailView(
     template_name = "student_group/student_group_detail.html"
 
 
-def get_series_by_year(request):
+def get_student_group_by_year(request):
     if request.method == 'GET' and 'reference_year' in request.GET:
-        series = models.Serie.objects.filter(
-            student_groups__reference_year=request.GET.get('reference_year')
-        ).values('id', 'name',).distinct()
-        return JsonResponse({'series': list(series)})
+        group = models.StudentGroup.objects.filter(
+            reference_year=request.GET.get('reference_year')
+        ).values('id', 'serie__name', 'serie__shift__name').distinct()
 
+        return JsonResponse({'student_groups': list(group)})
     return JsonResponse({'error': 'Invalid request'})

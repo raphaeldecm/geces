@@ -27,13 +27,14 @@
       <form method="post" autocomplete="off">
         {% csrf_token %}
         <div class="row mx-auto mb-3">
-          <div class="col-12 col-sm-6">{% bootstrap_field form.student %}</div>
           <div class="col-12 col-sm-6">{% bootstrap_field form.reference_year %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.student_group %}</div>
         </div>
         <div class="row mx-auto mb-3">
-          <div class="col-12 col-sm-6">{% bootstrap_field form.student_group %}</div>
+          <div class="col-12 col-sm-6">{% bootstrap_field form.student %}</div>
           <div class="col-12 col-sm-6">{% bootstrap_field form.status %}</div>
         </div>
+
         {% url "academics:enrollment_list" as enrollment_list %}
         {% save_cancel_buttons link_back=enrollment_list has_form=True %}
       </form>
@@ -49,20 +50,20 @@
         var reference_year = $(this).val();
 
         $.ajax({
-            url: "{% url 'academics:get_series_by_year' %}",
+            url: "{% url 'academics:get_student_group_by_year' %}",
             method: 'GET',
             data: { 'reference_year': reference_year },
             dataType: 'json',
             success: function(data) {
                 var studentGroupSelect = $('#id_student_group');
                 studentGroupSelect.empty();
-                console.log(data.series);
+                console.log(data.student_groups);
 
-                if (data.series) {
-                    $.each(data.series, function(index, serie) {
+                if (data.student_groups) {
+                    $.each(data.student_groups, function(index, group) {
                         studentGroupSelect.append($('<option>', {
-                            value: serie.id,
-                            text: serie.name
+                            value: group.id,
+                            text: group.serie__name + ' - ' + group.serie__shift__name
                         }));
                     });
                     studentGroupSelect.prop('disabled', false); // Habilita o campo de seleção da turma
@@ -76,6 +77,5 @@
         });
     });
 });
-    
 </script>
 {% endblock extra_js %}

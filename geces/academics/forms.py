@@ -18,19 +18,11 @@ class SerieForm(forms.ModelForm):
             "teachers": _("Docentes"),
         }
 
-# TODO: Refactor this form ti use select2 on student field and filter student_group by year
-
 
 class EnrollmentForm(forms.ModelForm):
     reference_year = forms.ChoiceField(
         choices=[],
         label="Ano referência"
-    )
-    student_group = forms.ModelChoiceField(
-        queryset=StudentGroup.objects.none(),
-        label="Turma",
-        required=False,
-        empty_label="Selecione o Ano de Referência"
     )
 
     def __init__(self, *args, **kwargs):
@@ -41,6 +33,20 @@ class EnrollmentForm(forms.ModelForm):
             choices=choices,
             label=_("Ano referência"),
         )
+
+    def clean_student_group(self):
+        student_group = self.cleaned_data.get("student_group")
+
+        if student_group:
+            if student_group.enrollments.count() >= student_group.offers:
+                raise forms.ValidationError(_("Esta turma já atingiu o limite de discentes"))
+            try:
+                student_group = StudentGroup.objects.get(pk=student_group.pk)
+                return student_group
+            except StudentGroup.DoesNotExist:
+                raise forms.ValidationError("Turma não encontrada.")
+
+        return student_group
 
     class Meta:
         model = Enrollment
