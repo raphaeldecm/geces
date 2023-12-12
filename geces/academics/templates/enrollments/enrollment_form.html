@@ -40,3 +40,42 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block extra_js %}
+{{ form.media }}
+<script>
+  $(document).ready(function () {
+    $('#id_reference_year').on('change', function() {
+        var reference_year = $(this).val();
+
+        $.ajax({
+            url: "{% url 'academics:get_series_by_year' %}",
+            method: 'GET',
+            data: { 'reference_year': reference_year },
+            dataType: 'json',
+            success: function(data) {
+                var studentGroupSelect = $('#id_student_group');
+                studentGroupSelect.empty();
+                console.log(data.series);
+
+                if (data.series) {
+                    $.each(data.series, function(index, serie) {
+                        studentGroupSelect.append($('<option>', {
+                            value: serie.id,
+                            text: serie.name
+                        }));
+                    });
+                    studentGroupSelect.prop('disabled', false); // Habilita o campo de seleção da turma
+                } else {
+                    studentGroupSelect.prop('disabled', true); // Desativa o campo de seleção da turma se não houver séries
+                }
+            },
+            error: function(err) {
+                console.log('Erro ao buscar as séries:', err);
+            }
+        });
+    });
+});
+    
+</script>
+{% endblock extra_js %}

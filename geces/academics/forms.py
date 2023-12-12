@@ -2,8 +2,10 @@ from datetime import date
 
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django_select2 import forms as s2forms
 
-from .models import Enrollment, Serie, StudentGroup
+from geces.academics.models import Enrollment, Serie, StudentGroup
+from geces.people import models
 
 
 class SerieForm(forms.ModelForm):
@@ -24,6 +26,12 @@ class EnrollmentForm(forms.ModelForm):
         choices=[],
         label="Ano referência"
     )
+    student_group = forms.ModelChoiceField(
+        queryset=StudentGroup.objects.none(),
+        label="Turma",
+        required=False,
+        empty_label="Selecione o Ano de Referência"
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -37,6 +45,12 @@ class EnrollmentForm(forms.ModelForm):
     class Meta:
         model = Enrollment
         fields = ["status", "student", "student_group"]
+        widgets = {
+            "student": s2forms.ModelSelect2Widget(
+                model=models.Student,
+                search_fields=["name__icontains"],
+            ),
+        }
 
 
 class StudentGroupForm(forms.ModelForm):

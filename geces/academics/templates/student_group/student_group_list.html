@@ -59,6 +59,7 @@
   {{ block.super }}
   <script type="text/javascript">
     $(document).ready(function() {
+      console.log('ready');
       $('#id_reference_year').change(function() {
         $('#student-group-filter').submit();
       });

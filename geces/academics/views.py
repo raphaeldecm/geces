@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, ExpressionWrapper, F, IntegerField
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views import generic
@@ -87,6 +88,25 @@ class EnrollmentCreateView(
     success_url = reverse_lazy("academics:enrollment_list")
     success_message = _("A matrícula foi cadastrada com sucesso")
 
+    def form_valid(self, form):
+        print("#################")
+        print(form.cleaned_data['reference_year'])
+        print(form.cleaned_data['student_group'])
+        print(form.cleaned_data['student'])
+        print(form.errors)
+
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print("#################")
+        print(form.cleaned_data['reference_year'])
+        # print(form.cleaned_data['student_group'])
+        print(form.cleaned_data['student'])
+        print(form.errors)
+        return super().form_invalid(form)
+    
+
+
 
 class EnrollmentUpdateView(
     LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView
@@ -153,3 +173,13 @@ class StudentGroupDetailView(
     model = models.StudentGroup
     title = _("Detalhes da Turma")
     template_name = "student_group/student_group_detail.html"
+
+
+def get_series_by_year(request):
+    if request.method == 'GET' and 'reference_year' in request.GET:
+        series = models.Serie.objects.filter(
+            student_groups__reference_year=request.GET.get('reference_year')
+        ).values('id', 'name',).distinct()
+        return JsonResponse({'series': list(series)})
+
+    return JsonResponse({'error': 'Invalid request'})

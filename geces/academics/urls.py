@@ -23,4 +23,5 @@ urlpatterns = [
     path("student_group_update/<int:pk>/", views.StudentGroupUpdateView.as_view(), name="student_group_update"),
     path("student_group_detail/<int:pk>/", views.StudentGroupDetailView.as_view(), name="student_group_detail"),
     # path("student_group_delete/<int:pk>/", views.GroupDeleteView.as_view(), name="student_group_delete"),
+    path('get_series_by_year/', views.get_series_by_year, name='get_series_by_year'),
 ]
