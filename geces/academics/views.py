@@ -88,10 +88,6 @@ class EnrollmentCreateView(
     success_url = reverse_lazy("academics:enrollment_list")
     success_message = _("A matrícula foi cadastrada com sucesso")
 
-    def form_invalid(self, form):
-        print("## ", form.errors)
-        return super().form_invalid(form)
-
 
 class EnrollmentUpdateView(
     LoginRequiredMixin, TitleBaseViewMixin, messages.views.SuccessMessageMixin, generic.UpdateView
