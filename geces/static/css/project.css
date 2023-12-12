@@ -16,3 +16,48 @@ td a i {
     color: var(--bs-link-color);
     text-decoration: none !important;
 }
+
+
+/* Estilos personalizados para o Select2 */
+
+
+/* Adapte as classes conforme necessário para corresponder à estrutura do Django Select2 */
+
+
+/* Estilo para o container principal do Select2 */
+
+.select2-container {
+    width: 100%;
+    /* Ajuste a largura conforme necessário */
+}
+
+
+/* Estilo para o campo de seleção do Select2 */
+
+.select2-selection {
+    height: calc(2.25rem + 2px) !important;
+    /* Ajuste a altura conforme necessário */
+    border-radius: 0.25rem !important;
+    /* Adapte o raio da borda conforme necessário */
+    padding: 0.375rem 0.75rem !important;
+    /* Ajuste o preenchimento conforme necessário */
+}
+
+
+/* Estilo para a seta de dropdown do Select2 */
+
+.select2-selection__arrow {
+    height: calc(2.25rem + 2px) !important;
+    /* Ajuste a altura conforme necessário */
+}
+
+
+/* Estilo para as opções do dropdown do Select2 */
+
+.select2-dropdown {
+    border-radius: 0.25rem !important;
+    /* Adapte o raio da borda conforme necessário */
+}
+
+
+/* Outros estilos conforme necessário */
