@@ -24,15 +24,26 @@ class EnrollmentForm(forms.ModelForm):
         choices=[],
         label="Ano referência"
     )
+    student_group = forms.ModelChoiceField(
+        queryset=StudentGroup.objects.all(),
+        label="Turma",
+        required=False,
+        empty_label=_("Selecione um ano de referência"),
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         current_year = date.today().year
-        choices = [(current_year, current_year), (current_year + 1, current_year + 1)]
+        choices = [
+            ("", "---------"),
+            (current_year, current_year),
+            (current_year + 1, current_year + 1)
+        ]
         self.fields["reference_year"] = forms.ChoiceField(
             choices=choices,
             label=_("Ano referência"),
         )
+        self.fields["student_group"].widget.attrs["disabled"] = True
 
     def clean_student_group(self):
         student_group = self.cleaned_data.get("student_group")
