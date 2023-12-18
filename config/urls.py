@@ -15,6 +15,7 @@ urlpatterns = [
     path("", include("geces.core.urls", namespace="")),
     path("users/", include("geces.users.urls", namespace="users")),
     path("canteen/", include("geces.canteen.urls", namespace="canteen")),
+    path("finance/", include("geces.finance.urls", namespace="finance")),
     path("people/", include("geces.people.urls", namespace="people")),
     path("academics/", include("geces.academics.urls", namespace="academics")),
     path("accounts/", include("allauth.urls")),

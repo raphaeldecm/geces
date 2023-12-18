@@ -91,6 +91,7 @@ LOCAL_APPS = [
     "geces.core",
     "geces.users",
     "geces.canteen",
+    "geces.finance",
     "geces.people",
     "geces.academics",
     # Your stuff: custom apps go here
