@@ -14,7 +14,7 @@ urlpatterns = [
     # User management
     path("", include("geces.core.urls", namespace="")),
     path("users/", include("geces.users.urls", namespace="users")),
-    path("movement/", include("geces.movement.urls", namespace="movement")),
+    path("canteen/", include("geces.canteen.urls", namespace="canteen")),
     path("people/", include("geces.people.urls", namespace="people")),
     path("academics/", include("geces.academics.urls", namespace="academics")),
     path("accounts/", include("allauth.urls")),

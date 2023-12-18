@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 
-class TestMovementBase(TestCase):
+class TestCanteenBase(TestCase):
     def setUp(self) -> None:
         print("setUp")
         return super().setUp()

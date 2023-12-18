@@ -10,7 +10,7 @@
 {% block breadcrumb_items %}
   {{ block.super }}
   {% breadcrumb_item text="Página Inicial" url="home" %}
-  {% breadcrumb_item text="Lista de Produtos" url="movement:products_list" %}
+  {% breadcrumb_item text="Lista de Produtos" url="canteen:products_list" %}
   {% breadcrumb_item text="Lista de Produtos" active="active" %}
 {% endblock breadcrumb_items %}
 {% block content %}
@@ -22,7 +22,7 @@
       <form method="post" autocomplete="off">
         {% csrf_token %}
         {% bootstrap_form form %}
-        {% url "movement:products_list" as product_list %}
+        {% url "canteen:products_list" as product_list %}
         {% save_cancel_buttons link_back=product_list has_form=True %}
       </form>
     </div>

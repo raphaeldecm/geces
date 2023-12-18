@@ -1,4 +1,4 @@
-<form action="{% url 'movement:product_delete' object.pk %}" method="post">
+<form action="{% url 'canteen:product_delete' object.pk %}" method="post">
   {% csrf_token %}
   <div class="modal fade"
        id="deleteModal-{{ object.pk }}"

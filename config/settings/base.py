@@ -90,7 +90,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "geces.core",
     "geces.users",
-    "geces.movement",
+    "geces.canteen",
     "geces.people",
     "geces.academics",
     # Your stuff: custom apps go here

@@ -1,8 +1,8 @@
 from .factories import ProductFactory
-from .test_movement_base import TestMovementBase
+from .test_canteen_base import TestCanteenBase
 
 
-class TestMovementModels(TestMovementBase):
+class TestCanteenModels(TestCanteenBase):
     def test_product_str_rep(self):
         print("test_product_str_rep")
         product = ProductFactory()

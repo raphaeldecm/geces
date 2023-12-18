@@ -17,15 +17,6 @@ td a i {
     text-decoration: none !important;
 }
 
-
-/* Estilos personalizados para o Select2 */
-
-
-/* Adapte as classes conforme necessário para corresponder à estrutura do Django Select2 */
-
-
-/* Estilo para o container principal do Select2 */
-
 .select2-container {
     width: 100%;
     /* Ajuste a largura conforme necessário */

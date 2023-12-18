@@ -11,7 +11,7 @@ class ProductFormView(LoginRequiredMixin, generic.CreateView):
     model = Product
     form_class = ProductForm
     template_name = "products/products_form.html"
-    success_url = reverse_lazy("movement:products_list")
+    success_url = reverse_lazy("canteen:products_list")
     success_message = _("Produto cadastrado com sucesso!")
 
 
@@ -19,14 +19,14 @@ class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Product
     form_class = ProductForm
     template_name = "products/products_form.html"
-    success_url = reverse_lazy("movement:products_list")
+    success_url = reverse_lazy("canteen:products_list")
     success_message = _("Produto atualizado com sucesso!")
 
 
 class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Product
     template_name = "products/products_confirm_delete.html"
-    success_url = reverse_lazy("movement:products_list")
+    success_url = reverse_lazy("canteen:products_list")
     success_message = _("Produto excluído com sucesso!")
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from geces.movement import models
+from geces.canteen import models
 
 
 class ProductAdmin(admin.ModelAdmin):

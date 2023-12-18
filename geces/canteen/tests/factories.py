@@ -3,7 +3,7 @@ from factory import Faker
 from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyDecimal, FuzzyInteger
 
-from geces.movement import models
+from geces.canteen import models
 from geces.users.tests.factories import UserFactory
 
 
