@@ -8,7 +8,7 @@ from django.views import generic
 from django_filters.views import FilterView
 
 from geces.academics.filters import StudentGroupFilterSet
-from geces.core.mixins import TitleBaseViewMixin
+from geces.core.mixins import ProtectedMessageMixin, TitleBaseViewMixin
 
 from . import forms, models
 
@@ -97,13 +97,16 @@ class EnrollmentUpdateView(
     template_name = "enrollments/enrollment_form.html"
     form_class = forms.EnrollmentForm
     success_url = reverse_lazy("academics:enrollment_list")
-    success_message = _("A matrícula foi atualizada com sucesso")
+    success_message = _("A matrícula foi atualizada com sucesso.")
 
 
-class EnrollmentDeleteView(LoginRequiredMixin, messages.views.SuccessMessageMixin, generic.DeleteView):
+class EnrollmentDeleteView(
+    LoginRequiredMixin, ProtectedMessageMixin, messages.views.SuccessMessageMixin, generic.DeleteView
+):
     model = models.Enrollment
     success_url = reverse_lazy("academics:enrollment_list")
-    success_message = _("A matrícula foi excluída com sucesso")
+    success_message = _("A matrícula foi excluída com sucesso.")
+    protected_message = _("Não é possível excluir uma matrícula com faturas associadas.")
 
 
 class StudentGroupListView(LoginRequiredMixin, TitleBaseViewMixin, FilterView):

@@ -59,6 +59,16 @@ class EnrollmentForm(forms.ModelForm):
 
         return student_group
 
+    def clean(self):
+        cleaned_data = super().clean()
+        reference_year = cleaned_data.get("reference_year")
+        student = cleaned_data.get("student")
+
+        if reference_year and student:
+            if Enrollment.objects.filter(student=student, student_group__reference_year=reference_year).exists():
+                raise forms.ValidationError(_("Já existe uma matrícula para este aluno e ano referência selecionados!"))
+        return cleaned_data
+
     class Meta:
         model = Enrollment
         fields = ["status", "student", "student_group"]
