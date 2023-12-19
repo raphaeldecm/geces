@@ -86,14 +86,12 @@ class Enrollment(BaseModel):
     class Status(models.IntegerChoices):
         ACTIVE = 1, _("Ativa")
         CANCELED = 2, _("Cancelada")
-        PENDING = 3, _("Pendente")
-        CLOSED = 4, _("Trancada")
-        FINISHED = 5, _("Concluída")  # Discente concluiu a oferta de disciplina
+        FINISHED = 3, _("Concluída")  # Discente concluiu a oferta de disciplina
 
     status = models.PositiveSmallIntegerField(
         verbose_name=_("Situação"),
         choices=Status.choices,
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        validators=[MinValueValidator(1), MaxValueValidator(3)],
     )
 
     code = models.CharField(
@@ -130,4 +128,6 @@ class Enrollment(BaseModel):
             super().save(*args, **kwargs)
             enrollment_date = self.created_at.date() if self.created_at else timezone.now().date()
             self.code = f"{enrollment_date.year}{self.student_group.serie.shift.code}{self.student_group.serie.code}{self.pk}"  # noqa
+            self.student.status = Student.Status.ENROLLED
+            self.student.save()
         super().save(*args, **kwargs)

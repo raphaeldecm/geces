@@ -43,6 +43,10 @@ class Invoice(BaseModel):
     due_date = models.DateField(
         verbose_name=_("Data de Vencimento"),
     )
+    observations = models.TextField(
+        verbose_name=_("Observações"),
+        blank=True
+    )
 
     class Meta:
         verbose_name = _("Fatura")
@@ -52,6 +56,7 @@ class Invoice(BaseModel):
         return f"Fatura para {self.enrollment.student.name} - Vencimento: {self.due_date}"
 
 
+# TODO: Allow multiple payments for the same invoice
 class Payment(BaseModel):
     class PaymentType(models.IntegerChoices):
         CASH = 1, _("Dinheiro")
@@ -81,6 +86,10 @@ class Payment(BaseModel):
         max_digits=6,
         decimal_places=2,
         default=0
+    )
+    observations = models.TextField(
+        verbose_name=_("Observações"),
+        blank=True
     )
 
     class Meta:
