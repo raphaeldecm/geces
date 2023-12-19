@@ -19,11 +19,11 @@ def create_enrollment_invoices(enrollment_pk):
 
         months_remaining = 12
         if not enrollment.student_group.reference_year > datetime.now().year:
-            months_remaining = 12 - enrollment.created_at.month - 1
+            months_remaining = 13 - enrollment.created_at.month
 
         for i in range(months_remaining):
 
-            month = months_remaining + i  # TODO: The current month is 6 need to be created.
+            month = enrollment.created_at.month + i
             if months_remaining == 12:
                 month = i + 1
 

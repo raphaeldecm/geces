@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 def enrollment_created(sender, instance, created, **kwargs):
     if created:
         try:
+            print("creating enrollment invoices")
             transaction.on_commit(
                 lambda: create_enrollment_invoices.delay(instance.pk)
             )
