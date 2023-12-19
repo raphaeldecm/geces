@@ -1,30 +1,21 @@
-from datetime import datetime
+import logging
 
+from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from geces.academics.models import Enrollment
-from geces.core.constants import MONTHLY_DUE_DAY, MONTHLY_VALUE
-from geces.finance.models import Invoice
+from geces.academics.tasks import create_enrollment_invoices
 
-# TODO: Move this to a Celery task. Transaction
+logger = logging.getLogger(__name__)
 
 
 @receiver(post_save, sender=Enrollment)
 def enrollment_created(sender, instance, created, **kwargs):
     if created:
-
-        months_remaining = 12
-        if not instance.student_group.reference_year > datetime.now().year:
-            months_remaining = 12 - instance.created_at.month + 1
-
-        for i in range(months_remaining):
-            invoice = Invoice.objects.create(
-                enrollment=instance,
-                due_date=datetime(
-                    instance.student_group.reference_year,
-                    instance.created_at.month + i,
-                    MONTHLY_DUE_DAY),
-                value=MONTHLY_VALUE,
+        try:
+            transaction.on_commit(
+                lambda: create_enrollment_invoices.delay(instance.pk)
             )
-            invoice.save()
+        except Exception as e:
+            logger.error(f"Error creating enrollment invoices: {e}")
