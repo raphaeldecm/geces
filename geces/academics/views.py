@@ -160,10 +160,12 @@ class StudentGroupDetailView(
 
 
 def get_student_group_by_year(request):
-    if request.method == 'GET' and 'reference_year' in request.GET:
-        group = models.StudentGroup.objects.filter(
-            reference_year=request.GET.get('reference_year')
-        ).values('id', 'serie__name', 'serie__shift__name').distinct()
+    if request.method == "GET" and "reference_year" in request.GET:
+        group = (
+            models.StudentGroup.objects.filter(reference_year=request.GET.get("reference_year"))
+            .values("id", "serie__name", "serie__shift__name")
+            .distinct()
+        )
 
-        return JsonResponse({'student_groups': list(group)})
-    return JsonResponse({'error': 'Invalid request'})
+        return JsonResponse({"student_groups": list(group)})
+    return JsonResponse({"error": "Invalid request"})

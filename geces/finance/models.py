@@ -21,32 +21,20 @@ class Invoice(BaseModel):
         verbose_name=_("Situação"),
         choices=Status.choices,
         validators=[MinValueValidator(1), MaxValueValidator(3)],
-        default=Status.PENDING
+        default=Status.PENDING,
     )
     type = models.PositiveSmallIntegerField(
         verbose_name=_("Tipo"),
         choices=Type.choices,
         validators=[MinValueValidator(1), MaxValueValidator(2)],
-        default=Type.MONTHLY
+        default=Type.MONTHLY,
     )
-    enrollment = models.ForeignKey(
-        Enrollment,
-        on_delete=models.PROTECT,
-        related_name="invoices"
-    )
-    value = models.DecimalField(
-        verbose_name=_("Valor"),
-        max_digits=6,
-        decimal_places=2,
-        default=0
-    )
+    enrollment = models.ForeignKey(Enrollment, on_delete=models.PROTECT, related_name="invoices")
+    value = models.DecimalField(verbose_name=_("Valor"), max_digits=6, decimal_places=2, default=0)
     due_date = models.DateField(
         verbose_name=_("Data de Vencimento"),
     )
-    observations = models.TextField(
-        verbose_name=_("Observações"),
-        blank=True
-    )
+    observations = models.TextField(verbose_name=_("Observações"), blank=True)
 
     class Meta:
         verbose_name = _("Fatura")
@@ -66,31 +54,12 @@ class Payment(BaseModel):
         PIX = 5, _("PIX")
 
     payment_type = models.CharField(
-        max_length=SMALL_CHAR_FIELD_NAME_LENGTH,
-        choices=PaymentType.choices,
-        default=PaymentType.CASH
+        max_length=SMALL_CHAR_FIELD_NAME_LENGTH, choices=PaymentType.choices, default=PaymentType.CASH
     )
-    invoice = models.ForeignKey(
-        Invoice,
-        on_delete=models.PROTECT,
-        related_name="payments"
-    )
-    value = models.DecimalField(
-        verbose_name=_("Valor"),
-        max_digits=6,
-        decimal_places=2,
-        default=0
-    )
-    discount = models.DecimalField(
-        verbose_name=_("Desconto"),
-        max_digits=6,
-        decimal_places=2,
-        default=0
-    )
-    observations = models.TextField(
-        verbose_name=_("Observações"),
-        blank=True
-    )
+    invoice = models.ForeignKey(Invoice, on_delete=models.PROTECT, related_name="payments")
+    value = models.DecimalField(verbose_name=_("Valor"), max_digits=6, decimal_places=2, default=0)
+    discount = models.DecimalField(verbose_name=_("Desconto"), max_digits=6, decimal_places=2, default=0)
+    observations = models.TextField(verbose_name=_("Observações"), blank=True)
 
     class Meta:
         verbose_name = _("Pagamento")

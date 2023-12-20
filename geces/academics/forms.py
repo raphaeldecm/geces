@@ -20,10 +20,7 @@ class SerieForm(forms.ModelForm):
 
 
 class EnrollmentForm(forms.ModelForm):
-    reference_year = forms.ChoiceField(
-        choices=[],
-        label="Ano referência"
-    )
+    reference_year = forms.ChoiceField(choices=[], label="Ano referência")
     student_group = forms.ModelChoiceField(
         queryset=StudentGroup.objects.all(),
         label="Turma",
@@ -34,11 +31,7 @@ class EnrollmentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         current_year = date.today().year
-        choices = [
-            ("", "---------"),
-            (current_year, current_year),
-            (current_year + 1, current_year + 1)
-        ]
+        choices = [("", "---------"), (current_year, current_year), (current_year + 1, current_year + 1)]
         self.fields["reference_year"] = forms.ChoiceField(
             choices=choices,
             label=_("Ano referência"),
@@ -66,7 +59,9 @@ class EnrollmentForm(forms.ModelForm):
 
         if reference_year and student:
             if Enrollment.objects.filter(student=student, student_group__reference_year=reference_year).exists():
-                raise forms.ValidationError(_("Já existe uma matrícula para este aluno e ano referência selecionados!"))
+                raise forms.ValidationError(
+                    _("Já existe uma matrícula para este aluno e ano referência selecionados!")
+                )
         return cleaned_data
 
     class Meta:

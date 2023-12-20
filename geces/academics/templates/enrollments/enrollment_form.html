@@ -34,48 +34,48 @@
           <div class="col-12 col-sm-6">{% bootstrap_field form.student %}</div>
           <div class="col-12 col-sm-6">{% bootstrap_field form.status %}</div>
         </div>
-
         {% url "academics:enrollment_list" as enrollment_list %}
         {% save_cancel_buttons link_back=enrollment_list has_form=True %}
       </form>
     </div>
   </div>
 {% endblock content %}
-
 {% block extra_js %}
-{{ form.media }}
-<script>
-  $(document).ready(function () {
-    $('#id_reference_year').on('change', function() {
+  {{ form.media }}
+  <script>
+    $(document).ready(function() {
+      $('#id_reference_year').on('change', function() {
         var reference_year = $(this).val();
 
         $.ajax({
-            url: "{% url 'academics:get_student_group_by_year' %}",
-            method: 'GET',
-            data: { 'reference_year': reference_year },
-            dataType: 'json',
-            success: function(data) {
-                var studentGroupSelect = $('#id_student_group');
-                studentGroupSelect.empty();
-                console.log(data.student_groups);
+          url: "{% url 'academics:get_student_group_by_year' %}",
+          method: 'GET',
+          data: {
+            'reference_year': reference_year
+          },
+          dataType: 'json',
+          success: function(data) {
+            var studentGroupSelect = $('#id_student_group');
+            studentGroupSelect.empty();
+            console.log(data.student_groups);
 
-                if (data.student_groups) {
-                    $.each(data.student_groups, function(index, group) {
-                        studentGroupSelect.append($('<option>', {
-                            value: group.id,
-                            text: group.serie__name + ' - ' + group.serie__shift__name
-                        }));
-                    });
-                    studentGroupSelect.prop('disabled', false); // Habilita o campo de seleção da turma
-                } else {
-                    studentGroupSelect.prop('disabled', true); // Desativa o campo de seleção da turma se não houver séries
-                }
-            },
-            error: function(err) {
-                console.log('Erro ao buscar as séries:', err);
+            if (data.student_groups) {
+              $.each(data.student_groups, function(index, group) {
+                studentGroupSelect.append($('<option>', {
+                  value: group.id,
+                  text: group.serie__name + ' - ' + group.serie__shift__name
+                }));
+              });
+              studentGroupSelect.prop('disabled', false); // Habilita o campo de seleção da turma
+            } else {
+              studentGroupSelect.prop('disabled', true); // Desativa o campo de seleção da turma se não houver séries
             }
+          },
+          error: function(err) {
+            console.log('Erro ao buscar as séries:', err);
+          }
         });
+      });
     });
-});
-</script>
+  </script>
 {% endblock extra_js %}

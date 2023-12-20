@@ -15,8 +15,6 @@ def enrollment_created(sender, instance, created, **kwargs):
     if created:
         try:
             print("creating enrollment invoices")
-            transaction.on_commit(
-                lambda: create_enrollment_invoices.delay(instance.pk)
-            )
+            transaction.on_commit(lambda: create_enrollment_invoices.delay(instance.pk))
         except Exception as e:
             logger.error(f"Error creating enrollment invoices: {e}")

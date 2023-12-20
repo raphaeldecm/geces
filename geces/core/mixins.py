@@ -13,7 +13,6 @@ class TitleBaseViewMixin:
 
 
 class ProtectedMessageMixin:
-
     protected_message = None
 
     def form_valid(self, form):
@@ -21,4 +20,4 @@ class ProtectedMessageMixin:
             return super().form_valid(form)
         except ProtectedError:
             messages.warning(self.request, self.protected_message)
-            return redirect(self.request.META.get("HTTP_REFERER"))
+            return redirect(self.request.headers.get("referer"))

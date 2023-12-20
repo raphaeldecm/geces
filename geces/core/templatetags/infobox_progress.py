@@ -19,7 +19,7 @@ def infobox(context, *args, **kwargs):
     link = kwargs.get("link", None)
 
     if "link" in kwargs and kwargs["link"] is not None:
-        link = reverse(kwargs["link"], kwargs={'pk': kwargs.get("pk")})
+        link = reverse(kwargs["link"], kwargs={"pk": kwargs.get("pk")})
 
     return {
         "color": color,

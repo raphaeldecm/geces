@@ -22,17 +22,13 @@ def create_enrollment_invoices(enrollment_pk):
             months_remaining = 13 - enrollment.created_at.month
 
         for i in range(months_remaining):
-
             month = enrollment.created_at.month + i
             if months_remaining == 12:
                 month = i + 1
 
             invoice = Invoice.objects.create(
                 enrollment=enrollment,
-                due_date=datetime(
-                    enrollment.student_group.reference_year,
-                    month,
-                    MONTHLY_DUE_DAY),
+                due_date=datetime(enrollment.student_group.reference_year, month, MONTHLY_DUE_DAY),
                 value=MONTHLY_VALUE,
             )
             invoice.save()

@@ -16,13 +16,12 @@ def invoice_list_pdf(request, pk):
 
     buffer = BytesIO()
 
-    # Cria um PDF usando o ReportLab
     pdf = canvas.Canvas(buffer)
     pdf.setTitle(f"Invoices for Enrollment {enrollment.code}")
 
     # Configurações de estilo
     pdf.setFont("Helvetica", 12)
-    page_width, page_height = 595, 842  # Tamanho padrão de uma página A4 em pontos (1/72 polegadas)
+    page_width, page_height = 595, 842
     margin = 50
     rect_width = (page_width - 3 * margin) / 2
     rect_height = 100
@@ -46,7 +45,7 @@ def invoice_list_pdf(request, pk):
         pdf.drawString(text_x, text_y - 60, f"Due Date: {invoice.due_date}")
         pdf.drawString(text_x, text_y - 80, f"Invoice Number: {index}/{len(invoices)}")
         pdf.drawString(text_x, text_y - 100, f"Value: {invoice.value}")
-        pdf.drawString(text_x, text_y - 120, f"Payment Date: ____/____/______")
+        pdf.drawString(text_x, text_y - 120, "Payment Date: ____/____/______")
 
         if index % 2 == 0:  # Se já desenhou o par de retângulos, move para a próxima linha
             y_coordinate -= rect_height + 40  # Espaço entre os pares de retângulos
@@ -56,7 +55,7 @@ def invoice_list_pdf(request, pk):
 
     # Prepara o PDF para resposta HTTP
     buffer.seek(0)
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="invoices_for_{enrollment.code}.pdf"'
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="invoices_for_{enrollment.code}.pdf"'
     response.write(buffer.getvalue())
     return response

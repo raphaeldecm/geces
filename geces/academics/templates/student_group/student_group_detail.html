@@ -38,9 +38,7 @@
         <div id="teacher" class="col-md-10 col-sm-12">
           {% for teacher in object.serie.teachers.all %}
             {{ teacher }}
-            {% if not forloop.last %}
-              <br>
-            {% endif %}
+            {% if not forloop.last %}<br />{% endif %}
           {% endfor %}
         </div>
       </div>
@@ -58,7 +56,6 @@
       </div>
     </div>
   </div>
-
   <div class="card card-primary m-3">
     <div class="card-header">
       <h3 class="card-title">Lista de Discentes</h3>
