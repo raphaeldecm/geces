@@ -19,36 +19,25 @@ td a i {
 
 .select2-container {
     width: 100%;
-    /* Ajuste a largura conforme necessário */
 }
-
-
-/* Estilo para o campo de seleção do Select2 */
 
 .select2-selection {
     height: calc(2.25rem + 2px) !important;
-    /* Ajuste a altura conforme necessário */
     border-radius: 0.25rem !important;
-    /* Adapte o raio da borda conforme necessário */
     padding: 0.375rem 0.75rem !important;
-    /* Ajuste o preenchimento conforme necessário */
 }
-
-
-/* Estilo para a seta de dropdown do Select2 */
 
 .select2-selection__arrow {
     height: calc(2.25rem + 2px) !important;
-    /* Ajuste a altura conforme necessário */
 }
-
-
-/* Estilo para as opções do dropdown do Select2 */
 
 .select2-dropdown {
     border-radius: 0.25rem !important;
-    /* Adapte o raio da borda conforme necessário */
 }
 
-
-/* Outros estilos conforme necessário */
+.main-sidebar.sidebar-dark-primary {
+    background-color: #fff;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22)!important;
+    box-sizing: border-box;
+    color: var(--bs-body-color);
+}
