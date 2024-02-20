@@ -17,7 +17,9 @@
   {% block nav_custom_menu %}
     {{ block.super }}
   {% endblock nav_custom_menu %}
-  {% block nav_bar_right %}
-    {{ block.super }}
-  {% endblock nav_bar_right %}
+
 {% endblock nav_bar %}
+
+{% block change_password_url %}
+    {% url 'account_change_password' %}
+{% endblock %}

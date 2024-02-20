@@ -10,6 +10,7 @@ from geces.core.mixins import TitleBaseViewMixin
 
 from .filters import UserFilterSet
 from .forms import UserAdminCreationForm
+from .permissions import DirectorPermission
 
 User = get_user_model()
 
@@ -40,7 +41,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 user_redirect_view = UserRedirectView.as_view()
 
 
-class UsersListView(LoginRequiredMixin, TitleBaseViewMixin, FilterView):
+class UsersListView(DirectorPermission, LoginRequiredMixin, TitleBaseViewMixin, FilterView):
     model = User
     title = _("Lista de Usuários")
     paginate_by = 5
